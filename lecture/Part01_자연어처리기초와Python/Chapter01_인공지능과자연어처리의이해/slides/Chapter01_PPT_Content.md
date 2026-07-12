@@ -270,6 +270,12 @@ AI는 어떻게 사람의 언어를 다루게 되었을까?
 
 단어, 형태소, 문자, 서브워드 등 목적에 따라 단위가 달라진다.
 
+실습 파일: `examples/01_simple_tokenization.py`
+
+```powershell
+python examples/01_simple_tokenization.py
+```
+
 ---
 
 ## 33. 컴퓨터는 단어를 숫자로 바꾸어 계산한다
@@ -457,6 +463,8 @@ LLM은 사실 데이터베이스에서 정답을 복사하는 것이 아니라, 
 
 먼저 규칙으로 만들고, 한계를 확인한 뒤 학습 기반 방식으로 확장한다.
 
+실습 파일: `examples/02_rule_based_intent.py`
+
 ---
 
 ## 54. 규칙 기반 분류기는 키워드로 의도를 찾는다
@@ -470,6 +478,10 @@ def classify(text):
     return "기타 문의"
 ```
 
+```powershell
+python examples/02_rule_based_intent.py
+```
+
 ---
 
 ## 55. 작은 실습에서 확인할 것은 정답보다 한계다
@@ -478,6 +490,15 @@ def classify(text):
 - 한 문장에 여러 의도가 있으면 어떻게 되는가?
 - 오타와 띄어쓰기 차이에 강한가?
 - 규칙의 우선순위가 결과에 어떤 영향을 주는가?
+
+확장 실습 파일:
+
+- `examples/04_faq_chatbot.py`
+- `examples/faq_data.py`
+
+```powershell
+python examples/04_faq_chatbot.py
+```
 
 ---
 
@@ -488,6 +509,18 @@ def classify(text):
 → 원인 기록
 → 규칙 또는 데이터 개선
 → 같은 사례로 다시 평가
+```
+
+완성 프로젝트와 테스트:
+
+- `projects/faq_chatbot.py`
+- `projects/faq_data.py`
+- `projects/test_faq_chatbot.py`
+- `projects/test_cases.md`
+
+```powershell
+python projects/test_faq_chatbot.py
+python projects/faq_chatbot.py
 ```
 
 ---
@@ -504,6 +537,8 @@ Chapter01_인공지능과자연어처리의이해/
 └─ slides/
 ```
 
+배포 데이터: `datasets/faq.csv`
+
 ---
 
 ## 58. 개발 환경은 재현 가능해야 한다
@@ -512,6 +547,11 @@ Chapter01_인공지능과자연어처리의이해/
 - 코드와 데이터의 상대 경로를 일관되게 관리한다.
 - 의존성 버전을 기록한다.
 - API Key와 개인정보를 저장소에 올리지 않는다.
+
+빠른 시연 Notebook:
+
+- `notebooks/01_chapter01_quick_demo.ipynb`
+- `notebooks/02_rule_based_faq_chatbot.ipynb`
 
 ---
 
@@ -527,3 +567,68 @@ Chapter01_인공지능과자연어처리의이해/
 ## 60. 다음 Chapter에서는 데이터를 직접 다룬다
 
 Python 기본 문법을 반복하지 않고, NLP에 필요한 텍스트·CSV·JSON 데이터의 읽기, 정제, 검증과 저장을 실습한다.
+
+---
+
+# 강의자용 소스코드 배포 준비
+
+이 부분은 PPT 화면용 슬라이드가 아니라 강의 전 배포 자료를 준비하기 위한 목록입니다.
+
+## 짧은 시연 코드
+
+| 순서 | 파일 | 용도 | 실행 명령 |
+|---:|---|---|---|
+| 1 | `examples/01_simple_tokenization.py` | 공백 기준 토큰화 | `python examples/01_simple_tokenization.py` |
+| 2 | `examples/02_rule_based_intent.py` | 키워드 기반 의도 분류 | `python examples/02_rule_based_intent.py` |
+| 3 | `examples/03_sqlite_keyword_search.py` | SQLite 키워드 검색 | `python examples/03_sqlite_keyword_search.py` |
+| 4 | `examples/04_faq_chatbot.py` | 대화형 FAQ 챗봇 | `python examples/04_faq_chatbot.py` |
+
+`examples/04_faq_chatbot.py`를 배포할 때는 같은 폴더의 `examples/faq_data.py`도 함께 배포합니다.
+
+## 완성 프로젝트 코드
+
+| 파일 | 역할 |
+|---|---|
+| `projects/faq_chatbot.py` | 키워드 점수 기반 완성 챗봇 |
+| `projects/faq_data.py` | 카테고리별 키워드와 응답 데이터 |
+| `projects/test_faq_chatbot.py` | 정상·실패 사례 자동 검증 |
+| `projects/test_cases.md` | 강의에서 설명할 테스트 사례 |
+| `projects/README.md` | 실행 방법과 프로젝트 설명 |
+
+실행 순서:
+
+```powershell
+python projects/test_faq_chatbot.py
+python projects/faq_chatbot.py
+```
+
+## 데이터셋과 Notebook
+
+| 파일 | 배포 목적 |
+|---|---|
+| `datasets/faq.csv` | CSV 기반 FAQ 데이터 처리 실습 |
+| `datasets/README.md` | 데이터 열과 사용 방법 설명 |
+| `notebooks/01_chapter01_quick_demo.ipynb` | Chapter 1 핵심 개념 빠른 시연 |
+| `notebooks/02_rule_based_faq_chatbot.ipynb` | 규칙 기반 챗봇 단계별 실습 |
+
+## 권장 배포 단위
+
+강의 시작 전에는 다음 네 디렉터리를 Chapter 1 폴더 구조 그대로 배포합니다.
+
+```text
+Chapter01_인공지능과자연어처리의이해/
+├─ examples/
+├─ datasets/
+├─ notebooks/
+└─ projects/
+```
+
+시간이 부족한 경우에는 다음 파일만 최소 배포합니다.
+
+```text
+examples/02_rule_based_intent.py
+projects/faq_chatbot.py
+projects/faq_data.py
+projects/test_faq_chatbot.py
+datasets/faq.csv
+```
