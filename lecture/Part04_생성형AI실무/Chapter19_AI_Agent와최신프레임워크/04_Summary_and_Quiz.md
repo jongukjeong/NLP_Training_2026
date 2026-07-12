@@ -1,5 +1,4 @@
-# 요약과 퀴즈
-
+# 퀴즈
 1. 모델이 tool call을 제안하면 자동 실행해야 하나요? **아니요**
 2. 쓰기 tool에 필요한 추가 절차는? **권한·사용자 확인·감사 로그**
 3. MCP의 세 primitive는? **Prompts, Resources, Tools**

@@ -1,4 +1,4 @@
-﻿# Chapter 2. Python과 데이터 처리
+# Chapter 2 통합 강의 원고
 
 ---
 
@@ -142,8 +142,6 @@ python -m pip install pandas
 
 예제 코드는 해당 데이터셋과 같은 폴더에 배치합니다. 따라서 예제 폴더만 복사해도 코드와 입력 데이터를 함께 실행할 수 있습니다. 생성 결과는 예제 폴더의 `output` 하위 폴더로 분리합니다.
 
-> 다음: [파일·CSV·JSON 처리](06_File_IO.md)
-
 ---
 
 <!-- SOURCE: 06_File_IO.md -->
@@ -259,8 +257,6 @@ def read_utf8(path: Path) -> str:
 | TXT | 한 줄에 한 문장 | 단순함 | 열 구조 표현이 어려움 |
 | CSV | 행과 열이 일정한 표 | Excel·pandas 호환 | 중첩 구조에 부적합 |
 | JSON | 중첩된 레코드·메타데이터 | 구조 표현이 유연 | 큰 파일은 메모리 고려 |
-
-> 다음: [pandas로 표 데이터 다루기](07_Pandas.md)
 
 ---
 
@@ -380,8 +376,6 @@ non_empty = normalized.loc[normalized["text"].ne("")].copy()
 
 각 단계의 `shape`를 확인하면 어느 규칙에서 행이 사라졌는지 알 수 있습니다.
 
-> 다음: [텍스트 데이터 정제와 검증](08_Data_Cleaning.md)
-
 ---
 
 <!-- SOURCE: 08_Data_Cleaning.md -->
@@ -410,7 +404,6 @@ import pandas as pd
 
 REQUIRED_COLUMNS = {"id", "text", "label"}
 
-
 def validate_columns(df: pd.DataFrame) -> None:
     missing = REQUIRED_COLUMNS - set(df.columns)
     if missing:
@@ -422,7 +415,6 @@ def validate_columns(df: pd.DataFrame) -> None:
 
 ```python
 ALLOWED_LABELS = {"positive", "negative", "neutral", "unknown"}
-
 
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     validate_columns(df)
@@ -487,59 +479,13 @@ assert cleaned["text_length"].ge(1).all()
 
 실제 고객 문장에는 이름, 전화번호, 이메일, 주소가 포함될 수 있습니다. 교육·분석 환경으로 옮기기 전에 조직의 정책에 따라 비식별화하고 접근 권한과 보존 기간을 확인해야 합니다. 샘플 출력과 오류 로그에도 원문 전체가 노출되지 않도록 주의합니다.
 
-> 다음: [핵심 정리](09_Summary.md)
-
 ---
 
 <!-- SOURCE: 09_Summary.md -->
 
-# 09. 핵심 정리
+# 다음 Chapter로 연결하기
 
-## 한눈에 보는 처리 흐름
-
-```text
-경로 확인
-  ↓
-UTF-8로 파일 읽기
-  ↓
-열·자료형·결측·분포 탐색
-  ↓
-문자열 정규화
-  ↓
-결측·빈 값·중복 처리
-  ↓
-규칙 검증과 통계 계산
-  ↓
-새 파일로 저장 + 처리 보고서
-```
-
-## 핵심 개념
-
-| 주제 | 기억할 내용 |
-|---|---|
-| 경로 | `pathlib.Path`로 운영체제 독립적인 경로를 만든다. |
-| 인코딩 | 한글 텍스트는 UTF-8을 명시한다. |
-| CSV·JSON | 전용 파서로 읽고 쓴다. |
-| pandas | 구조 탐색 후 복사·정제·집계한다. |
-| 품질 | 처리 전후 건수와 검증 결과를 남긴다. |
-
-## 스스로 설명해 보기
-
-1. `None`과 빈 문자열은 왜 구분해야 하나요?
-2. CSV를 `split(",")`로 처리하면 왜 위험한가요?
-3. 정제 함수가 원본 DataFrame을 복사하는 이유는 무엇인가요?
-4. 정규화 후 중복을 제거해야 하는 이유는 무엇인가요?
-5. 처리 보고서에는 어떤 항목이 들어가야 하나요?
-
-## 다음 장을 위한 체크리스트
-
-- [ ] TXT, CSV, JSON을 UTF-8로 읽고 쓸 수 있다.
-- [ ] pandas로 선택, 필터링, 결측 처리, 중복 제거를 할 수 있다.
-- [ ] 정제 결과를 검증하고 처리 건수를 기록할 수 있다.
-
-다음 장에서는 정규표현식, 토큰화, 불용어, 형태소 분석 등 언어 데이터에 특화된 전처리로 확장합니다.
-
-> 다음: [퀴즈](10_Quiz.md)
+다음 Chapter에서는 정규표현식, 토큰화, 불용어, 형태소 분석 등 언어 데이터에 특화된 전처리로 확장합니다.
 
 ---
 
@@ -640,8 +586,6 @@ D. 화면 색상
 - 5~6개: 틀린 주제의 코드 예제를 다시 실행해 보세요.
 - 0~4개: 02~08 문서를 순서대로 복습한 뒤 다시 풉니다.
 
-> 다음: [실습 과제](11_Assignment.md)
-
 ---
 
 <!-- SOURCE: 11_Assignment.md -->
@@ -711,16 +655,6 @@ raw_records = [
 | 파일 입출력·인코딩 | 15 |
 | 처리 통계와 검증 | 15 |
 | 추가 도전 | 10 |
-
-## 자기 점검
-
-- [ ] 원본 객체를 의도치 않게 변경하지 않았다.
-- [ ] `None`에서 문자열 메서드를 호출하지 않는다.
-- [ ] 정규화한 뒤 중복을 제거했다.
-- [ ] CSV에 불필요한 인덱스 열이 저장되지 않는다.
-- [ ] 처리 전후 건수가 논리적으로 맞는다.
-
-> 다음: [미니 프로젝트](12_Mini_Project.md)
 
 ---
 
@@ -813,19 +747,16 @@ import pandas as pd
 REQUIRED_COLUMNS = {"id", "text", "label"}
 ALLOWED_LABELS = {"positive", "negative", "neutral", "unknown"}
 
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="텍스트 CSV를 정제하고 요약합니다.")
     parser.add_argument("input", type=Path, help="입력 CSV 경로")
     parser.add_argument("output", type=Path, help="정제 CSV 경로")
     return parser.parse_args()
 
-
 def validate_columns(df: pd.DataFrame) -> None:
     missing = REQUIRED_COLUMNS - set(df.columns)
     if missing:
         raise ValueError(f"필수 열이 없습니다: {', '.join(sorted(missing))}")
-
 
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     validate_columns(df)
@@ -850,7 +781,6 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     result["text_length"] = result["text"].str.len()
     return result.reset_index(drop=True)
 
-
 def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
     return {
         "rows_before": len(before),
@@ -865,7 +795,6 @@ def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
             for key, value in after["label"].value_counts().items()
         },
     }
-
 
 def run(input_path: Path, output_path: Path) -> tuple[pd.DataFrame, dict]:
     if not input_path.is_file():
@@ -890,12 +819,10 @@ def run(input_path: Path, output_path: Path) -> tuple[pd.DataFrame, dict]:
     )
     return cleaned, report
 
-
 def main() -> None:
     args = parse_args()
     _, report = run(args.input, args.output)
     print(json.dumps(report, ensure_ascii=False, indent=2))
-
 
 if __name__ == "__main__":
     main()
@@ -943,15 +870,3 @@ python text_data_explorer.py reviews.csv output\reviews_clean.csv
 - 제외된 행과 제외 사유를 별도 파일로 저장
 - 정제 규칙별 제거 건수를 단계별로 기록
 - 단위 테스트와 자동화된 품질 검사 추가
-
-## 완료 체크리스트
-
-- [ ] 원본과 출력 경로가 분리되어 있다.
-- [ ] 예제 코드와 입력 데이터셋이 같은 예제 폴더에 있다.
-- [ ] 필수 열과 허용 레이블을 검사한다.
-- [ ] 결측·공백·중복 처리 순서가 명확하다.
-- [ ] 정제 결과를 단언문 또는 테스트로 검증한다.
-- [ ] 처리 전후 통계를 JSON으로 남긴다.
-- [ ] 오류 메시지만 보고도 사용자가 수정 방향을 알 수 있다.
-
-Chapter 2를 마쳤습니다. 다음 장에서는 이 데이터를 정규표현식, 토큰화, 형태소 분석 등 NLP 전처리 기법에 연결합니다.

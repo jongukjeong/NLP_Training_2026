@@ -27,5 +27,3 @@
 - [답안 안내](examples/08_assignment_solution/README.md)
 - [답안 코드](examples/08_assignment_solution/preprocess_reviews.py)
 - [입력 데이터셋](examples/08_assignment_solution/reviews_raw.csv)
-
-> 다음: [미니 프로젝트](09_Mini_Project.md)

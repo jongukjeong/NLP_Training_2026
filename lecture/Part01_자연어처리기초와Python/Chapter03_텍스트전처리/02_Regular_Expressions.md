@@ -66,5 +66,3 @@ def reduce_repeats(text: str, limit: int = 2) -> str:
 | `help@example.com` | `<EMAIL>` |
 | `010-1234-5678` | `<PHONE>` |
 | `정말    좋아요` | `정말 좋아요` |
-
-> 다음: [Unicode와 텍스트 정규화](03_Normalization.md)

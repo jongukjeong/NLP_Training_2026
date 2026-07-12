@@ -1,6 +1,4 @@
-﻿# Chapter 6 통합 강의 원고
-
-입니다. 개별 원본 파일은 그대로 유지합니다.
+# Chapter 6 통합 강의 원고
 
 ---
 
@@ -21,7 +19,7 @@
 1. [Tensor와 Dataset](01_Tensor_and_Dataset.md)
 2. [Sequential과 Functional API](02_Keras_APIs.md)
 3. [모델 학습](03_Model_Training.md)
-4. [요약과 퀴즈](04_Summary_and_Quiz.md)
+4. [퀴즈](04_Summary_and_Quiz.md)
 5. [실습: 첫 번째 딥러닝 모델](05_Practice.md)
 
 > 공식 기준: Keras의 내장 학습 루프는 Sequential, Functional, subclass 모델에서 같은 방식으로 사용할 수 있습니다.
@@ -636,12 +634,7 @@ EarlyStopping의 마지막 epoch와 최고 epoch는 다를 수 있습니다. `re
 
 <!-- SOURCE: 04_Summary_and_Quiz.md -->
 
-# 요약과 퀴즈
-
-## 요약
-
-Tensor → Dataset → Model → compile → fit → evaluate → save 순서로 첫 학습 파이프라인을 구성합니다.
-
+# 퀴즈
 ## 퀴즈
 
 1. Tensor의 세 가지 핵심 속성은 무엇인가요?

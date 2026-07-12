@@ -49,8 +49,6 @@ CountVectorizer(
 
 이 값은 데이터 크기와 평가 결과를 기준으로 정하며 평가 데이터에 맞춰 조정하지 않습니다.
 
-> 다음: [TF-IDF와 n-gram](02_TFIDF_and_Ngrams.md)
-
 ## Binary와 Count 표현
 
 Binary 방식은 단어가 한 번이라도 나오면 1, Count 방식은 실제 등장 횟수를 기록합니다. 스팸 문구처럼 반복 횟수가 중요하면 Count가 유용하고, 긴 문서가 단순히 더 큰 값을 갖는 문제를 줄이려면 Binary를 비교할 수 있습니다.

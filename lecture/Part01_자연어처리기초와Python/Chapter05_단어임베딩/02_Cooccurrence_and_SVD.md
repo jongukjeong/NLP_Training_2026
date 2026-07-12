@@ -35,8 +35,6 @@ embeddings = svd.fit_transform(cooccurrence_matrix)
 - 어휘와 단어-인덱스 매핑 저장
 - 데이터 버전과 학습 시점 기록
 
-> 다음: [Word2Vec과 사전학습 임베딩](03_Word2Vec_and_Pretrained.md)
-
 ## 창 크기 숫자 예
 
 `나는 자연어 처리를 공부한다`에서 중심 단어가 `처리를`이고 window=1이면 `자연어`, `공부한다`가 문맥입니다. window=2이면 `나는`까지 포함됩니다.

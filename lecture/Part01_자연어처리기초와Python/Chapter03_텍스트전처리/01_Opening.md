@@ -48,5 +48,3 @@ comparison["clean_text"] = df["text"].map(preprocess_text)
 - 규칙과 적용 순서를 문서화한다.
 - 처리 전후 빈 문장·길이·토큰 수를 비교한다.
 - 민감정보가 출력과 로그에 남지 않는지 확인한다.
-
-> 다음: [정규표현식 기반 정제](02_Regular_Expressions.md)

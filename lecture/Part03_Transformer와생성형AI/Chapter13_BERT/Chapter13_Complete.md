@@ -1,6 +1,4 @@
-﻿# Chapter 13 통합 강의 원고
-
-입니다. 개별 원본 파일은 그대로 유지합니다.
+# Chapter 13 통합 강의 원고
 
 ---
 
@@ -10,7 +8,7 @@
 
 1. [Bidirectional Encoder·MLM·NSP](01_BERT_Pretraining.md)
 2. [Fine-tuning과 Sentence Classification](02_Fine_Tuning.md)
-3. [요약과 퀴즈](03_Summary_and_Quiz.md)
+3. [퀴즈](03_Summary_and_Quiz.md)
 4. [실습: 한국어 BERT 활용](04_Practice.md)
 
 ## 먼저 읽을 상세 가이드
@@ -297,8 +295,7 @@ z=h_{CLS}W+b,\qquad p=softmax(z)
 
 <!-- SOURCE: 03_Summary_and_Quiz.md -->
 
-# 요약과 퀴즈
-
+# 퀴즈
 1. BERT의 기본 backbone은? **Transformer encoder**
 2. MLM의 목표는? **가려진 token 예측**
 3. 모든 BERT 계열이 NSP를 쓰나요? **아니요**

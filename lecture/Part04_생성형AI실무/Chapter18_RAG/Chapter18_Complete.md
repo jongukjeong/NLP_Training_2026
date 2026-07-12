@@ -1,6 +1,4 @@
-﻿# Chapter 18 통합 강의 원고
-
-입니다. 개별 원본 파일은 그대로 유지합니다.
+# Chapter 18 통합 강의 원고
 
 ---
 
@@ -11,7 +9,7 @@
 1. [Embedding·Vector DB·Retrieval](01_Retrieval.md)
 2. [Generation과 Hybrid Search](02_Generation_and_Hybrid.md)
 3. [평가와 운영](03_Evaluation.md)
-4. [요약과 퀴즈](04_Summary_and_Quiz.md)
+4. [퀴즈](04_Summary_and_Quiz.md)
 5. [실습: PDF QA 시스템](05_Practice.md)
 
 ## 먼저 읽을 상세 가이드
@@ -349,8 +347,7 @@ Chunk, embedding, top-k, hybrid, reranker를 한 번에 하나씩 바꾸고 Hit@
 
 <!-- SOURCE: 04_Summary_and_Quiz.md -->
 
-# 요약과 퀴즈
-
+# 퀴즈
 1. RAG의 두 핵심 단계는? **Retrieval과 Generation**
 2. chunk metadata가 필요한 이유는? **출처·갱신·삭제·권한 관리**
 3. 고유한 제품 코드 검색에 강한 방식은? **lexical search**

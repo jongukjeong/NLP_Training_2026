@@ -17,5 +17,3 @@
 - [안내](examples/07_assignment_solution/README.md)
 - [코드](examples/07_assignment_solution/cooccurrence_embedding.py)
 - [데이터셋](examples/07_assignment_solution/sentences.txt)
-
-> 다음: [미니 프로젝트](08_Mini_Project.md)

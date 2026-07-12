@@ -1,5 +1,4 @@
-# 요약과 퀴즈
-
+# 퀴즈
 1. LSTM이 hidden state 외에 유지하는 state는? **cell state**
 2. Forget Gate의 역할은? **이전 cell 정보 유지량 결정**
 3. Input Gate의 역할은? **새 정보 기록량 결정**

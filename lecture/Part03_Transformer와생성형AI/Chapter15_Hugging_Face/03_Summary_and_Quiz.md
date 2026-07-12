@@ -1,5 +1,4 @@
-# 요약과 퀴즈
-
+# 퀴즈
 1. Auto Classes의 역할은? **checkpoint config에 맞는 class 선택**
 2. AutoModel과 AutoModelForSequenceClassification 차이는? **task head 유무**
 3. `from_config`가 pretrained weight도 로드하나요? **아니요**

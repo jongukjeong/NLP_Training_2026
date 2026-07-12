@@ -123,4 +123,3 @@ joblib.dump(vectorizer, "tfidf.joblib")
 4. 오류 질문 원문 분석
 5. 행렬 shape와 메모리 확인
 6. 저장 후 재로딩 검색 결과 확인
-

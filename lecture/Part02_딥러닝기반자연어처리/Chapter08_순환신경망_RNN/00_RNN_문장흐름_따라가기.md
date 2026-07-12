@@ -81,4 +81,3 @@ embedding = tf.keras.layers.Embedding(vocab_size, 64, mask_zero=True)
 2. 토큰 분류에 모든 시점 출력이 필요한 이유는?
 3. 양방향 RNN이 실시간 생성에 부적절한 이유는?
 4. clipping이 해결하는 문제는 무엇입니까?
-

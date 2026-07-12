@@ -1,6 +1,4 @@
-﻿# Chapter 9 통합 강의 원고
-
-입니다. 개별 원본 파일은 그대로 유지합니다.
+# Chapter 9 통합 강의 원고
 
 ---
 
@@ -11,7 +9,7 @@
 1. [LSTM 구조와 세 Gate](01_LSTM_Gates.md)
 2. [GRU와 모델 선택](02_GRU_and_Selection.md)
 3. [감성 분석 설계](03_Sentiment_Analysis.md)
-4. [요약과 퀴즈](04_Summary_and_Quiz.md)
+4. [퀴즈](04_Summary_and_Quiz.md)
 5. [실습: 감성 분석](05_Practice.md)
 
 ## 먼저 읽을 상세 가이드
@@ -555,8 +553,7 @@ precision, recall, thresholds = precision_recall_curve(y_valid, prob_valid)
 
 <!-- SOURCE: 04_Summary_and_Quiz.md -->
 
-# 요약과 퀴즈
-
+# 퀴즈
 1. LSTM이 hidden state 외에 유지하는 state는? **cell state**
 2. Forget Gate의 역할은? **이전 cell 정보 유지량 결정**
 3. Input Gate의 역할은? **새 정보 기록량 결정**

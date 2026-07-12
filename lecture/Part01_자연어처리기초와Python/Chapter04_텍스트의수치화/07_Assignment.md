@@ -15,5 +15,3 @@
 - [안내](examples/07_assignment_solution/README.md)
 - [코드](examples/07_assignment_solution/tfidf_search.py)
 - [데이터셋](examples/07_assignment_solution/faq.csv)
-
-> 다음: [미니 프로젝트](08_Mini_Project.md)

@@ -111,5 +111,3 @@ non_empty = normalized.loc[normalized["text"].ne("")].copy()
 ```
 
 각 단계의 `shape`를 확인하면 어느 규칙에서 행이 사라졌는지 알 수 있습니다.
-
-> 다음: [텍스트 데이터 정제와 검증](08_Data_Cleaning.md)

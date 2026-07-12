@@ -49,8 +49,6 @@ test_matrix = vectorizer.transform(test_texts)
 
 평가 데이터까지 `fit_transform()`하면 평가 데이터의 어휘와 문서 빈도가 학습에 반영되어 데이터 누수가 발생합니다.
 
-> 다음: [코사인 유사도와 검색](03_Similarity_and_Search.md)
-
 ## TF와 IDF 공식
 
 \[

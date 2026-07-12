@@ -109,5 +109,3 @@ def read_utf8(path: Path) -> str:
 | TXT | 한 줄에 한 문장 | 단순함 | 열 구조 표현이 어려움 |
 | CSV | 행과 열이 일정한 표 | Excel·pandas 호환 | 중첩 구조에 부적합 |
 | JSON | 중첩된 레코드·메타데이터 | 구조 표현이 유연 | 큰 파일은 메모리 고려 |
-
-> 다음: [pandas로 표 데이터 다루기](07_Pandas.md)

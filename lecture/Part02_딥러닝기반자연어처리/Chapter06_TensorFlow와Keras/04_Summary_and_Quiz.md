@@ -1,9 +1,4 @@
-# 요약과 퀴즈
-
-## 요약
-
-Tensor → Dataset → Model → compile → fit → evaluate → save 순서로 첫 학습 파이프라인을 구성합니다.
-
+# 퀴즈
 ## 퀴즈
 
 1. Tensor의 세 가지 핵심 속성은 무엇인가요?

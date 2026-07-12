@@ -1,5 +1,4 @@
-# 요약과 퀴즈
-
+# 퀴즈
 1. RNN의 state는 무엇을 요약하나요? **이전 timestep까지의 정보**
 2. Embedding 입력 shape는? **batch, timesteps**
 3. `mask_zero=True`의 목적은? **0 padding 무시 지원**

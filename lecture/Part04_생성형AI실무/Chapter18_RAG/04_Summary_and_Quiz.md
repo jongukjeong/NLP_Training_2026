@@ -1,5 +1,4 @@
-# 요약과 퀴즈
-
+# 퀴즈
 1. RAG의 두 핵심 단계는? **Retrieval과 Generation**
 2. chunk metadata가 필요한 이유는? **출처·갱신·삭제·권한 관리**
 3. 고유한 제품 코드 검색에 강한 방식은? **lexical search**

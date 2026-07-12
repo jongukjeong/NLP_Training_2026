@@ -34,8 +34,6 @@ scores = cosine_similarity(query_vector.reshape(1, -1), embeddings).ravel()
 
 임베딩 파일과 함께 어휘, 차원, 전처리, 문맥 창, 최소 빈도, 시드, 데이터·라이브러리 버전을 저장합니다.
 
-> 다음: [핵심 정리](05_Summary.md)
-
 ## OOV 비율
 
 \[

@@ -1,6 +1,4 @@
-﻿# Chapter 8 통합 강의 원고
-
-입니다. 개별 원본 파일은 그대로 유지합니다.
+# Chapter 8 통합 강의 원고
 
 ---
 
@@ -11,7 +9,7 @@
 1. [Sequence Data와 Vanilla RNN](01_Sequence_and_RNN.md)
 2. [BPTT와 Vanishing Gradient](02_BPTT_and_Gradient.md)
 3. [문장 분류 설계](03_Sentence_Classification.md)
-4. [요약과 퀴즈](04_Summary_and_Quiz.md)
+4. [퀴즈](04_Summary_and_Quiz.md)
 5. [실습: 문장 분류](05_Practice.md)
 
 목표는 timestep, hidden state, padding/masking과 RNN의 gradient 한계를 이해하고 문장 분류 모델을 완성하는 것입니다.
@@ -533,8 +531,7 @@ TF-IDF+선형 모델, 평균 임베딩, SimpleRNN을 같은 test에서 비교합
 
 <!-- SOURCE: 04_Summary_and_Quiz.md -->
 
-# 요약과 퀴즈
-
+# 퀴즈
 1. RNN의 state는 무엇을 요약하나요? **이전 timestep까지의 정보**
 2. Embedding 입력 shape는? **batch, timesteps**
 3. `mask_zero=True`의 목적은? **0 padding 무시 지원**

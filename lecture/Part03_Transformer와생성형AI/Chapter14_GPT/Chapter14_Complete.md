@@ -1,6 +1,4 @@
-﻿# Chapter 14 통합 강의 원고
-
-입니다. 개별 원본 파일은 그대로 유지합니다.
+# Chapter 14 통합 강의 원고
 
 ---
 
@@ -10,7 +8,7 @@
 
 1. [Decoder Only와 Auto Regression](01_GPT_Architecture.md)
 2. [Prompting·Text Generation·ChatGPT](02_Prompting_and_Generation.md)
-3. [요약과 퀴즈](03_Summary_and_Quiz.md)
+3. [퀴즈](03_Summary_and_Quiz.md)
 4. [실습: GPT API 활용](04_Practice.md)
 
 API 실습은 OpenAI Responses API와 공식 Python SDK를 사용하며 키를 저장소에 저장하지 않습니다.
@@ -309,8 +307,7 @@ API 키는 코드와 Markdown에 적지 않고 환경변수나 secret manager에
 
 <!-- SOURCE: 03_Summary_and_Quiz.md -->
 
-# 요약과 퀴즈
-
+# 퀴즈
 1. GPT의 기본 구조는? **Decoder-only Transformer**
 2. Auto Regression은 무엇을 예측하나요? **이전 token을 조건으로 다음 token**
 3. causal mask의 목적은? **미래 token 참조 방지**

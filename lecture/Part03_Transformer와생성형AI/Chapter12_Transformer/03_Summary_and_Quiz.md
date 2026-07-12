@@ -1,5 +1,4 @@
-# 요약과 퀴즈
-
+# 퀴즈
 1. Transformer가 recurrence 대신 사용하는 핵심 연산은? **Attention**
 2. 위치 정보가 필요한 이유는? **Self Attention 자체는 순서를 구분하지 못함**
 3. Multi-Head의 목적은? **여러 표현 공간의 관계 병렬 학습**

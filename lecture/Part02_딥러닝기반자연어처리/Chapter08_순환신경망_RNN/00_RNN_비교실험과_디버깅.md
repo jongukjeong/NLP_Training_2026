@@ -71,4 +71,3 @@ optimizer = tf.keras.optimizers.Adam(clipnorm=1.0)
 ## 결과 설명
 
 “RNN이 문맥을 이해했다”보다 “평균 풀링 대비 전체 F1은 0.02, 31토큰 이상 문장 F1은 0.08 개선했지만 P95 지연은 12ms 증가했다”고 씁니다.
-

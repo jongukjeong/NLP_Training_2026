@@ -22,7 +22,6 @@ import pandas as pd
 
 REQUIRED_COLUMNS = {"id", "text", "label"}
 
-
 def validate_columns(df: pd.DataFrame) -> None:
     missing = REQUIRED_COLUMNS - set(df.columns)
     if missing:
@@ -34,7 +33,6 @@ def validate_columns(df: pd.DataFrame) -> None:
 
 ```python
 ALLOWED_LABELS = {"positive", "negative", "neutral", "unknown"}
-
 
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     validate_columns(df)
@@ -98,5 +96,3 @@ assert cleaned["text_length"].ge(1).all()
 ## 개인정보와 민감정보
 
 실제 고객 문장에는 이름, 전화번호, 이메일, 주소가 포함될 수 있습니다. 교육·분석 환경으로 옮기기 전에 조직의 정책에 따라 비식별화하고 접근 권한과 보존 기간을 확인해야 합니다. 샘플 출력과 오류 로그에도 원문 전체가 노출되지 않도록 주의합니다.
-
-> 다음: [핵심 정리](09_Summary.md)

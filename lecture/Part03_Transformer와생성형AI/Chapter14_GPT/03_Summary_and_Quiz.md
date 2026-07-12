@@ -1,5 +1,4 @@
-# 요약과 퀴즈
-
+# 퀴즈
 1. GPT의 기본 구조는? **Decoder-only Transformer**
 2. Auto Regression은 무엇을 예측하나요? **이전 token을 조건으로 다음 token**
 3. causal mask의 목적은? **미래 token 참조 방지**

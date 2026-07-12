@@ -85,19 +85,16 @@ import pandas as pd
 REQUIRED_COLUMNS = {"id", "text", "label"}
 ALLOWED_LABELS = {"positive", "negative", "neutral", "unknown"}
 
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="텍스트 CSV를 정제하고 요약합니다.")
     parser.add_argument("input", type=Path, help="입력 CSV 경로")
     parser.add_argument("output", type=Path, help="정제 CSV 경로")
     return parser.parse_args()
 
-
 def validate_columns(df: pd.DataFrame) -> None:
     missing = REQUIRED_COLUMNS - set(df.columns)
     if missing:
         raise ValueError(f"필수 열이 없습니다: {', '.join(sorted(missing))}")
-
 
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     validate_columns(df)
@@ -122,7 +119,6 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     result["text_length"] = result["text"].str.len()
     return result.reset_index(drop=True)
 
-
 def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
     return {
         "rows_before": len(before),
@@ -137,7 +133,6 @@ def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
             for key, value in after["label"].value_counts().items()
         },
     }
-
 
 def run(input_path: Path, output_path: Path) -> tuple[pd.DataFrame, dict]:
     if not input_path.is_file():
@@ -162,12 +157,10 @@ def run(input_path: Path, output_path: Path) -> tuple[pd.DataFrame, dict]:
     )
     return cleaned, report
 
-
 def main() -> None:
     args = parse_args()
     _, report = run(args.input, args.output)
     print(json.dumps(report, ensure_ascii=False, indent=2))
-
 
 if __name__ == "__main__":
     main()
@@ -215,15 +208,3 @@ python text_data_explorer.py reviews.csv output\reviews_clean.csv
 - 제외된 행과 제외 사유를 별도 파일로 저장
 - 정제 규칙별 제거 건수를 단계별로 기록
 - 단위 테스트와 자동화된 품질 검사 추가
-
-## 완료 체크리스트
-
-- [ ] 원본과 출력 경로가 분리되어 있다.
-- [ ] 예제 코드와 입력 데이터셋이 같은 예제 폴더에 있다.
-- [ ] 필수 열과 허용 레이블을 검사한다.
-- [ ] 결측·공백·중복 처리 순서가 명확하다.
-- [ ] 정제 결과를 단언문 또는 테스트로 검증한다.
-- [ ] 처리 전후 통계를 JSON으로 남긴다.
-- [ ] 오류 메시지만 보고도 사용자가 수정 방향을 알 수 있다.
-
-Chapter 2를 마쳤습니다. 다음 장에서는 이 데이터를 정규표현식, 토큰화, 형태소 분석 등 NLP 전처리 기법에 연결합니다.

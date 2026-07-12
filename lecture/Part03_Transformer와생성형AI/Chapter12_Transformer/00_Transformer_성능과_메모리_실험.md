@@ -35,4 +35,3 @@ Batch 축소 → 최대 길이 축소 → mixed precision → gradient accumulat
 - 잔차 덧셈 양쪽 dtype
 - 학습/평가 Dropout 상태
 - 첫 batch gradient norm
-

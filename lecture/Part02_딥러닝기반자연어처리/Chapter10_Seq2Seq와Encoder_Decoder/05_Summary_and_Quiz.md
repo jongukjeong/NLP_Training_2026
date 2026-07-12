@@ -1,5 +1,4 @@
-# 요약과 퀴즈
-
+# 퀴즈
 1. Encoder의 출력 state는 어디에 사용되나요? **Decoder 초기 상태**
 2. Decoder input과 target은 어떻게 다른가요? **한 timestep 이동**
 3. Teacher Forcing은 학습 중 무엇을 다음 입력으로 사용하나요? **정답 token**
