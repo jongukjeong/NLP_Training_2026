@@ -1,0 +1,6 @@
+id,text,label
+1,  배송이   빨라요!!!  ,positive
+2,문의는 help@example.com 으로 주세요,neutral
+3,상세 정보 https://example.com/product,neutral
+4,전화 010-1234-5678 부탁드립니다,neutral
+5,정말​좋아요,positive
