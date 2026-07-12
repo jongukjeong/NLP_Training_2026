@@ -1,0 +1,6 @@
+query,relevant_id
+배송이 지연되고 있어요,delivery_delay
+택배 비용을 알려 주세요,delivery_fee
+주문을 취소하고 돈을 돌려받고 싶어요,refund
+다른 상품으로 바꾸고 싶어요,exchange
+암호를 잊어버렸어요,account
