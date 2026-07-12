@@ -1,0 +1,19 @@
+text,label
+배송이 늦어요,delivery
+택배 위치를 알려 주세요,delivery
+언제 도착하나요,delivery
+배송비가 궁금합니다,delivery
+상품이 아직 안 왔어요,delivery
+배송 상태를 확인하고 싶어요,delivery
+환불하고 싶어요,refund
+돈을 돌려받고 싶습니다,refund
+주문 취소가 필요해요,refund
+반품 후 환불은 언제 되나요,refund
+결제를 취소해 주세요,refund
+환불 절차를 알려 주세요,refund
+비밀번호를 잊었어요,account
+로그인이 안 됩니다,account
+아이디를 찾고 싶어요,account
+회원 정보를 변경해 주세요,account
+계정을 삭제하고 싶어요,account
+인증 메일이 오지 않아요,account

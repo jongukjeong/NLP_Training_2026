@@ -29,6 +29,16 @@ lecture/
         └── examples/
 ```
 
+```text
+lecture/
+└── Part02_딥러닝기반자연어처리/
+    ├── Chapter06_TensorFlow와Keras/
+    ├── Chapter07_딥러닝기초/
+    ├── Chapter08_순환신경망_RNN/
+    ├── Chapter09_LSTM과GRU/
+    └── Chapter10_Seq2Seq와Encoder_Decoder/
+```
+
 ## 환경 준비
 
 Python 3.11 가상환경에서 다음을 실행합니다.

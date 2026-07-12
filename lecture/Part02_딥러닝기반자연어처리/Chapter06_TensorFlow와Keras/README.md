@@ -1,0 +1,19 @@
+# Chapter 6. TensorFlow와 Keras
+
+## 학습 목표
+
+- Tensor의 shape, dtype, axis를 해석한다.
+- `tf.data.Dataset`으로 shuffle, batch, prefetch 파이프라인을 만든다.
+- Sequential API와 Functional API의 선택 기준을 설명한다.
+- `compile`, `fit`, `evaluate`, `predict`의 역할을 구분한다.
+- callback과 `.keras` 형식으로 학습 결과를 관리한다.
+
+## 구성
+
+1. [Tensor와 Dataset](01_Tensor_and_Dataset.md)
+2. [Sequential과 Functional API](02_Keras_APIs.md)
+3. [모델 학습](03_Model_Training.md)
+4. [요약과 퀴즈](04_Summary_and_Quiz.md)
+5. [실습: 첫 번째 딥러닝 모델](05_Practice.md)
+
+> 공식 기준: Keras의 내장 학습 루프는 Sequential, Functional, subclass 모델에서 같은 방식으로 사용할 수 있습니다.
