@@ -13,6 +13,15 @@ output_path = data_dir / "processed" / "reviews_clean.txt"
 output_path.parent.mkdir(parents=True, exist_ok=True)
 ```
 
+이 장의 예제 파일은 코드와 데이터셋을 같은 폴더에 둡니다. 코드 파일 위치를 기준으로 경로를 만들면 실행 위치가 달라져도 안정적입니다.
+
+```python
+BASE_DIR = Path(__file__).resolve().parent
+input_path = BASE_DIR / "reviews.txt"
+output_path = BASE_DIR / "output" / "reviews_clean.txt"
+output_path.parent.mkdir(parents=True, exist_ok=True)
+```
+
 ## 텍스트 파일
 
 ```python

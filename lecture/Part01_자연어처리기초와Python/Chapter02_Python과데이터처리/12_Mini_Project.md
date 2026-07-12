@@ -24,6 +24,19 @@ id,text,label
 4,배송이 빨라요,positive
 ```
 
+## 권장 폴더 구조
+
+예제 코드와 입력 데이터셋은 동일한 폴더에 둡니다. 실행 결과만 `output/`으로 분리합니다.
+
+```text
+examples/chapter02/text_data_explorer/
+├── text_data_explorer.py
+├── reviews.csv
+└── output/                 # 실행 시 생성
+    ├── reviews_clean.csv
+    └── reviews_clean.report.json
+```
+
 ## 기능 요구사항
 
 1. 명령행에서 입력·출력 경로를 받습니다.
@@ -157,7 +170,8 @@ if __name__ == "__main__":
 ## 실행 예시
 
 ```powershell
-python text_data_explorer.py data\raw\reviews.csv data\processed\reviews_clean.csv
+cd examples\chapter02\text_data_explorer
+python text_data_explorer.py reviews.csv output\reviews_clean.csv
 ```
 
 예상 보고서:
@@ -199,6 +213,7 @@ python text_data_explorer.py data\raw\reviews.csv data\processed\reviews_clean.c
 ## 완료 체크리스트
 
 - [ ] 원본과 출력 경로가 분리되어 있다.
+- [ ] 예제 코드와 입력 데이터셋이 같은 예제 폴더에 있다.
 - [ ] 필수 열과 허용 레이블을 검사한다.
 - [ ] 결측·공백·중복 처리 순서가 명확하다.
 - [ ] 정제 결과를 단언문 또는 테스트로 검증한다.

@@ -44,6 +44,18 @@
 - pandas 2.x
 - 모든 텍스트 파일의 기본 인코딩: UTF-8
 
+## 예제 파일 배치 규칙
+
+각 예제의 Python 코드와 그 코드가 사용하는 데이터셋은 **동일한 예제 폴더**에 둡니다.
+
+```text
+examples/chapter02/text_data_explorer/
+├── text_data_explorer.py
+└── reviews.csv
+```
+
+실행 결과는 원본과 섞이지 않도록 같은 폴더 아래 `output/`에 저장합니다.
+
 > 예제는 Windows PowerShell 기준 명령도 함께 제시하지만, Python 코드는 운영체제와 무관하게 실행되도록 작성합니다.
 
 ## 완료 기준
