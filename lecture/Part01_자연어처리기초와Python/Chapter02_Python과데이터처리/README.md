@@ -47,9 +47,16 @@
 각 예제의 Python 코드와 그 코드가 사용하는 데이터셋은 **동일한 예제 폴더**에 둡니다.
 
 ```text
-examples/chapter02/text_data_explorer/
-├── text_data_explorer.py
-└── reviews.csv
+Chapter02_Python과데이터처리/
+├── 11_Assignment.md
+├── 12_Mini_Project.md
+└── examples/
+    ├── 11_assignment_solution/
+    │   ├── assignment_solution.py
+    │   └── customer_inquiries.csv
+    └── 12_mini_project_solution/
+        ├── text_data_explorer.py
+        └── reviews.csv
 ```
 
 실행 결과는 원본과 섞이지 않도록 같은 폴더 아래 `output/`에 저장합니다.

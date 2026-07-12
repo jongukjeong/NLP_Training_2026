@@ -46,6 +46,14 @@ raw_records = [
 
 코드와 원본 데이터셋은 하나의 과제 폴더에 함께 두고, 생성된 CSV는 그 폴더의 `output/`에 저장합니다.
 
+## 배포용 완성 답안
+
+강의 시간이 부족할 때 바로 배포할 수 있는 실행 코드와 입력 데이터셋은 이 문서와 같은 Chapter 디렉터리 아래에 있습니다.
+
+- [완성 답안 안내](examples/11_assignment_solution/README.md)
+- [완성 답안 코드](examples/11_assignment_solution/assignment_solution.py)
+- [입력 데이터셋](examples/11_assignment_solution/customer_inquiries.csv)
+
 ## 평가 기준
 
 | 항목 | 배점 |

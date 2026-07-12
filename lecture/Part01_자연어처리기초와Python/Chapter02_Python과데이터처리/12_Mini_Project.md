@@ -29,13 +29,19 @@ id,text,label
 예제 코드와 입력 데이터셋은 동일한 폴더에 둡니다. 실행 결과만 `output/`으로 분리합니다.
 
 ```text
-examples/chapter02/text_data_explorer/
+Chapter02_Python과데이터처리/examples/12_mini_project_solution/
 ├── text_data_explorer.py
 ├── reviews.csv
 └── output/                 # 실행 시 생성
     ├── reviews_clean.csv
     └── reviews_clean.report.json
 ```
+
+저장소에 포함된 배포용 파일:
+
+- [완성 예제 안내](examples/12_mini_project_solution/README.md)
+- [완성 예제 코드](examples/12_mini_project_solution/text_data_explorer.py)
+- [입력 데이터셋](examples/12_mini_project_solution/reviews.csv)
 
 ## 기능 요구사항
 
@@ -170,7 +176,7 @@ if __name__ == "__main__":
 ## 실행 예시
 
 ```powershell
-cd examples\chapter02\text_data_explorer
+cd lecture\Part01_자연어처리기초와Python\Chapter02_Python과데이터처리\examples\12_mini_project_solution
 python text_data_explorer.py reviews.csv output\reviews_clean.csv
 ```
 
