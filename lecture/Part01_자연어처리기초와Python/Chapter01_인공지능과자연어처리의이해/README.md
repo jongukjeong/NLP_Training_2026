@@ -1,4 +1,13 @@
-﻿# Chapter 1. 인공지능과 자연어처리의 이해
+# Chapter 1. 인공지능과 자연어처리의 이해
+
+## 핵심 용어 미리보기
+
+본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
+
+- **인공지능(Artificial Intelligence, AI): 사람의 판단·추론·생성 작업을 컴퓨터로 수행하는 기술 분야**
+- **머신러닝(Machine Learning, ML): 데이터에서 판단 패턴을 학습하는 방법**
+- **대규모 언어모델(Large Language Model, LLM): 대규모 텍스트로 다음 토큰 패턴을 학습한 언어모델**
+- **검색 증강 생성(Retrieval-Augmented Generation, RAG): 관련 문서를 검색한 뒤 그 근거로 답을 생성하는 구조**
 
 ## Chapter 핵심 질문
 

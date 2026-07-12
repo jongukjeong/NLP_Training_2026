@@ -6,6 +6,16 @@
 
 # Chapter 13. BERT
 
+
+## 핵심 용어 미리보기
+
+본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
+
+- **양방향 인코더(Bidirectional Encoder): 토큰의 앞뒤 문맥을 함께 참고하는 Encoder**
+- **마스크 언어 모델링(Masked Language Modeling, MLM): 가린 토큰을 맞히는 사전학습 방법**
+- **미세조정(Fine-tuning): 사전학습 모델을 특정 과제로 추가 학습하는 과정**
+- **로짓(Logit): 확률 변환 전 클래스별 원점수**
+
 1. [Bidirectional Encoder·MLM·NSP](01_BERT_Pretraining.md)
 2. [Fine-tuning과 Sentence Classification](02_Fine_Tuning.md)
 3. [퀴즈](03_Summary_and_Quiz.md)

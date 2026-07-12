@@ -6,6 +6,17 @@
 
 # Chapter 15. Hugging Face
 
+
+## 핵심 용어 미리보기
+
+본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
+
+- **체크포인트(Checkpoint): 특정 시점의 모델 가중치와 설정**
+- **토크나이저(Tokenizer): 문자열을 토큰과 정수 ID로 바꾸는 도구**
+- **파이프라인(Pipeline): 전처리·추론·후처리를 연결한 실행 흐름**
+- **미세조정(Fine-tuning): 사전학습 모델을 특정 데이터로 추가 학습하는 과정**
+- **동적 패딩(Dynamic Padding): Batch마다 가장 긴 입력에 맞춰 Padding하는 방식**
+
 1. [Transformers·AutoTokenizer·AutoModel](01_Auto_Classes.md)
 2. [Pipeline과 Fine-tuning](02_Pipeline_and_Fine_Tuning.md)
 3. [퀴즈](03_Summary_and_Quiz.md)
@@ -245,7 +256,8 @@ with torch.no_grad():
 probs = logits.softmax(dim=-1)
 ```
 
-추론에서는 `eval()`과 `no_grad()`로 Dropout과 gradient 저장을 끈다.
+추론에서는 `eval()`과
+o_grad()`로 Dropout과 gradient 저장을 끈다.
 
 ## 4. Pipeline과 Fine-tuning
 

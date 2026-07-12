@@ -6,6 +6,16 @@
 
 # Chapter 8. 순환신경망(RNN)
 
+
+## 핵심 용어 미리보기
+
+본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
+
+- **순환신경망(Recurrent Neural Network, RNN): 이전 정보를 다음 시점으로 전달하는 신경망**
+- **은닉 상태(Hidden State): 현재까지 읽은 정보를 요약해 다음 시점으로 전달하는 값**
+- **시간 역전파(Backpropagation Through Time, BPTT): RNN을 시간축으로 펼쳐 기울기를 계산하는 방법**
+- **기울기 소실(Vanishing Gradient): 역전파 과정에서 기울기가 지나치게 작아지는 문제**
+
 1. [Sequence Data와 Vanilla RNN](01_Sequence_and_RNN.md)
 2. [BPTT와 Vanishing Gradient](02_BPTT_and_Gradient.md)
 3. [문장 분류 설계](03_Sentence_Classification.md)

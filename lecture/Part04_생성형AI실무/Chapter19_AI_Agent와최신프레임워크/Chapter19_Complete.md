@@ -6,6 +6,17 @@
 
 # Chapter 19. AI Agent와 최신 프레임워크
 
+
+## 핵심 용어 미리보기
+
+본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
+
+- **함수 호출(Function Calling): 모델이 함수 이름과 인자를 구조화해 제안하는 방식**
+- **도구 호출(Tool Calling): 모델이 외부 검색·계산·API 사용을 요청하는 방식**
+- **AI 에이전트(AI Agent): 목표를 위해 여러 단계에서 도구를 선택하고 결과를 확인하는 시스템**
+- **모델 컨텍스트 프로토콜(Model Context Protocol, MCP): 모델 앱과 외부 Resource·Tool을 연결하는 규약**
+- **멱등성(Idempotency): 같은 요청을 반복해도 최종 결과가 같은 성질**
+
 1. [Function Calling·Tool Calling·MCP](01_Tools_and_MCP.md)
 2. [LangChain·LangGraph와 설계](02_Frameworks.md)
 3. [안전과 평가](03_Safety_and_Evaluation.md)

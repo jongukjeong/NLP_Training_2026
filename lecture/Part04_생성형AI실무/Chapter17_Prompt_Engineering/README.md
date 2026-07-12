@@ -1,5 +1,15 @@
 # Chapter 17. Prompt Engineering
 
+
+## 핵심 용어 미리보기
+
+본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
+
+- **제로샷(Zero-shot): 정답 예시 없이 지시만으로 작업하는 방식**
+- **퓨샷(Few-shot): 소수의 입력·출력 예시를 함께 주는 방식**
+- **구조화 출력(Structured Output): 프로그램이 검증할 수 있는 정해진 출력 형식**
+- **프롬프트 인젝션(Prompt Injection): 입력 데이터로 상위 지시를 무력화하려는 공격**
+
 1. [기본 원리·Zero-shot·Few-shot](01_Prompt_Principles.md)
 2. [Reasoning과 Structured Output](02_Reasoning_and_Structure.md)
 3. [평가와 최적화](03_Evaluation.md)

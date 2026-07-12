@@ -1,5 +1,16 @@
 # Chapter 14. GPT
 
+
+## 핵심 용어 미리보기
+
+본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
+
+- **디코더 전용 모델(Decoder-only Model): Decoder 블록만 사용해 다음 토큰을 생성하는 모델**
+- **자기회귀(Autoregression): 이전 출력들을 조건으로 다음 값을 순서대로 예측하는 방식**
+- **프롬프트(Prompt): 모델에 전달하는 목표·입력·제약·출력 형식**
+- **구조화 출력(Structured Output): JSON처럼 프로그램이 검사할 수 있는 정해진 형식**
+- **환각(Hallucination): 근거 없이 그럴듯한 사실을 생성하는 현상**
+
 1. [Decoder Only와 Auto Regression](01_GPT_Architecture.md)
 2. [Prompting·Text Generation·ChatGPT](02_Prompting_and_Generation.md)
 3. [퀴즈](03_Summary_and_Quiz.md)

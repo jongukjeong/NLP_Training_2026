@@ -6,6 +6,17 @@
 
 # Chapter 11. Attention Mechanism
 
+
+## 핵심 용어 미리보기
+
+본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
+
+- **어텐션(Attention): 출력에 필요한 입력 위치를 점수화해 선택적으로 참고하는 계산**
+- **쿼리(Query, Q): 현재 찾고 싶은 정보**
+- **키(Key, K): Query와 비교하기 위한 색인 표현**
+- **값(Value, V): Attention 가중치에 따라 가져올 실제 정보**
+- **마스크(Mask): 보면 안 되는 위치를 계산에서 제외하는 장치**
+
 Attention의 등장 배경, Bahdanau(Additive), Luong(Multiplicative), Self Attention을 학습하고 attention weight를 시각화합니다.
 
 1. [핵심 강의](01_Attention.md)
