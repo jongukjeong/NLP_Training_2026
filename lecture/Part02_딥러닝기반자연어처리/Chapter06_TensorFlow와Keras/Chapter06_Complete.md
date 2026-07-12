@@ -32,6 +32,119 @@
 
 ---
 
+<!-- SOURCE: 00_실습_코드_읽기와_오류해결.md -->
+
+# Chapter 6 실습 코드 읽기와 오류 해결
+
+## 코드를 외우지 말고 데이터 흐름을 읽자
+
+딥러닝 코드가 어려운 가장 큰 이유는 한 줄마다 데이터 모양이 바뀌기 때문입니다. 모델을 읽을 때는 층 이름보다 입력과 출력 shape를 종이에 적는 습관이 중요합니다.
+
+```text
+특성 10개를 가진 샘플 32개: (32,10)
+Dense 16:                  (32,16)
+Dense 1:                   (32,1)
+```
+
+32는 한 번에 처리하는 샘플 수, 10과 16은 샘플 하나를 표현하는 숫자 개수입니다.
+
+## 첫 모델을 한 줄씩 읽기
+
+```python
+model = tf.keras.Sequential([
+    tf.keras.layers.Input(shape=(10,)),
+    tf.keras.layers.Dense(16, activation="relu"),
+    tf.keras.layers.Dense(1, activation="sigmoid"),
+])
+```
+
+- Input: 샘플 하나가 숫자 10개라고 선언
+- Dense 16: 10개 단서를 조합해 새로운 특징 16개 생성
+- ReLU: 음수 점수를 0으로 바꾸어 비선형 판단 가능
+- Dense 1: 최종 점수 하나 생성
+- Sigmoid: 점수를 0~1 확률로 변환
+
+## 파라미터 수 확인
+
+첫 Dense 층은 가중치 `10×16=160`개와 편향 16개로 총 176개입니다. 마지막 층은 `16×1+1=17`개입니다. 전체 학습 파라미터는 193개입니다.
+
+```python
+model.summary()
+```
+
+summary의 값과 손계산이 다르면 입력 차원이나 층 연결을 다시 확인합니다.
+
+## compile을 쉬운 말로
+
+```python
+model.compile(
+    optimizer="adam",
+    loss="binary_crossentropy",
+    metrics=["accuracy"],
+)
+```
+
+- optimizer: 틀린 정도를 보고 가중치를 고치는 방법
+- loss: 얼마나 틀렸는지 숫자로 계산하는 규칙
+- metric: 사람이 결과를 읽기 위한 평가 기준
+
+Loss는 학습에 직접 사용되지만 accuracy는 관찰용일 수 있습니다.
+
+## fit 결과 읽기
+
+```text
+loss: 0.42 - accuracy: 0.81 - val_loss: 0.55 - val_accuracy: 0.74
+```
+
+훈련 데이터 정확도 81%, 검증 데이터 정확도 74%입니다. 한 epoch만 보고 결론 내리지 말고 곡선의 방향을 봅니다. train loss는 계속 줄지만 val loss가 다시 올라가면 과적합 가능성이 큽니다.
+
+## 작은 데이터 과적합 테스트
+
+샘플 20개만 골라 여러 epoch 학습했을 때 거의 완벽히 맞추지 못하면 일반화 이전에 코드 연결 문제를 의심합니다.
+
+```python
+small_x, small_y = x_train[:20], y_train[:20]
+model.fit(small_x, small_y, epochs=100, verbose=0)
+```
+
+이 테스트의 목표는 좋은 성능이 아니라 모델·손실·레이블이 제대로 연결됐는지 확인하는 것입니다.
+
+## 대표 오류 해석
+
+### shape mismatch
+
+모델은 `(B,10)`을 기대하지만 데이터가 `(B,8)`이면 발생합니다. `x.shape`와 `model.input_shape`를 비교합니다.
+
+### label 범위 오류
+
+3개 클래스인데 레이블에 3 또는 4가 들어 있으면 범위를 벗어납니다. 정수 클래스는 보통 `0~C-1`입니다.
+
+### logits 설정 오류
+
+마지막 층에 Softmax가 없으면 `from_logits=True`, 이미 Softmax가 있으면 `False`입니다. 중복 Softmax나 잘못된 설정은 손실 계산을 왜곡합니다.
+
+### NaN loss
+
+입력의 NaN/Inf, 너무 큰 학습률, 잘못된 로그 계산을 확인합니다.
+
+```python
+tf.debugging.assert_all_finite(x_train, "입력에 NaN/Inf 존재")
+```
+
+## predict 결과 읽기
+
+Sigmoid 출력 `[[0.82],[0.31]]`은 첫 샘플이 양성일 가능성을 0.82로, 둘째는 0.31로 본다는 뜻입니다. 0.5는 기본 임계값일 뿐 업무 비용에 따라 validation에서 조정할 수 있습니다.
+
+## 실습 완료 체크
+
+1. 첫 batch의 shape와 dtype을 출력했는가?
+2. 파라미터 수를 손으로 계산해 보았는가?
+3. 다수 클래스 기준선과 비교했는가?
+4. train/validation 곡선을 함께 보았는가?
+5. 저장 모델을 다시 불러와 같은 결과가 나오는가?
+
+---
+
 <!-- SOURCE: 00_원리_수학_실습_가이드.md -->
 
 # Chapter 6 원리·수학·실습 가이드
