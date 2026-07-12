@@ -228,6 +228,29 @@ decoder target: 나       는 학생 <END>
 
 padding token의 loss를 제외하려면 sample weight 또는 mask를 적용합니다. 그렇지 않으면 긴 padding을 맞히는 능력이 loss를 지배할 수 있습니다.
 
+## 학습과 추론의 입력 차이
+
+학습에서는 정답 이전 토큰을 사용하므로 병렬로 모든 target 위치의 손실을 계산할 수 있습니다. 추론에서는 직전 예측이 다음 입력이어서 한 단계씩 생성합니다. 이 차이가 exposure bias의 원인입니다.
+
+## 비율 스케줄
+
+Teacher forcing 비율 `r`은 정답 토큰을 사용할 확률입니다. 초기 1.0에서 점차 낮추는 scheduled sampling을 사용할 수 있지만, 잘못된 예측이 학습 입력에 들어가 불안정해질 수 있습니다.
+
+```python
+use_truth = tf.random.uniform(()) < ratio
+next_input = tf.where(use_truth, target[:, t], predicted)
+```
+
+배치 전체에 같은 선택을 적용할지 샘플별로 선택할지도 실험 정의에 기록합니다.
+
+## Padding과 손실
+
+Teacher forcing 입력의 PAD 위치와 target PAD 위치가 한 칸 이동해도 정확히 대응하는지 작은 예를 출력합니다. 마스크 분모는 PAD를 제외한 토큰 수여야 합니다.
+
+## 디버깅
+
+한 샘플에서 decoder input, target, argmax prediction을 표로 출력합니다. `<BOS>`를 예측 대상으로 넣거나 `<EOS>`가 target에서 빠지는 오류가 자주 발생합니다.
+
 ---
 
 <!-- SOURCE: 03_Beam_Search.md -->
@@ -245,6 +268,32 @@ Beam Search는 상위 `beam_width`개의 부분 sequence를 유지합니다.
 확률을 곱하면 underflow가 발생하므로 log probability를 더합니다. 긴 문장이 불리해지는 문제를 줄이기 위해 length normalization을 사용하기도 합니다.
 
 beam을 넓히면 계산량과 메모리가 증가하며 품질이 항상 향상되는 것은 아닙니다. 반복, 종료 실패와 문장 길이를 함께 평가합니다.
+
+## 후보 확장 예
+
+beam 2에서 첫 단계 후보가 `I:-0.2`, `You:-0.5`이고 다음 단계가 각각 `am:-0.1`, `like:-0.8`, `are:-0.2`, `like:-0.4`라면 누적 점수는 `I am:-0.3`, `I like:-1.0`, `You are:-0.7`, `You like:-0.9`입니다. 상위 두 후보 `I am`, `You are`를 유지합니다.
+
+## 길이 정규화
+
+로그 확률은 토큰을 추가할 때 대체로 더 작아져 짧은 문장을 선호합니다.
+
+\[
+score_{norm}(y)=\frac{\sum_t\log P(y_t|y_{<t},x)}{length(y)^\alpha}
+\]
+
+`α`가 클수록 길이 벌점을 완화합니다. validation 번역 품질과 길이 비율로 선택합니다.
+
+## 완료 후보 관리
+
+`<EOS>`가 나온 후보는 더 확장하지 않고 완료 목록에 둡니다. 활성 후보가 모두 완료되거나 최대 길이에 도달하면 종료합니다. 완료 후보와 미완료 후보의 점수 비교 규칙을 명확히 합니다.
+
+## Beam 크기의 trade-off
+
+beam을 늘리면 탐색 후보는 많아지지만 속도와 메모리 비용이 늘고, 모델 자체의 확률 편향 때문에 품질이 오히려 떨어질 수 있습니다. greedy, beam 2/4/8을 동일 데이터에서 비교합니다.
+
+## 생성 결과 기록
+
+원문, 정답, greedy, beam 결과, 로그 점수, 길이, 종료 원인을 저장합니다. 자동 점수만으로는 누락·추가·반복을 구분하기 어렵습니다.
 
 ---
 

@@ -298,6 +298,51 @@ model = keras.Model(inputs, outputs)
 
 `model.summary()`로 출력 shape와 파라미터 수를 확인한 뒤 학습합니다.
 
+## API 선택을 구조로 판단하기
+
+Sequential은 입력 하나가 층을 한 방향으로 지나는 모델에 적합합니다. Functional API는 다중 입력·다중 출력, 층 공유, 잔차 연결처럼 계산 그래프가 갈라지거나 합쳐질 때 사용합니다. Subclassing은 동적 반복이나 조건 분기가 핵심일 때 선택하지만 `summary()`와 저장·직렬화가 더 복잡할 수 있습니다.
+
+```python
+title = tf.keras.Input((20,), name="title")
+body = tf.keras.Input((100,), name="body")
+x1 = tf.keras.layers.Dense(16, activation="relu")(title)
+x2 = tf.keras.layers.Dense(32, activation="relu")(body)
+x = tf.keras.layers.Concatenate()([x1, x2])
+priority = tf.keras.layers.Dense(1, activation="sigmoid", name="priority")(x)
+category = tf.keras.layers.Dense(5, name="category")(x)
+model = tf.keras.Model([title, body], [priority, category])
+```
+
+입력 shape는 batch 축을 제외해 선언합니다. `Input((100,))`은 실제 배치에서 `(B,100)`입니다. `Concatenate` 뒤에는 `(B,48)`이 되며 출력 이름을 지정하면 다중 손실 로그를 읽기 쉽습니다.
+
+## 잔차 연결과 shape
+
+\[
+y=x+F(x)
+\]
+
+덧셈하려면 `x`와 `F(x)`의 shape가 같아야 합니다. 차원이 다르면 projection 층으로 맞춥니다. 연결은 `Add`와 `Concatenate`가 다릅니다. Add는 차원을 유지하고, Concatenate는 지정 축의 크기를 더합니다.
+
+## 사용자 정의 층의 최소 원칙
+
+가중치는 `build()` 또는 `add_weight()`로 등록하고 계산은 `call()`에 둡니다. Python 리스트에 임의 Tensor를 저장하거나 `call()`에서 매번 층을 새로 만들면 추적과 저장이 깨질 수 있습니다.
+
+```python
+class Scale(tf.keras.layers.Layer):
+    def build(self, input_shape):
+        self.scale = self.add_weight(shape=(), initializer="ones")
+    def call(self, inputs):
+        return inputs * self.scale
+```
+
+## 모델 요약을 읽는 법
+
+`Param #`는 학습 가능한 가중치와 비학습 가중치를 포함합니다. None은 실행 시 정해지는 batch 또는 sequence 길이입니다. 예상 파라미터 수와 summary가 다르면 입력 차원이나 양방향 연결을 다시 봅니다.
+
+## 저장과 재현성
+
+전체 모델 저장은 구조·가중치·일부 optimizer 상태를 함께 보존합니다. 사용자 정의 객체는 직렬화 설정을 추가하고 저장 직후 새 프로세스에서 불러와 같은 입력의 출력을 비교합니다. 파일 생성 성공만으로 복원이 검증된 것은 아닙니다.
+
 ---
 
 <!-- SOURCE: 03_Model_Training.md -->
@@ -331,6 +376,50 @@ callbacks = [
 ```
 
 테스트 데이터는 최종 평가에만 사용합니다. 모델 선택과 epoch 결정에 테스트 점수를 사용하면 누수가 발생합니다.
+
+## compile 설정의 일관성
+
+| 문제 | 출력층 | 손실 |
+|---|---|---|
+| 이진 분류 | 1 sigmoid | BinaryCrossentropy |
+| 정수 레이블 다중 분류 | C logits | SparseCategoricalCrossentropy(from_logits=True) |
+| one-hot 다중 분류 | C logits | CategoricalCrossentropy(from_logits=True) |
+| 다중 레이블 | C sigmoid | BinaryCrossentropy |
+| 회귀 | 필요한 값 수 | MSE 또는 MAE |
+
+마지막 활성화와 `from_logits`가 중복되거나 빠지면 학습이 왜곡됩니다. 로짓에 Softmax를 적용했다면 `from_logits=False`, 활성화가 없다면 `True`입니다.
+
+## fit 내부에서 일어나는 일
+
+각 배치마다 순전파, 손실 계산, 자동미분, optimizer 갱신, metric 누적이 실행됩니다. epoch가 끝나면 validation은 가중치 갱신 없이 수행됩니다.
+
+```python
+callbacks = [
+    tf.keras.callbacks.EarlyStopping(
+        monitor="val_loss", patience=3, restore_best_weights=True
+    ),
+    tf.keras.callbacks.ModelCheckpoint(
+        "best.keras", monitor="val_loss", save_best_only=True
+    ),
+]
+```
+
+EarlyStopping의 마지막 epoch와 최고 epoch는 다를 수 있습니다. `restore_best_weights=True`가 없으면 마지막 상태가 남습니다.
+
+## 학습 곡선 진단
+
+- 첫 epoch부터 손실이 NaN: 비정상 입력, 과도한 학습률, 잘못된 손실
+- train/val 모두 변화 없음: gradient 단절, 레이블 오류, 너무 작은 학습률
+- train만 계속 개선: 과적합 또는 분할 차이
+- validation이 심하게 출렁임: 검증셋이 작거나 클래스 불균형
+
+## evaluate와 predict의 차이
+
+`evaluate()`는 정답이 있는 데이터에서 loss와 metric을 계산합니다. `predict()`는 모델 출력만 만듭니다. 로짓을 바로 확률로 오해하지 말고 문제에 맞는 Sigmoid 또는 Softmax를 적용합니다.
+
+## 실험 기록표
+
+데이터 버전, split seed, 모델 구조, optimizer, 학습률, batch, 최고 epoch, val/test metric, 실행 시간, 커밋 ID를 한 행으로 기록합니다. 한 번에 변수 하나만 바꿔야 개선 원인을 설명할 수 있습니다.
 
 ---
 

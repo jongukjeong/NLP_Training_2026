@@ -229,6 +229,33 @@ rnn = layers.GRU(64)       # 또는 layers.LSTM(64)
 
 모델 이름보다 데이터와 평가 설계가 중요합니다.
 
+## GRU 전체 계산
+
+\[
+z_t=\sigma(W_zx_t+U_zh_{t-1}),\quad
+r_t=\sigma(W_rx_t+U_rh_{t-1})
+\]
+\[
+\tilde h_t=\tanh(W_hx_t+U_h(r_t\odot h_{t-1}))
+\]
+\[
+h_t=(1-z_t)\odot h_{t-1}+z_t\odot\tilde h_t
+\]
+
+update gate는 과거와 후보 상태의 혼합 비율, reset gate는 후보를 만들 때 과거를 얼마나 사용할지 정합니다. 구현 문헌에 따라 update 식의 두 항 배치가 반대로 표기될 수 있으므로 사용 라이브러리 정의를 확인합니다.
+
+## 파라미터 비교
+
+GRU는 대략 `3H(D+H+1)`, LSTM은 `4H(D+H+1)`입니다. `D=128,H=64`이면 GRU는 약 37,056개, LSTM은 약 49,408개입니다. 실제 수는 bias 구현에 따라 조금 다를 수 있으므로 `model.summary()`로 확인합니다.
+
+## 공정한 선택 실험
+
+동일 tokenizer, embedding, split, seed, batch와 비슷한 파라미터 예산을 사용합니다. 최고 validation F1, test F1, epoch당 시간, peak memory, 긴 문장 성능을 비교합니다. 한 번 실행의 작은 차이보다 여러 seed의 평균과 변동을 봅니다.
+
+## 선택 기준
+
+GRU는 제한된 자원과 빠른 반복에서 좋은 출발점입니다. LSTM은 더 세밀한 기억 제어가 도움이 되는지 실험합니다. Transformer와도 비교하되 데이터 크기, 지연 요구와 설명 가능성을 포함합니다.
+
 ---
 
 <!-- SOURCE: 03_Sentiment_Analysis.md -->
@@ -245,6 +272,26 @@ TextVectorization → Embedding(mask_zero=True)
 평가 시 accuracy와 함께 precision, recall, F1, confusion matrix를 봅니다. 같은 상품·사용자의 거의 동일한 리뷰가 train/test에 나뉘지 않도록 중복 그룹을 고려합니다.
 
 작은 데이터의 높은 점수는 일반화를 의미하지 않습니다. 실제 배포 전 시간·도메인 기준 holdout이 필요합니다.
+
+## 데이터 설계
+
+평점으로 감성 레이블을 자동 생성할 때 중간 평점 처리와 반어적 리뷰를 점검합니다. 동일 사용자의 반복 리뷰나 거의 같은 문장이 분할을 넘어가면 누수됩니다.
+
+## 전처리의 균형
+
+느낌표, 이모지, 반복 문자, 부정 표현은 감성 신호일 수 있으므로 일괄 제거하지 않습니다. 미등록어 비율과 truncation 비율을 train/validation/test별로 기록합니다.
+
+## 확률과 calibration
+
+Sigmoid 0.9가 실제로 약 90% 정확한지를 calibration curve로 확인할 수 있습니다. 확률이 과신되어 있다면 임계값과 사용자 표시 정책에 영향을 줍니다.
+
+## 도전 평가셋
+
+부정, 반전, 풍자, 도메인 용어, 매우 긴 문장으로 작은 challenge set을 만듭니다. 일반 test F1과 함께 보고 모델이 어떤 언어 현상을 아직 못 다루는지 설명합니다.
+
+## 운영 관점
+
+오분류 비용이 대칭인지 확인합니다. 부정 리뷰 누락과 긍정 리뷰 오탐의 업무 비용이 다르면 PR 곡선에서 임계값을 정하고 모호한 구간은 사람 검토로 보냅니다.
 
 ---
 
