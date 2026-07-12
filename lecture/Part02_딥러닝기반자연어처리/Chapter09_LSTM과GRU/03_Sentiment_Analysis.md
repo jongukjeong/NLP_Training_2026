@@ -30,3 +30,52 @@ Sigmoid 0.9가 실제로 약 90% 정확한지를 calibration curve로 확인할 
 ## 운영 관점
 
 오분류 비용이 대칭인지 확인합니다. 부정 리뷰 누락과 긍정 리뷰 오탐의 업무 비용이 다르면 PR 곡선에서 임계값을 정하고 모호한 구간은 사람 검토로 보냅니다.
+
+## 데이터 준비 흐름
+
+```text
+리뷰 원문 → 중복 제거 → 레이블 규칙 → 그룹 분할
+→ tokenizer fit(train만) → padding → 모델 학습 → 오류 분석
+```
+
+별점에서 레이블을 만들면 별점 3의 처리와 내용·별점 불일치를 표본 검사합니다.
+
+## 모델 코드
+
+```python
+model = tf.keras.Sequential([
+    layers.Embedding(vocab_size, 128, mask_zero=True),
+    layers.Bidirectional(layers.GRU(64)),
+    layers.Dropout(0.3),
+    layers.Dense(1, activation="sigmoid"),
+])
+model.compile(
+    optimizer="adam",
+    loss="binary_crossentropy",
+    metrics=["accuracy"],
+)
+```
+
+양방향 GRU의 출력은 보통 정방향·역방향을 연결해 128차원입니다.
+
+## 임계값 선택
+
+```python
+from sklearn.metrics import precision_recall_curve
+
+precision, recall, thresholds = precision_recall_curve(y_valid, prob_valid)
+```
+
+부정 리뷰를 놓치지 않는 것이 중요하면 목표 Recall을 만족하는 threshold를 validation에서 찾습니다. Test에서 고르면 성능이 과대평가됩니다.
+
+## Challenge set 평가
+
+부정, 반전, 풍자, 대상 혼합, 긴 문장을 각 20개 이상 준비합니다. 전체 test가 좋아도 “느리지만 결과는 좋다” 같은 반전 문장에서 실패할 수 있습니다.
+
+## 확신하며 틀린 사례
+
+예측 확률이 0.9 이상인데 오답인 리뷰를 먼저 읽습니다. 잘못된 레이블, 데이터 누수, 특정 키워드 편향을 찾기 쉽습니다.
+
+## 운영 출력
+
+확률이 모호한 구간은 `uncertain`으로 보내 사람 검토를 받을 수 있습니다. 긍정/부정만 강제로 반환하는 것보다 업무 위험을 줄일 수 있습니다.
