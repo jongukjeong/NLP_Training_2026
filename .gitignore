@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Virtual environment
+.venv/
+venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Data
+datasets/raw/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Vector DB local files
+chroma/
+chroma_db/
+faiss_index/
+
+# MkDocs
+site/

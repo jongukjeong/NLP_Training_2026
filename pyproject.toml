@@ -1,0 +1,18 @@
+[project]
+name = "nlp-training-2026"
+version = "0.1.0"
+description = "딥러닝을 이용한 자연어처리 실무 교육과정"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "jupyterlab",
+    "ipykernel",
+    "mkdocs",
+    "mkdocs-material",
+]
+
+[tool.ruff]
+line-length = 100

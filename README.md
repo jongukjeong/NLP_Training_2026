@@ -1,31 +1,72 @@
-# Chapter 1 Lab Setup & Troubleshooting Update
+# NLP-Training-2026
 
-Chapter 1의 실습 환경 구축 문서 보강본과 별도 문제 해결 문서입니다.
+딥러닝을 이용한 자연어처리 실무 교육과정
 
-## 포함 파일
+## 현재 포함된 범위
 
-- `lecture/.../07_Lab_Setup.md`
-- `lecture/.../TROUBLESHOOTING.md`
-- `docs/part01/chapter01/07_Lab_Setup.md`
-- `docs/part01/chapter01/TROUBLESHOOTING.md`
-- `mkdocs_troubleshooting_nav_snippet.yml`
+- Part 1. 자연어처리 기초와 Python
+  - Chapter 1. 인공지능과 자연어처리의 이해
 
-## 반영 내용
+## Chapter 1 문서
 
-- 콘솔에서 Python 예제 실행 확인
-- VS Code Python Interpreter 선택
-- VS Code Notebook Kernel 등록
-- `ipykernel` 설치 및 커널 등록 명령어
-- JupyterLab 실행 확인
-- Google Colab 사용 안내
-- Colab 로그인 필요 여부 안내
-- MkDocs 404 점검
-- 강의 전 체크리스트
-
-## mkdocs.yml 추가 항목
-
-`07. 실습 환경 구축` 바로 아래에 추가합니다.
-
-```yaml
-          - Troubleshooting: part01/chapter01/TROUBLESHOOTING.md
+```text
+lecture/
+└── Part01_자연어처리기초와Python/
+    └── Chapter01_인공지능과자연어처리의이해/
+        ├── README.md
+        ├── 01_Opening.md
+        ├── 02_AI_History.md
+        ├── 03_Machine_Learning.md
+        ├── 04_NLP.md
+        ├── 05_Generative_AI_and_LLM.md
+        ├── 06_NLP_Cases.md
+        ├── 07_Lab_Setup.md
+        ├── 08_Summary.md
+        ├── 09_Quiz.md
+        ├── 10_Assignment.md
+        └── 11_Mini_Project.md
 ```
+
+## 로컬 사용 방법
+
+### 1. 압축 해제
+
+원하는 위치에 압축을 해제합니다.
+
+### 2. 프로젝트 폴더로 이동
+
+```bash
+cd NLP-Training-2026_Chapter01_COMPLETE
+```
+
+### 3. Git 저장소 초기화
+
+```bash
+git init
+git add .
+git commit -m "Add chapter 1 lecture materials"
+```
+
+### 4. MkDocs Material 미리보기
+
+필요한 패키지를 설치합니다.
+
+```bash
+python -m pip install mkdocs mkdocs-material
+```
+
+로컬 서버를 실행합니다.
+
+```bash
+mkdocs serve
+```
+
+브라우저에서 안내되는 주소로 접속하면 문서를 확인할 수 있습니다.
+
+## 교육 과정 원칙
+
+- 최신 기술보다 검증된 기술을 우선합니다.
+- 학생이 검색 가능한 환경을 우선합니다.
+- 새로운 기술은 왜 등장했는지 함께 설명합니다.
+- 실무에서 안정적으로 재현 가능한 환경을 선택합니다.
+- 소프트웨어 엔지니어링 관점도 함께 다룹니다.

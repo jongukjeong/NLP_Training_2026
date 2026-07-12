@@ -1,0 +1,5 @@
+# mkdocs.yml nav에 추가할 예시입니다.
+
+- Chapter 1 실습 자료:
+    - Examples Overview: examples/chapter01/README.md
+    - Notebooks Overview: notebooks/chapter01/README.md
