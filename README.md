@@ -21,7 +21,11 @@ lecture/
     │   └── images/
     ├── Chapter02_Python과데이터처리/
     │   └── examples/
-    └── Chapter03_텍스트전처리/
+    ├── Chapter03_텍스트전처리/
+    │   └── examples/
+    ├── Chapter04_텍스트의수치화/
+    │   └── examples/
+    └── Chapter05_단어임베딩/
         └── examples/
 ```
 
