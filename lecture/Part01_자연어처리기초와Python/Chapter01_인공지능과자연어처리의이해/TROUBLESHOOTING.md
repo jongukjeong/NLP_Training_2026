@@ -54,15 +54,15 @@ Python 3.11.x
 Chapter 1 예제 파일을 실행합니다.
 
 ```bash
-python examples/chapter01/01_simple_tokenization.py
-python examples/chapter01/02_rule_based_intent.py
-python examples/chapter01/03_sqlite_keyword_search.py
+python examples/01_simple_tokenization.py
+python examples/02_rule_based_intent.py
+python examples/03_sqlite_keyword_search.py
 ```
 
 FAQ 챗봇 예제는 대화형입니다.
 
 ```bash
-python examples/chapter01/04_faq_chatbot.py
+python examples/04_faq_chatbot.py
 ```
 
 종료하려면 다음을 입력합니다.
@@ -187,8 +187,8 @@ jupyter lab
 브라우저에서 다음 파일을 엽니다.
 
 ```text
-notebooks/chapter01/01_chapter01_quick_demo.ipynb
-notebooks/chapter01/02_rule_based_faq_chatbot.ipynb
+notebooks/01_chapter01_quick_demo.ipynb
+notebooks/02_rule_based_faq_chatbot.ipynb
 ```
 
 JupyterLab에서는 정상인데 VS Code에서만 실패한다면, VS Code의 Python Interpreter 또는 Notebook Kernel 문제일 가능성이 큽니다.
@@ -319,9 +319,9 @@ python --version
 ### 예제 코드 실행
 
 ```bash
-python examples/chapter01/01_simple_tokenization.py
-python examples/chapter01/02_rule_based_intent.py
-python examples/chapter01/03_sqlite_keyword_search.py
+python examples/01_simple_tokenization.py
+python examples/02_rule_based_intent.py
+python examples/03_sqlite_keyword_search.py
 ```
 
 ### VS Code Notebook Kernel 등록

@@ -1316,15 +1316,15 @@ Google Colab에서 Notebook 실행
 cd /Users/jeongjonguk/Documents/GitHub/NLP-Training-2026
 source .venv/bin/activate
 
-python examples/chapter01/01_simple_tokenization.py
-python examples/chapter01/02_rule_based_intent.py
-python examples/chapter01/03_sqlite_keyword_search.py
+python examples/01_simple_tokenization.py
+python examples/02_rule_based_intent.py
+python examples/03_sqlite_keyword_search.py
 ```
 
 `04_faq_chatbot.py`는 대화형 입력을 받는 예제입니다.
 
 ```bash
-python examples/chapter01/04_faq_chatbot.py
+python examples/04_faq_chatbot.py
 ```
 
 종료하려면 다음을 입력합니다.
@@ -1417,8 +1417,8 @@ jupyter lab
 브라우저가 열리면 다음 파일을 실행합니다.
 
 ```text
-notebooks/chapter01/01_chapter01_quick_demo.ipynb
-notebooks/chapter01/02_rule_based_faq_chatbot.ipynb
+notebooks/01_chapter01_quick_demo.ipynb
+notebooks/02_rule_based_faq_chatbot.ipynb
 ```
 
 JupyterLab에서는 정상인데 VS Code에서만 실패한다면, 대부분 VS Code의 Kernel 선택 또는 Jupyter 확장 문제입니다.

@@ -4,5 +4,3 @@ matplotlib
 scikit-learn
 jupyterlab
 ipykernel
-mkdocs
-mkdocs-material
