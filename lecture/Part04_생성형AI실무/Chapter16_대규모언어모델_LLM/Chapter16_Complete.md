@@ -1,6 +1,6 @@
 ﻿# Chapter 16 통합 강의 원고
 
-> 이 문서는 Chapter  원본 강의 문서를 학습 순서대로 합친 통합본입니다. 개별 원본 파일은 그대로 유지합니다.
+입니다. 개별 원본 파일은 그대로 유지합니다.
 
 ---
 
@@ -367,4 +367,3 @@ model,quantization,prompt_id,passed,ttft,total_seconds,tokens_per_second,error
 ## 완료 기준
 
 두 개 이상 모델 또는 양자화 설정, 20개 이상 질문, 품질·TTFT·tokens/s·메모리 표, 실패 사례와 선택 결론을 제출합니다.
-

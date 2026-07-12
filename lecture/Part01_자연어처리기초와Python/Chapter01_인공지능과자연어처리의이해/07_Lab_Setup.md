@@ -1,4 +1,4 @@
-# 실습 환경 구축
+﻿# 실습 환경 구축
 
 > **Chapter 1. 인공지능과 자연어처리의 이해**  
 > 문서: `07_Lab_Setup.md`
@@ -75,7 +75,6 @@ AI 실습에서는 개발환경이 매우 중요합니다.
 | 벡터 검색 | ChromaDB 중심 |
 | 고급 벡터 검색 | FAISS 소개 |
 | 배포/재현성 | Docker |
-| 문서화 | MkDocs Material |
 
 모든 도구를 처음부터 한꺼번에 사용하지는 않습니다.
 
@@ -332,46 +331,24 @@ git init
 
 ## 권장 디렉터리 구조
 
-이번 과정의 기본 디렉터리 구조는 다음과 같습니다.
+모든 Chapter 1 강의 자료와 실습 산출물은 Chapter 폴더 안에서 함께 관리합니다.
 
 ```text
-NLP-Training-2026/
-├── README.md
-├── requirements.txt
-├── environment.yml
-├── pyproject.toml
-├── mkdocs.yml
-├── lecture/
-│   └── Part01_자연어처리기초와Python/
-│       └── Chapter01_인공지능과자연어처리의이해/
-│           ├── README.md
-│           ├── 01_Opening.md
-│           ├── 02_AI_History.md
-│           ├── 03_Machine_Learning.md
-│           ├── 04_NLP.md
-│           ├── 05_Generative_AI_and_LLM.md
-│           ├── 06_NLP_Cases.md
-│           ├── 07_Lab_Setup.md
-│           ├── images/
-│           ├── examples/
-│           ├── notebooks/
-│           └── slides/
-├── notebooks/
-├── examples/
-├── datasets/
-├── exercises/
-├── quizzes/
-├── assignments/
-├── projects/
-└── assets/
+lecture/Part01_자연어처리기초와Python/
+└── Chapter01_인공지능과자연어처리의이해/
+    ├── README.md
+    ├── 01_Opening.md ... 11_Mini_Project.md
+    ├── notebooks/          # 실습 노트북
+    ├── examples/           # 짧은 예제 코드
+    ├── datasets/           # 예제 코드와 노트북이 함께 쓰는 데이터
+    ├── projects/           # 과제·미니 프로젝트 코드와 테스트
+    ├── images/             # 강의 이미지
+    └── slides/             # 강의 슬라이드 원본
 ```
 
-강의 본문은 `lecture/` 아래에 둡니다.
-
-실습 코드는 `examples/`, 노트북은 `notebooks/`, 데이터는 `datasets/`에 둡니다.
+예제 코드는 해당 Chapter의 `examples/`, 데이터는 `datasets/`, 노트북은 `notebooks/`, 완성 프로젝트는 `projects/`에서 관리합니다.
 
 ---
-
 ## 가상환경이란 무엇인가?
 
 Python 프로젝트를 진행할 때는 가상환경을 사용하는 것이 좋습니다.
@@ -1245,48 +1222,16 @@ RAG 프로젝트
 
 ---
 
-## 실습 체크리스트
-
-아래 항목을 하나씩 확인합니다.
-
-| 체크 | 항목 |
-|---|---|
-| ☐ | Python 3.11 설치 확인 |
-| ☐ | pip 확인 |
-| ☐ | VS Code 설치 |
-| ☐ | Python 확장 설치 |
-| ☐ | Jupyter 확장 설치 |
-| ☐ | Git 설치 |
-| ☐ | 프로젝트 폴더 생성 |
-| ☐ | `.venv` 가상환경 생성 |
-| ☐ | 가상환경 활성화 |
-| ☐ | 기본 패키지 설치 |
-| ☐ | JupyterLab 실행 |
-| ☐ | VS Code Interpreter 설정 |
-| ☐ | SQLite 기본 코드 실행 |
-| ☐ | `.gitignore` 작성 |
-| ☐ | 첫 커밋 생성 |
-
----
-
-## 다음 문서
-
-다음 문서에서는 Chapter 1에서 배운 내용을 정리합니다.
-
-AI, 머신러닝, 딥러닝, 자연어처리, 생성형 AI, LLM, RAG의 관계를 한 번에 정리하고,  
-앞으로 이어질 Part 1 학습으로 연결합니다.
-
 ## 키워드 검색과 벡터 검색 비교
 
 ![SQLite 키워드 검색과 ChromaDB 벡터 검색 비교](images/06_keyword_vs_vector_search.svg)
 
 > 일반 키워드 검색은 단어 일치에 강하고, 벡터 검색은 표현이 달라도 의미가 비슷한 문서를 찾는 데 유리합니다.
 
-> 다음: `08_Summary.md`
 
 ---
 
-# 부록. 실행 환경 점검과 문제 해결
+# 실행 환경 점검과 문제 해결
 
 이번 과정에서는 같은 예제를 여러 환경에서 실행할 수 있습니다.
 
@@ -1494,23 +1439,6 @@ Colab은 편리하지만 로컬 환경과 다른 점이 있습니다.
 
 ---
 
-## 강의 전 환경 점검 체크리스트
-
-| 체크 | 항목 |
-|---|---|
-| ☐ | 콘솔에서 Python 예제 실행 확인 |
-| ☐ | VS Code에서 프로젝트 폴더 열기 확인 |
-| ☐ | VS Code Python Interpreter가 `.venv`인지 확인 |
-| ☐ | VS Code에서 Python 파일 실행 확인 |
-| ☐ | `ipykernel` 설치 및 Kernel 등록 확인 |
-| ☐ | VS Code에서 Notebook 실행 확인 |
-| ☐ | JupyterLab에서 Notebook 실행 확인 |
-| ☐ | Google Colab 접속 확인 |
-| ☐ | Colab에서 Notebook 업로드 후 실행 확인 |
-| ☐ | MkDocs `mkdocs serve` 실행 확인 |
-
----
-
 ## 수강생 안내용 빠른 해결 명령어
 
 VS Code Notebook 실행이 되지 않는 경우, 수강생에게 다음 명령어를 안내할 수 있습니다.
@@ -1537,7 +1465,7 @@ Python 3.11 (NLP Training 2026)
 
 ## 이번 문서에 추가된 운영 메모
 
-이번 부록의 핵심은 다음과 같습니다.
+환경 점검의 핵심은 다음과 같습니다.
 
 ```text
 콘솔 실행이 되면 코드와 Python 환경은 대체로 정상이다.

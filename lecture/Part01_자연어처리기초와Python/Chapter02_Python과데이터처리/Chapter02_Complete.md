@@ -1,24 +1,8 @@
-# Chapter 2. Python과 데이터 처리 — 통합 원고
-
-> 이 문서는 Chapter 2. Python과 데이터 처리 의 최상위 강의 마크다운을 학습 순서대로 합친 통합 원고입니다. 개별 원본 파일은 그대로 유지합니다.
-
-## 통합 목차
-
-- Chapter 2. Python과 데이터 처리 — `README.md`
-- 01. 학습 안내 — `01_Opening.md`
-- 06. 파일·CSV·JSON 처리 — `06_File_IO.md`
-- 07. pandas로 표 데이터 다루기 — `07_Pandas.md`
-- 08. 텍스트 데이터 정제와 검증 — `08_Data_Cleaning.md`
-- 09. 핵심 정리 — `09_Summary.md`
-- 10. 퀴즈 — `10_Quiz.md`
-- 11. 실습 과제 — `11_Assignment.md`
-- 12. 미니 프로젝트: 텍스트 데이터 탐색기 — `12_Mini_Project.md`
+﻿# Chapter 2. Python과 데이터 처리
 
 ---
 
 <!-- SOURCE: README.md -->
-
-# Chapter 2. Python과 데이터 처리
 
 # Chapter 2. Python과 데이터 처리
 
@@ -36,15 +20,6 @@
 ## 선수 지식
 
 변수, 기본 자료형, 조건문, 반복문, 함수 등 Python 기본 문법은 이 장에서 별도로 설명하지 않습니다. 필요한 코드는 데이터 처리 맥락의 완성 예제로 제공합니다.
-
-## 권장 학습 시간
-
-| 구분 | 시간 |
-|---|---:|
-| 개념 학습 | 4시간 |
-| 따라 하기 | 4시간 |
-| 퀴즈·과제 | 2시간 |
-| 미니 프로젝트 | 3시간 |
 
 ## 문서 구성
 
@@ -94,12 +69,9 @@ Chapter02_Python과데이터처리/
 
 다음 장에서는 이 장에서 준비한 텍스트 데이터를 바탕으로 정규표현식과 형태소 분석 등 본격적인 텍스트 전처리를 학습합니다.
 
-
 ---
 
 <!-- SOURCE: 01_Opening.md -->
-
-# 01. 학습 안내
 
 # 01. 학습 안내
 
@@ -172,12 +144,9 @@ python -m pip install pandas
 
 > 다음: [파일·CSV·JSON 처리](06_File_IO.md)
 
-
 ---
 
 <!-- SOURCE: 06_File_IO.md -->
-
-# 06. 파일·CSV·JSON 처리
 
 # 06. 파일·CSV·JSON 처리
 
@@ -293,12 +262,9 @@ def read_utf8(path: Path) -> str:
 
 > 다음: [pandas로 표 데이터 다루기](07_Pandas.md)
 
-
 ---
 
 <!-- SOURCE: 07_Pandas.md -->
-
-# 07. pandas로 표 데이터 다루기
 
 # 07. pandas로 표 데이터 다루기
 
@@ -416,12 +382,9 @@ non_empty = normalized.loc[normalized["text"].ne("")].copy()
 
 > 다음: [텍스트 데이터 정제와 검증](08_Data_Cleaning.md)
 
-
 ---
 
 <!-- SOURCE: 08_Data_Cleaning.md -->
-
-# 08. 텍스트 데이터 정제와 검증
 
 # 08. 텍스트 데이터 정제와 검증
 
@@ -526,12 +489,9 @@ assert cleaned["text_length"].ge(1).all()
 
 > 다음: [핵심 정리](09_Summary.md)
 
-
 ---
 
 <!-- SOURCE: 09_Summary.md -->
-
-# 09. 핵심 정리
 
 # 09. 핵심 정리
 
@@ -581,12 +541,9 @@ UTF-8로 파일 읽기
 
 > 다음: [퀴즈](10_Quiz.md)
 
-
 ---
 
 <!-- SOURCE: 10_Quiz.md -->
-
-# 10. 퀴즈
 
 # 10. 퀴즈
 
@@ -598,72 +555,72 @@ UTF-8로 파일 읽기
 
 Windows Excel에서 만든 UTF-8 CSV의 BOM까지 안전하게 처리할 때 적합한 입력 인코딩은 무엇인가요?
 
-A. `ascii`  
-B. `utf-8-sig`  
-C. `utf-16-le`  
+A. `ascii`
+B. `utf-8-sig`
+C. `utf-16-le`
 D. `latin-1`
 
 ### 2
 
 JSON 저장 시 한글을 읽을 수 있는 문자로 유지하는 설정은 무엇인가요?
 
-A. `ensure_ascii=False`  
-B. `indent=None`  
-C. `sort_keys=True`  
+A. `ensure_ascii=False`
+B. `indent=None`
+C. `sort_keys=True`
 D. `encoding="ascii"`
 
 ### 3
 
 pandas에서 데이터 구조를 처음 진단할 때 우선 확인할 조합으로 가장 적절한 것은 무엇인가요?
 
-A. 화면 색상과 글꼴  
-B. 행·열 수, 열 이름, 자료형, 결측값  
-C. 파일 생성자 이름만  
+A. 화면 색상과 글꼴
+B. 행·열 수, 열 이름, 자료형, 결측값
+C. 파일 생성자 이름만
 D. 첫 번째 셀만
 
 ### 4
 
 Windows와 macOS에서 모두 동작하는 경로 조합에 가장 적절한 도구는 무엇인가요?
 
-A. 문자열 `+`  
-B. `pathlib.Path`  
-C. `print`  
+A. 문자열 `+`
+B. `pathlib.Path`
+C. `print`
 D. `input`
 
 ### 5
 
 쉼표가 포함될 수 있는 CSV 필드를 안전하게 읽는 방법은 무엇인가요?
 
-A. 각 줄에 `split(",")` 적용  
-B. 글자별 반복  
-C. `csv` 모듈 또는 `pandas.read_csv` 사용  
+A. 각 줄에 `split(",")` 적용
+B. 글자별 반복
+C. `csv` 모듈 또는 `pandas.read_csv` 사용
 D. 쉼표 모두 삭제
 
 ### 6
 
 pandas에서 `text` 열이 결측인 행만 제거하는 코드는 무엇인가요?
 
-A. `df.dropna()`  
-B. `df.dropna(subset=["text"])`  
-C. `df.drop("text")`  
+A. `df.dropna()`
+B. `df.dropna(subset=["text"])`
+C. `df.drop("text")`
 D. `df.fillna("text")`
 
 ### 7
 
 텍스트 중복 제거를 문자열 공백 정규화 뒤에 수행하는 주된 이유는 무엇인가요?
 
-A. 파일 크기를 늘리기 위해  
-B. 공백만 다른 동일 문장을 발견하기 위해  
-C. 레이블을 삭제하기 위해  
+A. 파일 크기를 늘리기 위해
+B. 공백만 다른 동일 문장을 발견하기 위해
+C. 레이블을 삭제하기 위해
 D. 인코딩을 바꾸기 위해
 
 ### 8
 
 정제 파이프라인에서 반드시 함께 남겨야 할 정보로 가장 적절한 것은 무엇인가요?
 
-A. 출력 파일명만  
-B. 개발자 이름만  
-C. 처리 전후 행 수와 제외 사유별 건수  
+A. 출력 파일명만
+B. 개발자 이름만
+C. 처리 전후 행 수와 제외 사유별 건수
 D. 화면 색상
 
 ## 정답과 해설
@@ -685,12 +642,9 @@ D. 화면 색상
 
 > 다음: [실습 과제](11_Assignment.md)
 
-
 ---
 
 <!-- SOURCE: 11_Assignment.md -->
-
-# 11. 실습 과제
 
 # 11. 실습 과제
 
@@ -768,12 +722,9 @@ raw_records = [
 
 > 다음: [미니 프로젝트](12_Mini_Project.md)
 
-
 ---
 
 <!-- SOURCE: 12_Mini_Project.md -->
-
-# 12. 미니 프로젝트: 텍스트 데이터 탐색기
 
 # 12. 미니 프로젝트: 텍스트 데이터 탐색기
 
@@ -1004,4 +955,3 @@ python text_data_explorer.py reviews.csv output\reviews_clean.csv
 - [ ] 오류 메시지만 보고도 사용자가 수정 방향을 알 수 있다.
 
 Chapter 2를 마쳤습니다. 다음 장에서는 이 데이터를 정규표현식, 토큰화, 형태소 분석 등 NLP 전처리 기법에 연결합니다.
-

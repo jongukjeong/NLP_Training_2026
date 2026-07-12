@@ -1,6 +1,6 @@
 ﻿# Chapter 9 통합 강의 원고
 
-> 이 문서는 Chapter  원본 강의 문서를 학습 순서대로 합친 통합본입니다. 개별 원본 파일은 그대로 유지합니다.
+입니다. 개별 원본 파일은 그대로 유지합니다.
 
 ---
 
@@ -576,4 +576,3 @@ precision, recall, thresholds = precision_recall_curve(y_valid, prob_valid)
 - [안내](examples/05_sentiment_solution/README.md)
 - [완성 코드](examples/05_sentiment_solution/sentiment_compare.py)
 - [데이터셋](examples/05_sentiment_solution/reviews.csv)
-

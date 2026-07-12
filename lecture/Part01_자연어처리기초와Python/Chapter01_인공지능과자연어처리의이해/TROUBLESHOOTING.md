@@ -1,4 +1,4 @@
-# Chapter 1 Troubleshooting
+﻿# Chapter 1 Troubleshooting
 
 > **Chapter 1. 인공지능과 자연어처리의 이해**  
 > 문서: `TROUBLESHOOTING.md`
@@ -246,44 +246,6 @@ Colab은 초반 실습과 GPU 실습에는 유용합니다.
 
 ---
 
-## 9. MkDocs 404가 발생할 때
-
-MkDocs에서 메뉴는 보이는데 페이지가 404인 경우, 대부분 `mkdocs.yml`의 nav 경로와 `docs/` 안의 실제 파일 경로가 맞지 않는 상태입니다.
-
-현재 권장 구조는 다음과 같습니다.
-
-```text
-NLP-Training-2026/
-├── lecture/
-│   └── 원본 강의자료
-├── docs/
-│   ├── index.md
-│   └── part01/
-│       └── chapter01/
-│           ├── README.md
-│           ├── 01_Opening.md
-│           └── ...
-└── mkdocs.yml
-```
-
-`mkdocs.yml`에서는 다음처럼 `docs/` 기준 상대 경로를 사용합니다.
-
-```yaml
-Overview: part01/chapter01/README.md
-01. Opening: part01/chapter01/01_Opening.md
-```
-
-문서 수정 후 MkDocs용 문서에 반영하려면 다음 명령을 사용합니다.
-
-```bash
-rm -rf docs/part01/chapter01
-mkdir -p docs/part01/chapter01
-
-cp lecture/Part01_자연어처리기초와Python/Chapter01_인공지능과자연어처리의이해/*.md docs/part01/chapter01/
-```
-
----
-
 ## 10. 강의 전 체크리스트
 
 | 체크 | 항목 |
@@ -297,7 +259,6 @@ cp lecture/Part01_자연어처리기초와Python/Chapter01_인공지능과자연
 | ☐ | JupyterLab에서 Notebook 실행 확인 |
 | ☐ | Google Colab 접속 확인 |
 | ☐ | Colab에서 Notebook 업로드 후 실행 확인 |
-| ☐ | MkDocs `mkdocs serve` 실행 확인 |
 
 ---
 
@@ -340,14 +301,6 @@ python -m ipykernel install --user \
 jupyter lab
 ```
 
-### MkDocs 실행
-
-```bash
-mkdocs serve
-```
-
----
-
 ## 핵심 정리
 
 ```text
@@ -355,5 +308,4 @@ mkdocs serve
 VS Code Notebook 문제는 대부분 Kernel 등록 문제이다.
 ipykernel을 설치하고 명시적으로 Kernel을 등록하면 해결되는 경우가 많다.
 Colab은 Chapter 1 Notebook 실행에 적합하지만 Google 계정 로그인이 필요하다.
-MkDocs 404는 nav 경로와 docs 폴더 구조를 먼저 확인한다.
 ```

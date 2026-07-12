@@ -1,4 +1,4 @@
-# Windows 실습 환경 확인
+﻿# Windows 실습 환경 확인
 
 > **기준 환경:** Windows 10/11, Python 3.11.9, VS Code, PowerShell
 
@@ -57,15 +57,6 @@ python -m jupyter nbconvert --to notebook --execute `
   notebooks\chapter01\01_chapter01_quick_demo.ipynb `
   --output 01_executed.ipynb
 ```
-
-## MkDocs 실행
-
-```powershell
-mkdocs build --strict
-mkdocs serve
-```
-
-브라우저에서 `http://127.0.0.1:8000/`에 접속해 모든 메뉴가 열리는지 확인합니다.
 
 ## JupyterLab 실행
 
