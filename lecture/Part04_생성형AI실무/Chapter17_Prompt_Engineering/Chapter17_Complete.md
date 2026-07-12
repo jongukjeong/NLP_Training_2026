@@ -304,6 +304,51 @@ if not required.issubset(result):
 
 한 번에 여러 요소를 바꾸지 않고 prompt version, model, temperature를 기록합니다. LLM judge는 편향이 있으므로 중요한 표본은 사람이 검토합니다.
 
+## 평가셋 분리
+
+프롬프트를 수정하는 개발셋과 마지막 확인용 test를 분리합니다. Test 실패를 보고 계속 수정하면 test도 학습 자료가 됩니다.
+
+## 자동 평가
+
+분류 값, 필수 키, 타입, 문자열 길이, 금지 표현은 코드로 검사합니다.
+
+```python
+def validate(result):
+    allowed = {"배송", "환불", "계정", "기타"}
+    return (
+        isinstance(result, dict)
+        and result.get("category") in allowed
+        and isinstance(result.get("reason"), str)
+    )
+```
+
+## 사람 평가
+
+요약·생성처럼 답이 여러 개인 과제는 사실성, 충분성, 명료성, 안전성을 1~5점으로 평가합니다. 평가자에게 좋은/나쁜 예를 제공합니다.
+
+## 비용과 지연
+
+\[
+평균비용=전체요청비용/요청수
+\]
+
+P95는 요청의 95%가 이 시간 이내에 완료된다는 뜻입니다. 평균이 낮아도 일부 사용자가 오래 기다릴 수 있어 함께 봅니다.
+
+## 평가 결과표
+
+| Prompt | Accuracy | Schema | 사람점수 | P95 | 비용 |
+|---|---:|---:|---:|---:|---:|
+| v1 | 기록 | 기록 | 기록 | 기록 | 기록 |
+| v2 | 기록 | 기록 | 기록 | 기록 | 기록 |
+
+## 실패 유형
+
+지시 누락, 입력 오해, 형식 오류, 근거 없는 생성, 안전 위반으로 분류합니다. 유형별 수정 방법이 다릅니다.
+
+## 통계적 주의
+
+평가 질문 5개에서 1건 차이는 20%p입니다. 작은 표본의 큰 차이를 일반화하지 않고 질문 수와 반복 실행 수를 함께 보고합니다.
+
 ---
 
 <!-- SOURCE: 04_Summary_and_Quiz.md -->
@@ -328,4 +373,35 @@ if not required.issubset(result):
 - [안내](examples/05_prompt_optimization_solution/README.md)
 - [코드](examples/05_prompt_optimization_solution/prompt_evaluator.py)
 - [평가셋](examples/05_prompt_optimization_solution/evaluation.csv)
+
+## 실습 목표
+
+하나의 업무 Prompt를 Zero-shot에서 시작해 Few-shot과 Structured Output으로 개선하고 같은 평가셋에서 비교합니다.
+
+## 단계
+
+1. 평가 질문 30개와 기대 결과 작성
+2. Zero-shot 기준 Prompt 실행
+3. 오류 유형 분류
+4. 판단 경계 예시 3~5개 추가
+5. JSON schema 적용
+6. 정확도·형식·토큰·P95 비교
+
+## 결과 파일
+
+```text
+prompt_version,input_id,output,parsed,correct,latency,input_tokens,output_tokens,error_type
+```
+
+## Prompt 버전
+
+Prompt 파일에 `v01`, `v02`를 붙이고 변경 이유를 기록합니다. 결과가 나빠진 버전도 삭제하지 않아 반복 실험을 방지합니다.
+
+## 안전 사례
+
+입력 내부에 지시 무시 문구, 개인정보, 범위 밖 요청을 포함합니다. 외부 입력은 데이터로 취급하고 민감정보는 전송 전 제거합니다.
+
+## 완료 기준
+
+기준선과 개선 버전, 30개 이상 평가, 자동 파서, 오류 분석, 비용·지연, 최종 채택 이유를 제출합니다.
 
