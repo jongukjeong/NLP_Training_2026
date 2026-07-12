@@ -50,3 +50,41 @@ CountVectorizer(
 이 값은 데이터 크기와 평가 결과를 기준으로 정하며 평가 데이터에 맞춰 조정하지 않습니다.
 
 > 다음: [TF-IDF와 n-gram](02_TFIDF_and_Ngrams.md)
+
+## Binary와 Count 표현
+
+Binary 방식은 단어가 한 번이라도 나오면 1, Count 방식은 실제 등장 횟수를 기록합니다. 스팸 문구처럼 반복 횟수가 중요하면 Count가 유용하고, 긴 문서가 단순히 더 큰 값을 갖는 문제를 줄이려면 Binary를 비교할 수 있습니다.
+
+```python
+binary_vectorizer = CountVectorizer(binary=True)
+count_vectorizer = CountVectorizer(binary=False)
+```
+
+문장 `배송 배송 지연`은 어휘 `[배송, 지연]`에서 Binary `[1,1]`, Count `[2,1]`입니다.
+
+## 행렬 shape 해석
+
+문서 1,000개와 어휘 5,000개가 있으면 행렬 shape는 `(1000,5000)`입니다. 행은 문서, 열은 단어입니다. 새 문서를 `transform()`하면 `(새 문서 수,5000)`으로 같은 열을 사용합니다.
+
+## 메모리 확인
+
+```python
+print(matrix.shape)
+print("0이 아닌 원소:", matrix.nnz)
+sparsity = 1 - matrix.nnz / (matrix.shape[0] * matrix.shape[1])
+print("희소도:", sparsity)
+```
+
+희소도가 0.99라면 원소의 99%가 0입니다. 이 때문에 희소 행렬을 사용합니다.
+
+## 어휘 누수와 미등록 단어
+
+평가 문서까지 포함해 `fit()`하면 미래 어휘를 미리 알게 됩니다. Train에서 fit하고 validation/test에는 transform만 적용합니다. 학습 어휘에 없는 새 단어는 해당 열이 없으므로 벡터에 반영되지 않습니다.
+
+## BoW가 적합한 경우
+
+- 카테고리별 핵심 단어가 뚜렷한 문서 분류
+- 제품 코드와 정확한 용어 중심 검색
+- 빠르고 설명 가능한 기준선
+
+번역·문장 생성처럼 순서가 핵심인 과제에는 적합하지 않습니다.

@@ -345,6 +345,44 @@ CountVectorizer(
 
 > 다음: [TF-IDF와 n-gram](02_TFIDF_and_Ngrams.md)
 
+## Binary와 Count 표현
+
+Binary 방식은 단어가 한 번이라도 나오면 1, Count 방식은 실제 등장 횟수를 기록합니다. 스팸 문구처럼 반복 횟수가 중요하면 Count가 유용하고, 긴 문서가 단순히 더 큰 값을 갖는 문제를 줄이려면 Binary를 비교할 수 있습니다.
+
+```python
+binary_vectorizer = CountVectorizer(binary=True)
+count_vectorizer = CountVectorizer(binary=False)
+```
+
+문장 `배송 배송 지연`은 어휘 `[배송, 지연]`에서 Binary `[1,1]`, Count `[2,1]`입니다.
+
+## 행렬 shape 해석
+
+문서 1,000개와 어휘 5,000개가 있으면 행렬 shape는 `(1000,5000)`입니다. 행은 문서, 열은 단어입니다. 새 문서를 `transform()`하면 `(새 문서 수,5000)`으로 같은 열을 사용합니다.
+
+## 메모리 확인
+
+```python
+print(matrix.shape)
+print("0이 아닌 원소:", matrix.nnz)
+sparsity = 1 - matrix.nnz / (matrix.shape[0] * matrix.shape[1])
+print("희소도:", sparsity)
+```
+
+희소도가 0.99라면 원소의 99%가 0입니다. 이 때문에 희소 행렬을 사용합니다.
+
+## 어휘 누수와 미등록 단어
+
+평가 문서까지 포함해 `fit()`하면 미래 어휘를 미리 알게 됩니다. Train에서 fit하고 validation/test에는 transform만 적용합니다. 학습 어휘에 없는 새 단어는 해당 열이 없으므로 벡터에 반영되지 않습니다.
+
+## BoW가 적합한 경우
+
+- 카테고리별 핵심 단어가 뚜렷한 문서 분류
+- 제품 코드와 정확한 용어 중심 검색
+- 빠르고 설명 가능한 기준선
+
+번역·문장 생성처럼 순서가 핵심인 과제에는 적합하지 않습니다.
+
 ---
 
 <!-- SOURCE: 02_TFIDF_and_Ngrams.md -->
@@ -402,6 +440,40 @@ test_matrix = vectorizer.transform(test_texts)
 
 > 다음: [코사인 유사도와 검색](03_Similarity_and_Search.md)
 
+## TF와 IDF 공식
+
+\[
+TF(t,d)=\frac{count(t,d)}{문서d의전체단어수}
+\]
+
+\[
+IDF(t)=\log\frac{전체문서수}{단어t가등장한문서수}
+\]
+
+100개 문서 중 5개에만 등장한 단어의 IDF는 `log(20)≈2.996`입니다. 100개 모두에 등장하면 `log(1)=0`입니다. 라이브러리는 smoothing 때문에 손계산과 조금 다를 수 있습니다.
+
+## sublinear_tf
+
+`sublinear_tf=True`는 등장 횟수를 그대로 쓰지 않고 `1+log(count)`로 완화합니다. 한 문서에서 어떤 단어가 20번 나왔다고 1번 나온 단어보다 정확히 20배 중요하다고 보기 어려울 때 유용합니다.
+
+## L2 정규화
+
+`norm="l2"`는 각 문서 벡터의 길이를 1로 맞춥니다. 긴 문서가 단어 수 때문에 무조건 큰 값을 갖는 현상을 줄이고 cosine 계산을 편리하게 합니다.
+
+## 단어와 문자 n-gram 비교
+
+| 데이터 | 권장 후보 | 이유 |
+|---|---|---|
+| 정제된 뉴스 | word `(1,2)` | 단어 의미와 구 보존 |
+| 오타 많은 문의 | char `(2,5)` | 철자·띄어쓰기 변화 대응 |
+| 제품 코드 | word+char 비교 | 정확한 문자열 보존 |
+
+특징 수, Hit@k, 메모리와 검색시간을 같은 평가셋에서 비교합니다.
+
+## 지나친 n-gram
+
+긴 n-gram은 학습 문장 전체를 외우는 특징이 될 수 있습니다. Train 성능은 높지만 새 표현에서 실패할 수 있으므로 validation 결과와 `matrix.shape[1]`을 함께 봅니다.
+
 ---
 
 <!-- SOURCE: 03_Similarity_and_Search.md -->
@@ -437,6 +509,42 @@ best_indices = scores.argsort()[::-1][:3]
 `반품`과 `환불`처럼 의미는 비슷하지만 표면 단어가 다르면 유사도가 낮을 수 있습니다. 이는 Chapter 5의 임베딩이 필요한 이유입니다. 그럼에도 TF-IDF는 빠르고 설명 가능하며 도메인 단어가 명확한 검색에서 좋은 기준선입니다.
 
 > 다음: [평가와 실무 주의사항](04_Evaluation.md)
+
+## 코사인 공식과 손계산
+
+\[
+cos(A,B)=\frac{A\cdot B}{\|A\|\|B\|}
+\]
+
+`A=[1,2]`, `B=[2,1]`이면 내적은 4, 두 벡터 길이는 각각 `√5`이므로 cosine은 `4/5=0.8`입니다.
+
+## Top-k 검색 함수
+
+```python
+import numpy as np
+
+def search(query, vectorizer, document_matrix, documents, k=3):
+    query_vector = vectorizer.transform([query])
+    scores = cosine_similarity(query_vector, document_matrix).ravel()
+    if query_vector.nnz == 0:
+        return []
+    indices = np.argsort(scores)[::-1][:k]
+    return [(documents[i], float(scores[i])) for i in indices]
+```
+
+0 벡터를 별도로 처리하지 않으면 관련 없는 첫 문서를 결과처럼 보여줄 수 있습니다.
+
+## 임계값
+
+Top-1을 무조건 반환하기보다 validation 질문에서 최소 점수를 정할 수 있습니다. 점수가 낮으면 “관련 문서를 찾지 못했습니다”를 반환합니다. 점수는 정답 확률이 아니므로 업무 데이터로 임계값을 정합니다.
+
+## 중복 결과
+
+거의 같은 문서가 top-k를 채우면 사용자에게 다양한 정보를 주지 못합니다. 문서 중복 제거, 문서 그룹별 하나만 선택, MMR 같은 다양성 검색을 검토합니다.
+
+## 검색 로그
+
+질문, 문서 ID, rank, score, vectorizer 버전과 사용자 선택 여부를 기록합니다. 개인정보가 포함된 질문은 마스킹과 보존 기간을 적용합니다.
 
 ---
 
@@ -478,6 +586,39 @@ best_indices = scores.argsort()[::-1][:3]
 어휘 목록에는 이메일, 전화번호와 식별자가 남을 수 있습니다. Chapter 3에서 마스킹한 데이터를 사용하고, 모델·로그·직렬화 파일 접근 권한을 관리합니다.
 
 > 다음: [핵심 정리](05_Summary.md)
+
+## Hit@k 손계산
+
+질문 10개 중 정답 문서가 top-1에 6개, top-3에 9개 있으면 Hit@1은 0.6, Hit@3은 0.9입니다. 화면에 세 결과를 보여주는 검색 서비스라면 Hit@3이 실제 경험과 관련될 수 있습니다.
+
+## MRR 손계산
+
+첫 정답 순위가 1, 2, 4라면:
+
+\[
+MRR=(1+1/2+1/4)/3\approx0.583
+\]
+
+정답을 찾는 것뿐 아니라 앞 순위에 배치하는 능력을 평가합니다.
+
+## 평가셋 구성
+
+- 문서 표현과 같은 쉬운 질문
+- 동의어를 사용한 질문
+- 오타와 띄어쓰기 오류
+- 제품 코드·숫자 포함
+- 정답 문서가 없는 질문
+- 여러 관련 문서가 있는 질문
+
+정답이 없는 질문을 포함해야 무조건 결과를 반환하는 오류를 평가할 수 있습니다.
+
+## 실패 분류
+
+어휘에 없는 표현, 전처리 손실, 동점, 중복 문서, 너무 긴 문서, 잘못된 정답 라벨로 나눕니다. 실패 유형별 건수를 세면 다음 개선 방향이 명확해집니다.
+
+## 배포 전 확인
+
+저장한 vectorizer를 새 프로세스에서 불러와 같은 질문의 top-k가 같은지 확인합니다. 전처리 함수와 문서 순서도 같은 버전이어야 합니다.
 
 ---
 
