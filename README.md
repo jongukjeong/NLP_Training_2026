@@ -39,6 +39,16 @@ lecture/
     └── Chapter10_Seq2Seq와Encoder_Decoder/
 ```
 
+```text
+lecture/
+└── Part03_Transformer와생성형AI/
+    ├── Chapter11_Attention_Mechanism/
+    ├── Chapter12_Transformer/
+    ├── Chapter13_BERT/
+    ├── Chapter14_GPT/
+    └── Chapter15_Hugging_Face/
+```
+
 ## 환경 준비
 
 Python 3.11 가상환경에서 다음을 실행합니다.

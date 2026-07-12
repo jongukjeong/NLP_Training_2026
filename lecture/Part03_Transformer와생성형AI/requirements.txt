@@ -1,0 +1,7 @@
+tensorflow==2.16.1
+transformers
+torch
+openai
+pandas
+numpy
+matplotlib
