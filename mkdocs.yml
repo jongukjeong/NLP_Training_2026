@@ -13,7 +13,7 @@ theme:
     - content.code.select
 
 nav:
-  - Home: part01/chapter01/README.md
+  - Home: index.md
   - Part 1. 자연어처리 기초와 Python:
       - Chapter 1. 인공지능과 자연어처리의 이해:
           - Overview: part01/chapter01/README.md
@@ -24,6 +24,7 @@ nav:
           - 05. 생성형 AI와 LLM: part01/chapter01/05_Generative_AI_and_LLM.md
           - 06. NLP 활용 사례: part01/chapter01/06_NLP_Cases.md
           - 07. 실습 환경 구축: part01/chapter01/07_Lab_Setup.md
+          - Windows 환경 확인: part01/chapter01/WINDOWS_SETUP.md
           - Troubleshooting: part01/chapter01/TROUBLESHOOTING.md
           - 08. Chapter 요약: part01/chapter01/08_Summary.md
           - 09. Quiz: part01/chapter01/09_Quiz.md
@@ -32,6 +33,8 @@ nav:
           - 실습 자료:
               - Examples Overview: examples/chapter01/README.md
               - Notebooks Overview: notebooks/chapter01/README.md
+              - Mini Project 완성 예제: projects/chapter01_mini_project/README.md
+              - Mini Project 테스트 결과: projects/chapter01_mini_project/test_cases.md
 
 markdown_extensions:
   - admonition
