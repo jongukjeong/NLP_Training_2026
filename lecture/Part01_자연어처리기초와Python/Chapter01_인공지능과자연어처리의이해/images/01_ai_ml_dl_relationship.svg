@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+
+<style>
+  .bg { fill: #ffffff; }
+  .title { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 30px; font-weight: 700; fill: #111827; }
+  .subtitle { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 16px; fill: #4b5563; }
+  .label { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: 700; fill: #111827; }
+  .small { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 14px; fill: #374151; }
+  .tiny { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 12px; fill: #4b5563; }
+  .box { fill: #f9fafb; stroke: #d1d5db; stroke-width: 2; rx: 18; }
+  .box-blue { fill: #eff6ff; stroke: #93c5fd; stroke-width: 2; rx: 18; }
+  .box-green { fill: #ecfdf5; stroke: #86efac; stroke-width: 2; rx: 18; }
+  .box-orange { fill: #fff7ed; stroke: #fdba74; stroke-width: 2; rx: 18; }
+  .box-purple { fill: #f5f3ff; stroke: #c4b5fd; stroke-width: 2; rx: 18; }
+  .box-red { fill: #fef2f2; stroke: #fca5a5; stroke-width: 2; rx: 18; }
+  .arrow { stroke: #6b7280; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+  .line { stroke: #9ca3af; stroke-width: 2; fill: none; }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+  </marker>
+</defs>
+
+<rect class="bg" width="1200" height="720"/>
+<text x="60" y="70" class="title">AI / Machine Learning / Deep Learning 관계</text>
+<text x="60" y="105" class="subtitle">인공지능은 가장 큰 개념이고, 머신러닝과 딥러닝은 그 안에 포함되는 접근 방식입니다.</text>
+
+<circle cx="600" cy="390" r="260" fill="#eff6ff" stroke="#60a5fa" stroke-width="4"/>
+<circle cx="600" cy="420" r="185" fill="#ecfdf5" stroke="#34d399" stroke-width="4"/>
+<circle cx="600" cy="455" r="110" fill="#f5f3ff" stroke="#a78bfa" stroke-width="4"/>
+
+<text x="520" y="230" class="label">AI</text>
+<text x="505" y="260" class="small">사람처럼 판단하거나 문제를 해결하는 기술 전체</text>
+
+<text x="505" y="355" class="label">Machine Learning</text>
+<text x="480" y="385" class="small">데이터에서 패턴을 학습하는 방식</text>
+
+<text x="535" y="465" class="label">Deep Learning</text>
+<text x="510" y="495" class="small">신경망으로 복잡한 패턴을 학습</text>
+
+<rect x="70" y="545" width="290" height="110" class="box"/>
+<text x="100" y="585" class="label">규칙 기반 AI</text>
+<text x="100" y="615" class="small">사람이 IF-THEN 규칙을 직접 작성</text>
+
+<rect x="840" y="545" width="290" height="110" class="box-orange"/>
+<text x="870" y="585" class="label">LLM / 생성형 AI</text>
+<text x="870" y="615" class="small">딥러닝과 Transformer 기반의 현대적 응용</text>
+
+<path d="M360 600 C430 570, 460 530, 500 485" class="arrow"/>
+<path d="M840 600 C770 565, 730 520, 690 485" class="arrow"/>
+</svg>

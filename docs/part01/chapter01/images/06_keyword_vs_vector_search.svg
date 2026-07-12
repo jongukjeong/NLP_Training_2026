@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="780" viewBox="0 0 1500 780">
+
+<style>
+  .bg { fill: #ffffff; }
+  .title { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 30px; font-weight: 700; fill: #111827; }
+  .subtitle { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 16px; fill: #4b5563; }
+  .label { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: 700; fill: #111827; }
+  .small { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 14px; fill: #374151; }
+  .tiny { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 12px; fill: #4b5563; }
+  .box { fill: #f9fafb; stroke: #d1d5db; stroke-width: 2; rx: 18; }
+  .box-blue { fill: #eff6ff; stroke: #93c5fd; stroke-width: 2; rx: 18; }
+  .box-green { fill: #ecfdf5; stroke: #86efac; stroke-width: 2; rx: 18; }
+  .box-orange { fill: #fff7ed; stroke: #fdba74; stroke-width: 2; rx: 18; }
+  .box-purple { fill: #f5f3ff; stroke: #c4b5fd; stroke-width: 2; rx: 18; }
+  .box-red { fill: #fef2f2; stroke: #fca5a5; stroke-width: 2; rx: 18; }
+  .arrow { stroke: #6b7280; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+  .line { stroke: #9ca3af; stroke-width: 2; fill: none; }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+  </marker>
+</defs>
+
+<rect class="bg" width="1500" height="780"/>
+<text x="60" y="70" class="title">SQLite 키워드 검색 vs ChromaDB 벡터 검색</text>
+<text x="60" y="105" class="subtitle">키워드 검색은 단어 일치에 강하고, 벡터 검색은 의미가 비슷한 문서 찾기에 강합니다.</text>
+
+<rect x="80" y="170" width="620" height="470" class="box-blue"/>
+<text x="255" y="220" class="label">SQLite 키워드 검색</text>
+
+<rect x="130" y="270" width="520" height="70" class="box"/>
+<text x="165" y="315" class="small">질문: "연차는 언제부터 쓸 수 있나요?"</text>
+<path d="M390 345 V390" class="arrow"/>
+<rect x="130" y="400" width="520" height="70" class="box"/>
+<text x="165" y="445" class="small">SQL LIKE '%연차%'로 단어 포함 여부 검색</text>
+<path d="M390 475 V520" class="arrow"/>
+<rect x="130" y="530" width="520" height="70" class="box-green"/>
+<text x="165" y="575" class="small">단어가 맞으면 잘 찾음, 표현이 다르면 놓칠 수 있음</text>
+
+<rect x="800" y="170" width="620" height="470" class="box-purple"/>
+<text x="985" y="220" class="label">ChromaDB 벡터 검색</text>
+
+<rect x="850" y="270" width="520" height="70" class="box"/>
+<text x="885" y="315" class="small">질문: "입사 후 쉬는 날은 언제부터 쓸 수 있나요?"</text>
+<path d="M1110 345 V390" class="arrow"/>
+<rect x="850" y="400" width="520" height="70" class="box"/>
+<text x="885" y="445" class="small">질문과 문서를 임베딩 벡터로 변환</text>
+<path d="M1110 475 V520" class="arrow"/>
+<rect x="850" y="530" width="520" height="70" class="box-orange"/>
+<text x="885" y="575" class="small">단어가 달라도 의미가 가까운 문서를 찾을 수 있음</text>
+
+<line x1="750" y1="155" x2="750" y2="660" stroke="#d1d5db" stroke-width="3"/>
+
+<rect x="80" y="680" width="1340" height="60" class="box"/>
+<text x="115" y="718" class="small">실무에서는 일반 데이터 저장과 관리에는 SQLite/MySQL을, 의미 기반 문서 검색에는 ChromaDB/FAISS 같은 벡터 검색 도구를 사용합니다.</text>
+</svg>

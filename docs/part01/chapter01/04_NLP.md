@@ -879,4 +879,10 @@ for sentence in sentences:
 > 기존 AI는 주로 분류하고 예측했는데,  
 > 생성형 AI는 어떻게 새로운 문장을 만들어낼까?
 
+## NLP 처리 흐름
+
+![NLP 처리 흐름도](images/02_nlp_pipeline.svg)
+
+> 자연어처리는 텍스트를 전처리하고, 토큰화하고, 수치화한 뒤 모델이 처리할 수 있게 만드는 과정입니다.
+
 > 다음: `05_Generative_AI_and_LLM.md`

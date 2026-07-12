@@ -703,4 +703,18 @@ Chapter 1은 지도를 보는 단계였습니다.
 
 퀴즈는 단순 암기보다 개념을 자기 말로 설명할 수 있는지 확인하는 데 초점을 둡니다.
 
+## Chapter 1 핵심 구조 한눈에 보기
+
+![AI / ML / DL 관계도](images/01_ai_ml_dl_relationship.svg)
+
+> AI는 가장 큰 개념이고, Machine Learning과 Deep Learning은 그 안에 포함되는 하위 접근 방식입니다.
+
+![NLP 처리 흐름도](images/02_nlp_pipeline.svg)
+
+> 자연어처리는 텍스트를 전처리하고, 토큰화하고, 수치화한 뒤 모델이 처리할 수 있게 만드는 과정입니다.
+
+![RAG 기반 문서 챗봇 구조](images/05_rag_pipeline.svg)
+
+> RAG는 질문과 관련된 문서를 먼저 검색한 뒤, 그 문서를 근거로 LLM이 답변을 생성하게 만드는 구조입니다.
+
 > 다음: `09_Quiz.md`

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="780" viewBox="0 0 1500 780">
+
+<style>
+  .bg { fill: #ffffff; }
+  .title { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 30px; font-weight: 700; fill: #111827; }
+  .subtitle { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 16px; fill: #4b5563; }
+  .label { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: 700; fill: #111827; }
+  .small { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 14px; fill: #374151; }
+  .tiny { font-family: Arial, 'Noto Sans KR', sans-serif; font-size: 12px; fill: #4b5563; }
+  .box { fill: #f9fafb; stroke: #d1d5db; stroke-width: 2; rx: 18; }
+  .box-blue { fill: #eff6ff; stroke: #93c5fd; stroke-width: 2; rx: 18; }
+  .box-green { fill: #ecfdf5; stroke: #86efac; stroke-width: 2; rx: 18; }
+  .box-orange { fill: #fff7ed; stroke: #fdba74; stroke-width: 2; rx: 18; }
+  .box-purple { fill: #f5f3ff; stroke: #c4b5fd; stroke-width: 2; rx: 18; }
+  .box-red { fill: #fef2f2; stroke: #fca5a5; stroke-width: 2; rx: 18; }
+  .arrow { stroke: #6b7280; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+  .line { stroke: #9ca3af; stroke-width: 2; fill: none; }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+    <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+  </marker>
+</defs>
+
+<rect class="bg" width="1500" height="780"/>
+<text x="60" y="70" class="title">RAG 기반 문서 챗봇 구조</text>
+<text x="60" y="105" class="subtitle">RAG는 문서를 먼저 검색하고, 검색된 근거를 LLM에 제공해 답변을 생성합니다.</text>
+
+<rect x="70" y="190" width="210" height="95" class="box-blue"/>
+<text x="125" y="230" class="label">사용자 질문</text>
+<text x="105" y="260" class="small">질문 입력</text>
+
+<path d="M285 238 H360" class="arrow"/>
+
+<rect x="370" y="190" width="210" height="95" class="box-purple"/>
+<text x="425" y="230" class="label">질문 임베딩</text>
+<text x="405" y="260" class="small">질문을 벡터로 변환</text>
+
+<path d="M585 238 H660" class="arrow"/>
+
+<rect x="670" y="190" width="230" height="95" class="box-green"/>
+<text x="735" y="230" class="label">벡터 DB 검색</text>
+<text x="720" y="260" class="small">관련 문서 조각 검색</text>
+
+<path d="M905 238 H980" class="arrow"/>
+
+<rect x="990" y="190" width="210" height="95" class="box-orange"/>
+<text x="1045" y="230" class="label">근거 문서</text>
+<text x="1025" y="260" class="small">Context 구성</text>
+
+<path d="M1205 238 H1280" class="arrow"/>
+
+<rect x="1290" y="190" width="160" height="95" class="box-red"/>
+<text x="1342" y="230" class="label">LLM</text>
+<text x="1318" y="260" class="small">답변 생성</text>
+
+<path d="M1370 290 V390" class="arrow"/>
+
+<rect x="1200" y="400" width="250" height="110" class="box"/>
+<text x="1260" y="445" class="label">최종 답변</text>
+<text x="1230" y="480" class="small">답변 + 출처 표시</text>
+
+<rect x="670" y="430" width="230" height="150" class="box"/>
+<text x="735" y="475" class="label">문서 저장소</text>
+<text x="720" y="510" class="small">PDF / 규정 / FAQ</text>
+<text x="720" y="540" class="small">문서 분할 후 임베딩</text>
+
+<path d="M785 430 V300" class="arrow"/>
+
+<rect x="70" y="610" width="1380" height="90" class="box"/>
+<text x="105" y="650" class="label">핵심 관점</text>
+<text x="105" y="680" class="small">LLM이 혼자 기억으로 답하는 것이 아니라, 검색된 문서를 근거로 답변하도록 만드는 구조입니다.</text>
+</svg>

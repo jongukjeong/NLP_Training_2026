@@ -801,4 +801,16 @@ for review in reviews:
 > 컴퓨터가 사람의 언어를 처리하려면  
 > 문장을 어떤 단계로 나누어야 할까?
 
+## AI / Machine Learning / Deep Learning 관계
+
+![AI / ML / DL 관계도](images/01_ai_ml_dl_relationship.svg)
+
+> AI는 가장 큰 개념이고, Machine Learning과 Deep Learning은 그 안에 포함되는 하위 접근 방식입니다.
+
+## 규칙 기반 AI와 머신러닝 비교
+
+![규칙 기반 AI와 머신러닝 비교](images/03_rule_based_vs_ml.svg)
+
+> 규칙 기반 AI는 사람이 규칙을 직접 작성하고, 머신러닝은 데이터에서 패턴을 학습합니다.
+
 > 다음: `04_NLP.md`
