@@ -49,6 +49,16 @@ lecture/
     └── Chapter15_Hugging_Face/
 ```
 
+```text
+lecture/
+└── Part04_생성형AI실무/
+    ├── Chapter16_대규모언어모델_LLM/
+    ├── Chapter17_Prompt_Engineering/
+    ├── Chapter18_RAG/
+    ├── Chapter19_AI_Agent와최신프레임워크/
+    └── Chapter20_최종프로젝트/
+```
+
 ## 환경 준비
 
 Python 3.11 가상환경에서 다음을 실행합니다.

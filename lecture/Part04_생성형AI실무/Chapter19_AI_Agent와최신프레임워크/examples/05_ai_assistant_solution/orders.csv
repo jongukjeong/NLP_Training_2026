@@ -1,0 +1,4 @@
+order_id,status
+ORD-1001,배송 중
+ORD-1002,결제 완료
+ORD-1003,배송 완료
