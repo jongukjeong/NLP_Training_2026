@@ -1,0 +1,60 @@
+/* @theme nlp-training */
+@import 'default';
+
+:root {
+  --navy: #0b1f3a;
+  --blue: #2563eb;
+  --cyan: #06b6d4;
+  --ink: #172033;
+  --muted: #5b6474;
+  --paper: #f7f9fc;
+  --line: #d8e0ec;
+}
+
+section {
+  width: 1280px;
+  height: 720px;
+  padding: 54px 70px 48px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  font-size: 27px;
+  line-height: 1.42;
+}
+
+section::after {
+  color: #72809a;
+  font-size: 16px;
+  right: 36px;
+  bottom: 24px;
+}
+
+h1 { color: var(--navy); font-size: 44px; letter-spacing: -0.035em; margin: 0 0 26px; }
+h2 { color: var(--blue); font-size: 31px; margin: 18px 0 12px; }
+h3 { font-size: 25px; }
+p, li { letter-spacing: -0.018em; }
+strong { color: var(--blue); }
+code { font-size: 0.82em; }
+pre { border: 1px solid var(--line); border-radius: 10px; padding: 18px 22px; background: #101827; color: #e8eef8; }
+blockquote { border-left: 7px solid var(--cyan); background: #eaf8fb; padding: 14px 22px; color: var(--navy); }
+table { font-size: 22px; width: 100%; }
+th { background: var(--navy); color: white; }
+td, th { padding: 10px 14px; border-color: var(--line); }
+
+section.lead { background: linear-gradient(135deg, #07162a, #123b70); color: white; }
+section.lead h1 { color: white; font-size: 58px; margin-top: 160px; }
+section.lead h2 { color: #8ee8f4; font-size: 31px; }
+section.lead::after { color: #b7c6da; }
+
+section.section { background: var(--navy); color: white; }
+section.section h1 { color: white; font-size: 54px; margin-top: 200px; }
+section.section h2 { color: #8ee8f4; }
+
+section.center { text-align: center; }
+section.center h1 { margin-top: 180px; font-size: 52px; }
+.small { font-size: 20px; color: var(--muted); }
+.accent { color: var(--cyan); }
+.columns { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; align-items: start; }
+.card { background: white; border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px; }
+.flow { font-size: 32px; font-weight: 700; color: var(--navy); text-align: center; margin-top: 110px; }
+img { max-height: 470px; }
