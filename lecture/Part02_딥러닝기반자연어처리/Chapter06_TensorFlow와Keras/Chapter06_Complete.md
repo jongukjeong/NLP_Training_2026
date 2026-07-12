@@ -245,6 +245,104 @@ history = model.fit(train_ds, validation_data=valid_ds, epochs=10)
 
 ---
 
+<!-- SOURCE: 00_학습성능_개선과_재현성.md -->
+
+# Chapter 6 학습 성능 개선과 재현성
+
+## 성능 개선은 원인을 찾는 과정
+
+정확도가 낮다고 층을 무조건 늘리면 원인을 알 수 없습니다. 데이터, 학습 과정, 모델 용량, 평가 방법을 순서대로 확인합니다.
+
+```text
+데이터 정상 여부 → 단순 기준선 → 작은 데이터 과적합
+→ 학습 곡선 → 오류 사례 → 한 가지 변경 실험
+```
+
+## 재현 가능한 seed
+
+```python
+import random
+import numpy as np
+import tensorflow as tf
+
+random.seed(42)
+np.random.seed(42)
+tf.keras.utils.set_random_seed(42)
+```
+
+Seed를 고정해도 GPU 연산과 라이브러리 버전에 따라 완전히 같은 결과가 보장되지 않을 수 있습니다. Python·TensorFlow·CUDA 버전과 데이터 분할 ID도 기록합니다.
+
+## Batch 크기의 의미
+
+Batch 1은 샘플 하나마다 가중치를 고쳐 방향이 흔들리지만 메모리를 적게 씁니다. 큰 batch는 평균 gradient가 안정적이지만 메모리와 일반화 특성이 달라집니다.
+
+샘플 1,024개에서 batch 32면 epoch당 32회, batch 128이면 8회 업데이트합니다. Batch를 바꾸면 학습률과 총 업데이트 횟수도 함께 해석합니다.
+
+## 학습률 찾기
+
+손실이 처음부터 크게 출렁이거나 NaN이면 학습률을 낮춥니다. 너무 천천히 줄면 학습률이 작거나 gradient가 약할 수 있습니다.
+
+```python
+optimizer = tf.keras.optimizers.Adam(learning_rate=1e-3)
+```
+
+`1e-3`은 0.001입니다. 후보 `1e-2, 1e-3, 1e-4`를 같은 조건에서 비교합니다.
+
+## Callback을 안전장치로 이해하기
+
+- EarlyStopping: 검증 성능이 개선되지 않으면 중단
+- ModelCheckpoint: 최고 상태 저장
+- ReduceLROnPlateau: 정체 시 학습률 감소
+- TensorBoard/CSVLogger: 학습 기록 보존
+
+```python
+callbacks = [
+    tf.keras.callbacks.EarlyStopping(
+        monitor="val_loss", patience=3, restore_best_weights=True
+    ),
+    tf.keras.callbacks.ReduceLROnPlateau(
+        monitor="val_loss", factor=0.5, patience=1
+    ),
+]
+```
+
+## 과적합 대응의 순서
+
+데이터 누수 확인 → 중복 제거 → 더 많은 대표 데이터 → 모델 축소 → Dropout/규제 → EarlyStopping 순으로 검토합니다. 검증셋 자체가 작거나 편향되면 규제만으로 해결되지 않습니다.
+
+## L2 규제
+
+\[
+L_{total}=L_{data}+\lambda\sum_iw_i^2
+\]
+
+큰 가중치에 추가 비용을 줍니다. `λ`가 너무 크면 모델이 충분히 배우지 못합니다.
+
+## 실험 결과표
+
+| ID | 변경 | Best epoch | Val loss | Val F1 | 시간 |
+|---|---|---:|---:|---:|---:|
+| base | 기준 | 기록 | 기록 | 기록 | 기록 |
+| e01 | dropout 0.3 | 기록 | 기록 | 기록 | 기록 |
+| e02 | lr 1e-4 | 기록 | 기록 | 기록 | 기록 |
+
+한 번에 한 항목만 바꾸고 개선이 우연인지 여러 seed로 확인합니다.
+
+## 저장 모델 검증
+
+저장 직전 입력 하나의 예측을 보관하고 새 프로세스에서 모델을 불러와 오차 범위 안에서 같은지 확인합니다. 파일 존재만 확인하면 사용자 정의 층이나 tokenizer 누락을 놓칠 수 있습니다.
+
+## 완료 기준
+
+1. 기준선과 작은 데이터 과적합 테스트
+2. train/validation 곡선 저장
+3. 최고 epoch 복원
+4. 변경 한 가지씩 실험
+5. 모델·데이터·환경 버전 기록
+6. 재로딩 예측 비교
+
+---
+
 <!-- SOURCE: 01_Tensor_and_Dataset.md -->
 
 # 6.1 Tensor · 6.2 Dataset

@@ -22,6 +22,94 @@ Perceptron에서 Multi Layer Perceptron으로 확장하며 activation, loss, opt
 
 ---
 
+<!-- SOURCE: 00_손실과_최적화_실험워크북.md -->
+
+# Chapter 7 손실과 최적화 실험 워크북
+
+## 손실은 모델에게 주는 채점표
+
+같은 예측도 채점 방식에 따라 수정 방향이 달라집니다. 문제 유형에 맞는 손실을 선택해야 합니다.
+
+## 이진 교차 엔트로피 숫자 비교
+
+정답이 1일 때:
+
+\[
+L=-\log(p)
+\]
+
+| 예측 p | 손실 |
+|---:|---:|
+| 0.9 | 0.105 |
+| 0.5 | 0.693 |
+| 0.1 | 2.303 |
+
+확신하며 틀린 0.1 예측에 큰 벌점을 줍니다.
+
+## 다중 분류 손실
+
+정답 클래스가 2이고 Softmax 결과가 `[0.1,0.2,0.7]`이면 손실은 `-log(0.7)≈0.357`입니다. 정수 레이블이면 Sparse, one-hot이면 Categorical 손실을 사용합니다.
+
+## 다중 레이블
+
+“배송 지연”과 “환불 요청”을 동시에 표시할 수 있다면 클래스마다 독립 Sigmoid를 사용합니다. 레이블 `[1,1,0]`, 예측 `[0.8,0.6,0.2]`처럼 각 클래스의 Binary CE를 계산합니다.
+
+## Gradient descent를 산길로 이해하기
+
+현재 위치에서 가장 가파르게 올라가는 방향이 gradient입니다. 손실을 줄이려면 반대 방향으로 이동합니다.
+
+\[
+w_{new}=w-\eta\frac{\partial L}{\partial w}
+\]
+
+`w=1.0`, gradient 0.4, 학습률 0.1이면 새 값은 0.96입니다.
+
+## Momentum
+
+매 단계 방향을 조금씩 기억해 작은 요철에 흔들리지 않고 이동합니다. 관성 때문에 최솟값을 지나칠 수 있어 학습률과 함께 조정합니다.
+
+## Adam
+
+최근 gradient 평균과 제곱 평균을 사용해 파라미터별 이동 크기를 조절합니다. 초기 실험에 편리하지만 모든 데이터에서 최종 일반화가 가장 좋다는 보장은 없습니다.
+
+## Gradient 확인
+
+```python
+with tf.GradientTape() as tape:
+    predictions = model(x, training=True)
+    loss = loss_fn(y, predictions)
+grads = tape.gradient(loss, model.trainable_variables)
+print(float(tf.linalg.global_norm(grads)))
+```
+
+`None` gradient는 연결이 끊겼거나 손실에 사용되지 않는 변수일 수 있습니다. 매우 큰 값은 폭주, 거의 0인 값은 포화나 단절을 의심합니다.
+
+## Class weight
+
+희소 클래스 손실에 더 큰 가중치를 줄 수 있습니다. 하지만 Recall이 증가하면서 Precision이 크게 떨어질 수 있으므로 혼동 행렬을 함께 봅니다.
+
+## 실험표
+
+| Optimizer | LR | Val Macro F1 | 희소 Recall | 최고 epoch |
+|---|---:|---:|---:|---:|
+| SGD | 기록 | 기록 | 기록 | 기록 |
+| Adam | 기록 | 기록 | 기록 | 기록 |
+
+동일 초기화 또는 여러 seed 평균으로 비교합니다.
+
+## 흔한 오해
+
+- Loss가 낮으면 항상 업무 지표가 좋다: 임계값과 클래스 비용이 다를 수 있음
+- Accuracy가 높으면 충분하다: 불균형에서 희소 클래스를 무시할 수 있음
+- Adam이면 학습률이 필요 없다: 기본 학습률도 중요한 설정
+- epoch를 늘리면 좋아진다: 과적합될 수 있음
+
+## 완료 기준
+
+손실-출력층 조합, gradient norm, 기준선, 클래스별 지표, optimizer 비교와 오류 사례를 모두 기록합니다.
+
+---
+
 <!-- SOURCE: 00_원리_수학_실습_가이드.md -->
 
 # Chapter 7 원리·수학·실습 가이드
