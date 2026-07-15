@@ -13,6 +13,8 @@ NLP 문제와 규칙 기반 분류의 흐름 이해
 3. 여러 질문으로 규칙을 시험한다
 4. FAQ 챗봇 기본 기능을 완성한다
 
+오늘 수업에서는 [4단계 쉬운 실습](examples/03_easy_practice/README.md)을 사용합니다.
+
 각 단계가 끝날 때 입력, 출력 또는 중간 결과를 화면에서 확인합니다. 설명할 수 없는 줄은 다음 단계로 넘어가기 전에 질문합니다.
 
 ## 2. Basic Practice — 짧은 흐름 연결
@@ -28,7 +30,7 @@ Step by Step의 네 단계를 한 흐름으로 연결합니다. 처음에는 함
 
 ## 3. Practice·Assignment — 먼저 시도
 
-[11_Mini_Project.md](11_Mini_Project.md)의 기본 요구사항을 먼저 수행합니다. 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.
+Assignment는 이미 수행했으므로 반복하지 않습니다. [미니 프로젝트 starter](projects/starter/README.md)의 기본 요구사항을 먼저 수행하고, 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.
 
 ## 4. Solution — 피드백 후 공개
 

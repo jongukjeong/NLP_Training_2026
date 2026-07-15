@@ -122,6 +122,15 @@ def main() -> None:
     for relative, chapter, goal, steps, task, solution, advanced in CHAPTERS:
         chapter_dir = LECTURE_DIR / relative
         content = learning_path(chapter, goal, steps, advanced, task, solution)
+        if chapter == "Chapter 1":
+            content = content.replace(
+                "각 단계가 끝날 때 입력, 출력 또는 중간 결과를 화면에서 확인합니다.",
+                "오늘 수업에서는 [4단계 쉬운 실습](examples/03_easy_practice/README.md)을 사용합니다.\n\n각 단계가 끝날 때 입력, 출력 또는 중간 결과를 화면에서 확인합니다.",
+            )
+            content = content.replace(
+                f"[{task}]({task})의 기본 요구사항을 먼저 수행합니다. 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.",
+                "Assignment는 이미 수행했으므로 반복하지 않습니다. [미니 프로젝트 starter](projects/starter/README.md)의 기본 요구사항을 먼저 수행하고, 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.",
+            )
         (chapter_dir / "LEARNING_PATH.md").write_text(content, encoding="utf-8")
 
         readme_block = f"""## 권장 학습 순서

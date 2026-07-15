@@ -9,6 +9,23 @@
 - 처음부터 solution과 같은 구조로 작성하는 것은 목표가 아닙니다.
 <!-- END: BEGINNER_LEARNING_PATH -->
 
+## 수업 진행 순서
+
+```text
+오늘의 쉬운 실습
+→ Mini Project Starter
+→ 수강생 기본 기능 구현
+→ 성공·실패 질문 확인
+→ 완성형 Solution 비교
+```
+
+1. [4단계 쉬운 실습](examples/03_easy_practice/README.md)을 먼저 진행합니다.
+2. [미니 프로젝트 starter](projects/starter/README.md)에서 문의 유형 하나를 추가합니다.
+3. 기본 기능과 실패 사례를 확인한 뒤 아래의 전체 프로젝트 요구사항으로 확장합니다.
+4. 함수, 딕셔너리, 점수 계산과 자동 테스트는 마지막 solution 해설에서 소개합니다.
+
+> 이미 완료한 Assignment는 다시 수행하지 않습니다. 이 학습 경로는 Mini Project 준비와 진행에 사용합니다.
+
 > **Chapter 1. 인공지능과 자연어처리의 이해**  
 > 문서: `11_Mini_Project.md`
 

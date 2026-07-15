@@ -76,6 +76,8 @@ NLP 문제와 규칙 기반 분류의 흐름 이해
 3. 여러 질문으로 규칙을 시험한다
 4. FAQ 챗봇 기본 기능을 완성한다
 
+오늘 수업에서는 [4단계 쉬운 실습](examples/03_easy_practice/README.md)을 사용합니다.
+
 각 단계가 끝날 때 입력, 출력 또는 중간 결과를 화면에서 확인합니다. 설명할 수 없는 줄은 다음 단계로 넘어가기 전에 질문합니다.
 
 ## 2. Basic Practice — 짧은 흐름 연결
@@ -91,7 +93,7 @@ Step by Step의 네 단계를 한 흐름으로 연결합니다. 처음에는 함
 
 ## 3. Practice·Assignment — 먼저 시도
 
-[11_Mini_Project.md](11_Mini_Project.md)의 기본 요구사항을 먼저 수행합니다. 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.
+Assignment는 이미 수행했으므로 반복하지 않습니다. [미니 프로젝트 starter](projects/starter/README.md)의 기본 요구사항을 먼저 수행하고, 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.
 
 ## 4. Solution — 피드백 후 공개
 
@@ -7690,6 +7692,23 @@ Git 커밋까지 완료하면 제출 준비가 끝납니다.
 - solution은 직접 시도하고 공통 오류 피드백을 받은 뒤 공개합니다.
 - 처음부터 solution과 같은 구조로 작성하는 것은 목표가 아닙니다.
 <!-- END: BEGINNER_LEARNING_PATH -->
+
+## 수업 진행 순서
+
+```text
+오늘의 쉬운 실습
+→ Mini Project Starter
+→ 수강생 기본 기능 구현
+→ 성공·실패 질문 확인
+→ 완성형 Solution 비교
+```
+
+1. [4단계 쉬운 실습](examples/03_easy_practice/README.md)을 먼저 진행합니다.
+2. [미니 프로젝트 starter](projects/starter/README.md)에서 문의 유형 하나를 추가합니다.
+3. 기본 기능과 실패 사례를 확인한 뒤 아래의 전체 프로젝트 요구사항으로 확장합니다.
+4. 함수, 딕셔너리, 점수 계산과 자동 테스트는 마지막 solution 해설에서 소개합니다.
+
+> 이미 완료한 Assignment는 다시 수행하지 않습니다. 이 학습 경로는 Mini Project 준비와 진행에 사용합니다.
 
 > **Chapter 1. 인공지능과 자연어처리의 이해**
 > 문서: `11_Mini_Project.md`

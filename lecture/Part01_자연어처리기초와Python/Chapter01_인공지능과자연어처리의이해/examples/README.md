@@ -11,6 +11,9 @@ Chapter 1에서 사용하는 실행 가능한 예제 코드입니다.
 | `03_sqlite_keyword_search.py` | SQLite 문서 저장과 키워드 검색 |
 | `faq_data.py` | FAQ 챗봇 데이터 |
 | `04_faq_chatbot.py` | 규칙 기반 FAQ 챗봇 |
+| `03_easy_practice/` | 오늘 수업용 4단계 쉬운 실습 |
+
+처음 학습하는 수강생은 [오늘의 쉬운 실습](03_easy_practice/README.md)을 먼저 진행합니다. 기존 예제는 기본 흐름을 이해한 뒤 비교합니다.
 
 ## 실행 방법
 
