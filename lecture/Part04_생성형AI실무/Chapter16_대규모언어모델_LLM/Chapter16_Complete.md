@@ -68,6 +68,14 @@ Step by Step의 네 단계를 한 흐름으로 연결합니다. 처음에는 함
 - 출력이 예상과 다른 이유를 한 가지 찾는다.
 - 실행 결과를 짧게 기록한다.
 
+## 실행 코드 위치
+
+- [Step by Step](examples/01_step_by_step/README.md)
+- [Basic Practice](examples/02_basic_practice/README.md)
+- [Practice Starter](examples/03_practice_starter/README.md)
+
+세 자료는 외부 모델이나 API 없이 핵심 흐름을 먼저 이해하도록 구성했습니다. 실제 라이브러리와 완성형 구조는 기존 solution에서 비교합니다.
+
 ## 3. Practice·Assignment — 먼저 시도
 
 [04_Practice.md](04_Practice.md)의 기본 요구사항을 먼저 수행합니다. 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.

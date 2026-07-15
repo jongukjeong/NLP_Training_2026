@@ -1,0 +1,25 @@
+# Chapter 17 Prompt Engineering Basic Practice
+
+prompts = [
+    "배송 지연 안내문을 써줘",
+    "고객에게 정중한 말투로 배송 지연 안내문을 3문장으로 써줘",
+]
+required_words = ["고객", "정중", "3문장"]
+
+print("=== 입력 확인 ===")
+for number, prompt in enumerate(prompts, 1):
+    print(number, prompt)
+
+print("\n=== 핵심 처리 ===")
+scores = []
+for prompt in prompts:
+    score = 0
+    for word in required_words:
+        if word in prompt:
+            score += 1
+    scores.append(score)
+
+print("\n=== 결과 확인 ===")
+for prompt, score in zip(prompts, scores):
+    print("Prompt:", prompt)
+    print("명확성 점수:", score, "/", len(required_words))
