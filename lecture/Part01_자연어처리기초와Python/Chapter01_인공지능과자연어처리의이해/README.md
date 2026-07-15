@@ -1,5 +1,15 @@
 # Chapter 1. 인공지능과 자연어처리의 이해
 
+<!-- BEGIN: BEGINNER_LEARNING_PATH -->
+## 권장 학습 순서
+
+```text
+Step by Step → Basic Practice → Practice·Assignment → 피드백 → Solution
+```
+
+비전공자와 입문자는 [단계별 학습 경로](LEARNING_PATH.md)를 먼저 확인합니다. 완성형 solution의 고급 구조는 선택 학습입니다.
+<!-- END: BEGINNER_LEARNING_PATH -->
+
 ## 핵심 용어 미리보기
 
 본문을 읽기 전에 다음 용어의 뜻과 영어 원어를 먼저 확인합니다. 전체 정의는 [교육과정 핵심 용어집](../../TERMINOLOGY.md)에서 확인할 수 있습니다.
