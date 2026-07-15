@@ -176,12 +176,12 @@ except FileNotFoundError:
 
 # Chapter 2의 전체 학습 흐름
 
-<div class="flow">Step by Step → Basic Practice → Assignment → Mini Project → Solution</div>
+<div class="flow">Python 기초 → Step by Step → Basic Practice → Assignment → Mini Project → Solution</div>
 
-1. 강사와 함께 한 단계씩 실행한다
-2. 짧은 전체 코드를 직접 완성한다
-3. 과제와 프로젝트를 먼저 시도한다
-4. solution은 피드백 후 비교한다
+1. 변수·리스트·조건문·반복문·함수를 복습한다
+2. 강사와 함께 한 단계씩 실행한다
+3. 짧은 전체 코드와 과제를 직접 완성한다
+4. 프로젝트 solution은 피드백 후 비교한다
 
 ---
 

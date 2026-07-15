@@ -32,8 +32,10 @@ records = [
 이 장의 코드는 한 번에 완성하지 않습니다. 먼저 한 줄씩 실행하고, 다음에는 짧은 프로그램으로 합친 뒤, 마지막에 함수와 검증을 추가합니다.
 
 ```text
-한 단계씩 실행 → 짧은 전체 코드 → 과제 → 프로젝트 → 완성형 코드 비교
+Python 기초 복습 → 한 단계씩 실행 → 짧은 전체 코드 → 과제 → 프로젝트 → 완성형 코드 비교
 ```
+
+Python이 익숙하지 않다면 [기본 문법](02_Python_Basics.md)부터 [함수와 모듈](05_Functions_and_Modules.md)까지 먼저 진행합니다. 이미 익숙한 수강생은 예제를 빠르게 실행해 확인하고 파일 처리로 이동할 수 있습니다.
 
 ### 1. 작은 데이터로 먼저 확인한다
 
@@ -73,4 +75,4 @@ python -m pip install pandas
 
 예제 코드는 해당 데이터셋과 같은 폴더에 배치합니다. 따라서 예제 폴더만 복사해도 코드와 입력 데이터를 함께 실행할 수 있습니다. 생성 결과는 예제 폴더의 `output` 하위 폴더로 분리합니다.
 
-먼저 [Step by Step](examples/01_step_by_step/README.md)을 강사와 함께 진행하고, 이어서 [Basic Practice](examples/02_basic_practice/README.md)를 완성합니다. 과제와 미니 프로젝트 solution은 직접 시도한 뒤 확인합니다.
+Python 기초 `02~05`를 확인한 뒤 [Step by Step](examples/01_step_by_step/README.md)을 강사와 함께 진행하고, 이어서 [Basic Practice](examples/02_basic_practice/README.md)를 완성합니다. 과제와 미니 프로젝트 solution은 직접 시도한 뒤 확인합니다.

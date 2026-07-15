@@ -6,6 +6,10 @@ OUTPUT_PATH = CHAPTER_DIR / "Chapter02_Complete.md"
 SOURCES = [
     "README.md",
     "01_Opening.md",
+    "02_Python_Basics.md",
+    "03_Strings_and_Collections.md",
+    "04_Control_Flow.md",
+    "05_Functions_and_Modules.md",
     "06_File_IO.md",
     "07_Pandas.md",
     "08_Data_Cleaning.md",
