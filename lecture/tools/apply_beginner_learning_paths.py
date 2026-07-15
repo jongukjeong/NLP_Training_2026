@@ -131,6 +131,17 @@ def main() -> None:
                 f"[{task}]({task})의 기본 요구사항을 먼저 수행합니다. 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.",
                 "Assignment는 이미 수행했으므로 반복하지 않습니다. [미니 프로젝트 starter](projects/starter/README.md)의 기본 요구사항을 먼저 수행하고, 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.",
             )
+        else:
+            code_block = """## 실행 코드 위치
+
+- [Step by Step](examples/01_step_by_step/README.md)
+- [Basic Practice](examples/02_basic_practice/README.md)
+- [Practice Starter](examples/03_practice_starter/README.md)
+
+세 자료는 외부 모델이나 API 없이 핵심 흐름을 먼저 이해하도록 구성했습니다. 실제 라이브러리와 완성형 구조는 기존 solution에서 비교합니다.
+
+"""
+            content = content.replace("## 3. Practice·Assignment", code_block + "## 3. Practice·Assignment")
         (chapter_dir / "LEARNING_PATH.md").write_text(content, encoding="utf-8")
 
         readme_block = f"""## 권장 학습 순서
