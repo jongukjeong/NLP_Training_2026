@@ -2,19 +2,28 @@
 
 ## 프로젝트 목표
 
-CSV 파일을 읽어 품질을 진단하고 텍스트를 정제한 뒤, 정제 데이터와 처리 보고서를 저장하는 작은 프로그램을 설계합니다. 이 문서는 구현 명세와 완성 예제를 함께 제공합니다.
+CSV 파일을 읽어 텍스트를 정제하고, 정제 결과와 간단한 요약을 저장합니다. 처음에는 함수, CLI, JSON 보고서 없이 기본 흐름을 완성합니다.
 
-## 입력 명세
+```text
+입력 → 확인 → 정제 → 요약 → 저장
+```
 
-`reviews.csv`는 다음 열을 가집니다.
+## 시작 전 확인
 
-| 열 | 필수 | 설명 |
-|---|---|---|
-| `id` | 예 | 레코드 식별자 |
-| `text` | 예 | 리뷰 문장 |
-| `label` | 예 | `positive`, `negative`, `neutral`, `unknown` |
+다음 항목 중 네 가지 이상을 설명할 수 있으면 시작합니다.
 
-예시:
+- `pd.read_csv()`로 CSV를 읽는 방법
+- `dropna()`로 결측 문장을 제거하는 방법
+- `.str.strip()`으로 앞뒤 공백을 제거하는 방법
+- 빈 문자열을 조건으로 제외하는 방법
+- `drop_duplicates()`로 중복을 제거하는 방법
+- `to_csv()`로 결과를 저장하는 방법
+
+설명이 어렵다면 [Basic Practice](examples/02_basic_practice/README.md)를 한 번 더 실행합니다.
+
+## 입력 데이터
+
+`reviews.csv`는 `id`, `text`, `label` 열을 가집니다.
 
 ```csv
 id,text,label
@@ -24,187 +33,116 @@ id,text,label
 4,배송이 빨라요,positive
 ```
 
-## 권장 폴더 구조
+## 시작 코드
 
-예제 코드와 입력 데이터셋은 동일한 폴더에 둡니다. 실행 결과만 `output/`으로 분리합니다.
+다음 폴더에는 단계별 주석과 입력 데이터가 있습니다.
 
-```text
-Chapter02_Python과데이터처리/examples/12_mini_project_solution/
-├── text_data_explorer.py
-├── reviews.csv
-└── output/                 # 실행 시 생성
-    ├── reviews_clean.csv
-    └── reviews_clean.report.json
-```
-
-저장소에 포함된 배포용 파일:
-
-- [완성 예제 안내](examples/12_mini_project_solution/README.md)
-- [완성 예제 코드](examples/12_mini_project_solution/text_data_explorer.py)
-- [입력 데이터셋](examples/12_mini_project_solution/reviews.csv)
-
-## 기능 요구사항
-
-1. 명령행에서 입력·출력 경로를 받습니다.
-2. 파일 존재 여부와 필수 열을 검사합니다.
-3. UTF-8/BOM CSV를 읽습니다.
-4. 결측·빈 문장을 제거합니다.
-5. 문장 공백과 레이블 표기를 정규화합니다.
-6. 허용하지 않은 레이블이면 명확한 오류를 냅니다.
-7. 정규화된 문장 기준 중복을 제거합니다.
-8. 문장 길이와 레이블 분포를 계산합니다.
-9. 정제 CSV와 JSON 보고서를 별도 저장합니다.
-10. 원본 파일은 변경하지 않습니다.
-
-## 처리 설계
-
-```text
-CLI 인수
-  → 경로 검사
-  → CSV 읽기
-  → 스키마 검사
-  → 정제
-  → 결과 검증
-  → CSV 저장
-  → JSON 보고서 저장
-```
-
-## 완성 예제
-
-아래 코드를 `text_data_explorer.py`로 저장하면 실행할 수 있습니다. 이번 작업에서는 문서만 작성하므로 코드는 별도 파일로 생성하지 않습니다.
-
-```python
-from __future__ import annotations
-
-import argparse
-import json
-from pathlib import Path
-
-import pandas as pd
-
-REQUIRED_COLUMNS = {"id", "text", "label"}
-ALLOWED_LABELS = {"positive", "negative", "neutral", "unknown"}
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="텍스트 CSV를 정제하고 요약합니다.")
-    parser.add_argument("input", type=Path, help="입력 CSV 경로")
-    parser.add_argument("output", type=Path, help="정제 CSV 경로")
-    return parser.parse_args()
-
-def validate_columns(df: pd.DataFrame) -> None:
-    missing = REQUIRED_COLUMNS - set(df.columns)
-    if missing:
-        raise ValueError(f"필수 열이 없습니다: {', '.join(sorted(missing))}")
-
-def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-    validate_columns(df)
-    result = df.copy()
-    result = result.dropna(subset=["text"])
-    result["text"] = (
-        result["text"]
-        .astype("string")
-        .str.strip()
-        .str.replace(r"\s+", " ", regex=True)
-    )
-    result = result.loc[result["text"].str.len() > 0].copy()
-    result["label"] = (
-        result["label"].fillna("unknown").astype("string").str.lower().str.strip()
-    )
-
-    invalid_labels = sorted(set(result["label"]) - ALLOWED_LABELS)
-    if invalid_labels:
-        raise ValueError(f"허용되지 않은 레이블: {invalid_labels}")
-
-    result = result.drop_duplicates(subset=["text"], keep="first").copy()
-    result["text_length"] = result["text"].str.len()
-    return result.reset_index(drop=True)
-
-def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
-    return {
-        "rows_before": len(before),
-        "rows_after": len(after),
-        "rows_removed": len(before) - len(after),
-        "missing_text_before": int(before["text"].isna().sum()),
-        "average_text_length": (
-            round(float(after["text_length"].mean()), 2) if not after.empty else 0.0
-        ),
-        "label_counts": {
-            str(key): int(value)
-            for key, value in after["label"].value_counts().items()
-        },
-    }
-
-def run(input_path: Path, output_path: Path) -> tuple[pd.DataFrame, dict]:
-    if not input_path.is_file():
-        raise FileNotFoundError(f"입력 파일을 찾을 수 없습니다: {input_path}")
-
-    original = pd.read_csv(input_path, encoding="utf-8-sig")
-    cleaned = clean_dataframe(original)
-
-    assert cleaned["text"].notna().all()
-    assert cleaned["text"].str.len().gt(0).all()
-    assert cleaned["text"].is_unique
-    assert set(cleaned["label"]) <= ALLOWED_LABELS
-
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    cleaned.to_csv(output_path, index=False, encoding="utf-8-sig")
-
-    report = build_report(original, cleaned)
-    report_path = output_path.with_suffix(".report.json")
-    report_path.write_text(
-        json.dumps(report, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    return cleaned, report
-
-def main() -> None:
-    args = parse_args()
-    _, report = run(args.input, args.output)
-    print(json.dumps(report, ensure_ascii=False, indent=2))
-
-if __name__ == "__main__":
-    main()
-```
-
-## 실행 예시
+- [시작 안내](examples/12_mini_project_starter/README.md)
+- [시작 코드](examples/12_mini_project_starter/text_data_explorer_starter.py)
+- [입력 데이터](examples/12_mini_project_starter/reviews.csv)
 
 ```powershell
-cd lecture\Part01_자연어처리기초와Python\Chapter02_Python과데이터처리\examples\12_mini_project_solution
-python text_data_explorer.py reviews.csv output\reviews_clean.csv
+cd examples\12_mini_project_starter
+python text_data_explorer_starter.py
 ```
 
-예상 보고서:
+## 1단계: 기본 요구사항
 
-```json
-{
-  "rows_before": 4,
-  "rows_after": 2,
-  "rows_removed": 2,
-  "missing_text_before": 1,
-  "average_text_length": 8.5,
-  "label_counts": {
-    "positive": 1,
-    "negative": 1
-  }
-}
+1. `reviews.csv`를 읽습니다.
+2. 처리 전 행 수를 저장합니다.
+3. `text`가 결측인 행을 제거합니다.
+4. `text`의 앞뒤 공백과 연속 공백을 정리합니다.
+5. 정제 후 빈 문자열인 행을 제거합니다.
+6. `label`을 소문자로 통일합니다.
+7. 정제된 `text` 기준으로 중복을 제거합니다.
+8. `text_length` 열을 추가합니다.
+9. 처리 전후 행 수와 레이블 분포를 출력합니다.
+10. `reviews_clean.csv`로 저장합니다.
+
+처음부터 열 항목을 모두 작성하지 말고 2~3개씩 구현한 뒤 실행합니다.
+
+## 중간 점검
+
+solution을 보기 전에 다음을 확인합니다.
+
+- 프로그램이 오류 없이 끝까지 실행되는가?
+- 결측 행과 공백뿐인 행이 제거됐는가?
+- 공백만 다른 중복 문장이 하나로 줄었는가?
+- `Positive`가 `positive`로 바뀌었는가?
+- 처리 전후 행 수 차이를 설명할 수 있는가?
+- 생성된 CSV를 다시 읽을 수 있는가?
+
+## 막혔을 때 사용하는 힌트
+
+### 힌트 1: 결측 제거
+
+```python
+df = df.dropna(subset=["text"])
 ```
+
+### 힌트 2: 공백 정리
+
+```python
+df["text"] = df["text"].str.strip()
+df["text"] = df["text"].str.replace(r"\s+", " ", regex=True)
+```
+
+### 힌트 3: 중복 제거
+
+```python
+df = df.drop_duplicates(subset=["text"])
+```
+
+힌트는 위에서부터 필요한 만큼만 확인합니다.
+
+## 2단계: 선택 도전
+
+기본 요구사항을 완성한 학습자만 진행합니다.
+
+- 필수 열 `id`, `text`, `label`이 있는지 검사
+- 허용되지 않은 레이블 탐지
+- 정제 로직을 함수로 분리
+- `assert`로 결과 검증
+- 입력·출력 경로를 명령행에서 받기
+- 처리 결과를 JSON 보고서로 저장
+- 입력 파일이 없을 때 이해하기 쉬운 오류 출력
+
+선택 도전을 모두 구현할 필요는 없습니다. 한 가지를 골라 기존 코드에 추가합니다.
 
 ## 테스트 시나리오
 
-| 번호 | 입력 | 기대 결과 |
+| 번호 | 입력 | 기본 기대 결과 |
 |---|---|---|
-| 1 | 정상 CSV | 정제 CSV와 보고서 생성 |
-| 2 | 파일 없음 | 경로를 포함한 오류 |
-| 3 | `text` 열 없음 | 누락 열을 포함한 오류 |
-| 4 | 결측·공백 문장 | 해당 행 제거 |
-| 5 | 공백만 다른 중복 | 하나만 유지 |
-| 6 | 잘못된 레이블 | 잘못된 값을 포함한 오류 |
-| 7 | 유효 행 0개 | 빈 CSV와 평균 0 보고서 |
+| 1 | 정상 CSV | 정제 CSV 생성 |
+| 2 | 결측 문장 | 해당 행 제거 |
+| 3 | 공백 문장 | 해당 행 제거 |
+| 4 | 공백만 다른 중복 | 하나만 유지 |
+| 5 | 대문자 레이블 | 소문자로 통일 |
 
-## 확장 아이디어
+파일 없음, 필수 열 누락, 잘못된 레이블 검사는 선택 도전에서 확인합니다.
 
-- 입력 형식에 JSON 추가
-- 최소·최대 문장 길이를 명령행 옵션으로 제공
-- 제외된 행과 제외 사유를 별도 파일로 저장
-- 정제 규칙별 제거 건수를 단계별로 기록
-- 단위 테스트와 자동화된 품질 검사 추가
+## Solution 공개 및 해설
+
+> **강사용 공개 시점:** 수강생이 기본 요구사항을 충분히 시도하고, 공통 오류에 대한 피드백을 받은 뒤 공개합니다.
+
+완성형 solution에는 함수, 타입 힌트, CLI, 오류 검사와 JSON 보고서가 포함되어 있습니다. 수강생의 기본 코드보다 복잡한 것이 정상이며, 처음부터 동일하게 작성하는 것이 목표가 아닙니다.
+
+- [완성형 solution 안내](examples/12_mini_project_solution/README.md)
+- [완성형 solution 코드](examples/12_mini_project_solution/text_data_explorer.py)
+- [solution 입력 데이터](examples/12_mini_project_solution/reviews.csv)
+
+해설에서는 전체 코드를 다시 입력하기보다 다음 순서로 수강생 코드와 비교합니다.
+
+1. 반복되는 처리를 함수로 분리한 부분
+2. 잘못된 입력을 미리 검사한 부분
+3. 처리 결과를 보고서로 만든 부분
+4. 실행할 때 파일 경로를 바꿀 수 있게 만든 부분
+
+## 완료 기준
+
+- 기본 요구사항 10개 중 8개 이상 구현
+- 처리 전후 결과가 달라진 이유 설명
+- 자신의 코드에서 정제 단계 하나를 찾아 수정
+- solution과 자신의 코드 차이 한 가지 설명
+
+선택 도전 구현 여부는 기본 완료 기준에 포함하지 않습니다.

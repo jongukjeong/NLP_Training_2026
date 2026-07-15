@@ -16,7 +16,7 @@
 - **스키마(Schema): 열 이름·자료형·필수 여부처럼 데이터가 지켜야 할 구조**
 - **결측값(Missing Value): 값이 없거나 관측되지 않은 상태**
 
-자연어 처리에서는 모델 학습 전에 **데이터를 읽고, 구조를 진단하고, 정제하고, 검증하여 다시 저장하는 과정**이 필요합니다. 이 장은 Python 기본 문법을 이미 알고 있다는 전제에서 실제 텍스트 데이터 처리에 집중합니다.
+자연어 처리에서는 모델 학습 전에 **데이터를 읽고, 구조를 진단하고, 정제하고, 검증하여 다시 저장하는 과정**이 필요합니다. 이 장은 비전공자도 따라올 수 있도록 짧은 코드부터 시작하고, 같은 작업을 점차 실무적인 구조로 확장합니다.
 
 ## 학습 목표
 
@@ -29,7 +29,20 @@
 
 ## 선수 지식
 
-변수, 기본 자료형, 조건문, 반복문, 함수 등 Python 기본 문법은 이 장에서 별도로 설명하지 않습니다. 필요한 코드는 데이터 처리 맥락의 완성 예제로 제공합니다.
+변수, 리스트, `print()`와 간단한 함수 호출을 본 경험이 있으면 시작할 수 있습니다. 함수 작성, 타입 힌트, 예외 처리, CLI는 필수 선수 지식이 아니며 완성형 solution에서 선택적으로 설명합니다.
+
+## 권장 학습 순서
+
+```text
+Step by Step(함께 따라 하기)
+  → Basic Practice(짧은 전체 코드)
+  → Assignment(개별 과제)
+  → Assignment Solution(시도 후 해설)
+  → Mini Project(종합 적용)
+  → Mini Project Solution(피드백 후 공개)
+```
+
+solution은 정답 복사용 자료가 아니라 수강생 코드와 비교하는 해설 자료입니다. 강사는 다수의 수강생이 기본 요구사항을 시도한 뒤 공개합니다.
 
 ## 문서 구성
 
@@ -37,10 +50,12 @@
 2. [파일·CSV·JSON 처리](06_File_IO.md)
 3. [pandas로 표 데이터 다루기](07_Pandas.md)
 4. [텍스트 데이터 정제와 검증](08_Data_Cleaning.md)
-5. [핵심 정리](09_Summary.md)
-6. [퀴즈](10_Quiz.md)
-7. [실습 과제](11_Assignment.md)
-8. [미니 프로젝트: 텍스트 데이터 탐색기](12_Mini_Project.md)
+5. [Step by Step](examples/01_step_by_step/README.md)
+6. [Basic Practice](examples/02_basic_practice/README.md)
+7. [핵심 정리](09_Summary.md)
+8. [퀴즈](10_Quiz.md)
+9. [실습 과제](11_Assignment.md)
+10. [미니 프로젝트: 텍스트 데이터 탐색기](12_Mini_Project.md)
 
 ## 실습 환경
 
@@ -58,10 +73,13 @@ Chapter02_Python과데이터처리/
 ├── 11_Assignment.md
 ├── 12_Mini_Project.md
 └── examples/
+    ├── 01_step_by_step/             # 강사와 함께 실행
+    ├── 02_basic_practice/            # 입문용 통합 실습
     ├── 11_assignment_solution/
     │   ├── assignment_solution.py
     │   └── customer_inquiries.csv
-    └── 12_mini_project_solution/
+    ├── 12_mini_project_starter/      # 수강생 시작 코드
+    └── 12_mini_project_solution/     # 피드백 후 공개
         ├── text_data_explorer.py
         └── reviews.csv
 ```
@@ -72,10 +90,13 @@ Chapter02_Python과데이터처리/
 
 ## 완료 기준
 
+- Step by Step에서 각 단계 후 행 수가 달라진 이유를 설명
+- Basic Practice의 입력 파일과 저장 파일을 바꿔 실행
 - 퀴즈 8문항 중 6문항 이상 정답
-- 실습 과제의 필수 항목 완료
-- 미니 프로젝트가 정상 데이터와 잘못된 입력 모두를 처리
-- 출력 결과에 원본 행 수, 정제 행 수, 결측·중복 제거 수가 기록됨
+- 실습 과제의 기본 요구사항 완료
+- 미니 프로젝트에서 읽기·정제·저장 흐름 완료
+
+파일 검사, 사용자 정의 오류, CLI, JSON 보고서는 빠른 학습자를 위한 선택 목표입니다.
 
 다음 장에서는 이 장에서 준비한 텍스트 데이터를 바탕으로 정규표현식과 형태소 분석 등 본격적인 텍스트 전처리를 학습합니다.
 
@@ -113,6 +134,12 @@ records = [
 4. 데이터 정제 후 행 수가 줄었다면 무엇을 기록해야 할까요?
 
 ## 학습 원칙
+
+이 장의 코드는 한 번에 완성하지 않습니다. 먼저 한 줄씩 실행하고, 다음에는 짧은 프로그램으로 합친 뒤, 마지막에 함수와 검증을 추가합니다.
+
+```text
+한 단계씩 실행 → 짧은 전체 코드 → 과제 → 프로젝트 → 완성형 코드 비교
+```
 
 ### 1. 작은 데이터로 먼저 확인한다
 
@@ -152,13 +179,32 @@ python -m pip install pandas
 
 예제 코드는 해당 데이터셋과 같은 폴더에 배치합니다. 따라서 예제 폴더만 복사해도 코드와 입력 데이터를 함께 실행할 수 있습니다. 생성 결과는 예제 폴더의 `output` 하위 폴더로 분리합니다.
 
+먼저 [Step by Step](examples/01_step_by_step/README.md)을 강사와 함께 진행하고, 이어서 [Basic Practice](examples/02_basic_practice/README.md)를 완성합니다. 과제와 미니 프로젝트 solution은 직접 시도한 뒤 확인합니다.
+
 ---
 
 <!-- SOURCE: 06_File_IO.md -->
 
 # 06. 파일·CSV·JSON 처리
 
-## pathlib로 경로 다루기
+> **기본 목표:** 파일 이름을 지정해 읽고 저장할 수 있으면 충분합니다. `pathlib`, 예외 처리, 대용량 파일 처리는 선택 확장입니다.
+
+## 가장 간단한 CSV 입출력
+
+처음에는 코드와 CSV를 같은 폴더에 두고 파일 이름만 사용합니다.
+
+```python
+import pandas as pd
+
+df = pd.read_csv("reviews.csv", encoding="utf-8-sig")
+print(df)
+
+df.to_csv("reviews_clean.csv", index=False, encoding="utf-8-sig")
+```
+
+이 코드가 실행된 뒤 아래의 경로 관리와 파일 형식으로 확장합니다.
+
+## 선택 확장: pathlib로 경로 다루기
 
 문자열 이어 붙이기보다 `pathlib.Path`를 사용하면 Windows와 다른 운영체제에서 같은 코드를 사용할 수 있습니다.
 
@@ -180,7 +226,7 @@ output_path = BASE_DIR / "output" / "reviews_clean.txt"
 output_path.parent.mkdir(parents=True, exist_ok=True)
 ```
 
-## 텍스트 파일
+## 선택 확장: 텍스트 파일
 
 ```python
 from pathlib import Path
@@ -205,7 +251,7 @@ with path.open("r", encoding="utf-8") as file:
             print(cleaned)
 ```
 
-## CSV
+## 선택 확장: 표준 라이브러리로 CSV 처리
 
 CSV에는 쉼표가 포함된 필드와 따옴표 규칙이 있으므로 `csv` 모듈을 사용합니다.
 
@@ -232,7 +278,7 @@ with Path("reviews_clean.csv").open(
     writer.writerows(records)
 ```
 
-## JSON
+## 선택 확장: JSON
 
 ```python
 import json
@@ -248,7 +294,7 @@ Path("reviews_clean.json").write_text(
 
 `ensure_ascii=False`는 한글을 `\uXXXX` 형태가 아닌 읽을 수 있는 문자로 저장합니다.
 
-## 안전한 오류 메시지
+## 선택 확장: 안전한 오류 메시지
 
 ```python
 def read_utf8(path: Path) -> str:
@@ -273,6 +319,8 @@ def read_utf8(path: Path) -> str:
 <!-- SOURCE: 07_Pandas.md -->
 
 # 07. pandas로 표 데이터 다루기
+
+> **기본 목표:** 코드를 위에서 아래로 한 줄씩 실행하며 데이터가 어떻게 바뀌는지 확인합니다. 메서드 체이닝과 그룹 집계는 기본 흐름을 익힌 뒤 다룹니다.
 
 ## DataFrame 만들기
 
@@ -326,15 +374,14 @@ valid["label"] = valid["label"].fillna("unknown")
 ## 문자열 정제
 
 ```python
-valid["text"] = (
-    valid["text"]
-    .astype("string")
-    .str.strip()
-    .str.replace(r"\s+", " ", regex=True)
-)
-valid = valid.loc[valid["text"].str.len() > 0].copy()
+valid["text"] = valid["text"].astype("string")
+valid["text"] = valid["text"].str.strip()
+valid["text"] = valid["text"].str.replace(r"\s+", " ", regex=True)
+valid = valid[valid["text"] != ""]
 valid["text_length"] = valid["text"].str.len()
 ```
+
+한 줄을 실행할 때마다 `print(valid)`로 결과를 확인합니다.
 
 ## 중복 제거
 
@@ -345,7 +392,7 @@ deduplicated = valid.drop_duplicates(subset=["text"], keep="first").copy()
 
 무엇을 중복으로 볼지 먼저 정의해야 합니다. `id`가 달라도 정제된 `text`가 같으면 중복으로 볼 것인지 업무 규칙이 필요합니다.
 
-## 그룹 집계
+## 선택 확장: 그룹 집계
 
 ```python
 summary = (
@@ -374,7 +421,7 @@ json_df.to_json(
 )
 ```
 
-## 체인보다 단계 이름 붙이기
+## 선택 확장: 단계 이름 붙이기
 
 긴 메서드 체인은 편리하지만 교육과 디버깅에서는 중간 결과를 나누는 편이 좋습니다.
 
@@ -392,6 +439,31 @@ non_empty = normalized.loc[normalized["text"].ne("")].copy()
 
 # 08. 텍스트 데이터 정제와 검증
 
+## 기본 실습: 위에서 아래로 정제하기
+
+처음에는 함수나 타입 힌트 없이 각 줄의 결과를 확인합니다.
+
+```python
+import pandas as pd
+
+df = pd.read_csv("reviews.csv", encoding="utf-8-sig")
+rows_before = len(df)
+
+df = df.dropna(subset=["text"])
+df["text"] = df["text"].str.strip()
+df["text"] = df["text"].str.replace(r"\s+", " ", regex=True)
+df = df[df["text"] != ""]
+df["label"] = df["label"].fillna("unknown")
+df["label"] = df["label"].str.lower()
+df = df.drop_duplicates(subset=["text"])
+
+print("처리 전:", rows_before)
+print("처리 후:", len(df))
+df.to_csv("reviews_clean.csv", index=False, encoding="utf-8-sig")
+```
+
+이 흐름을 이해한 학습자는 아래의 함수화와 검증으로 확장합니다.
+
 ## 정제는 규칙의 집합이다
 
 “깨끗하게 만든다”는 표현만으로는 재현할 수 없습니다. 입력, 규칙, 출력, 제외 건수와 예외를 명시해야 합니다.
@@ -407,7 +479,7 @@ non_empty = normalized.loc[normalized["text"].ne("")].copy()
 7. 파생 변수 생성
 8. 처리 전후 통계 기록
 
-## 스키마 검사
+## 선택 확장: 스키마 검사
 
 ```python
 import pandas as pd
@@ -421,7 +493,7 @@ def validate_columns(df: pd.DataFrame) -> None:
         raise ValueError(f"필수 열이 없습니다: {names}")
 ```
 
-## 정제 함수
+## 선택 확장: 정제 함수
 
 ```python
 ALLOWED_LABELS = {"positive", "negative", "neutral", "unknown"}
@@ -449,7 +521,7 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return result.reset_index(drop=True)
 ```
 
-## 처리 보고서
+## 선택 확장: 처리 보고서
 
 ```python
 def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
@@ -463,7 +535,7 @@ def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
     }
 ```
 
-## 검증 항목
+## 선택 확장: 검증 항목
 
 ```python
 cleaned = clean_dataframe(df)
@@ -493,7 +565,36 @@ assert cleaned["text_length"].ge(1).all()
 
 <!-- SOURCE: 09_Summary.md -->
 
-# 다음 Chapter로 연결하기
+# 09. 핵심 정리
+
+## 기본 처리 흐름
+
+```text
+CSV 읽기 → 구조 확인 → 결측 제거 → 공백 정리 → 중복 제거 → 저장
+```
+
+- 처음에는 코드와 데이터 파일을 같은 폴더에 둡니다.
+- 한 줄씩 실행하고 `print()`로 중간 결과를 확인합니다.
+- 처리 전후 행 수가 달라진 이유를 기록합니다.
+- 원본 파일과 정제 결과 파일을 분리합니다.
+
+## 난이도별 도달 목표
+
+| 단계 | 할 수 있어야 하는 일 |
+|---|---|
+| 기본 | CSV를 읽고 결측·공백·중복을 처리해 저장 |
+| 발전 | 함수로 정제 로직을 분리하고 결과 검증 |
+| 선택 확장 | 경로 검사, CLI, JSON 보고서 구현 |
+
+## 다음 학습 순서
+
+1. Step by Step을 강사와 함께 실행합니다.
+2. Basic Practice로 전체 흐름을 연결합니다.
+3. Assignment를 직접 시도한 뒤 solution과 비교합니다.
+4. Mini Project starter를 완성합니다.
+5. 피드백 후 완성형 solution의 확장 구조를 살펴봅니다.
+
+## 다음 Chapter로 연결하기
 
 다음 Chapter에서는 정규표현식, 토큰화, 불용어, 형태소 분석 등 언어 데이터에 특화된 전처리로 확장합니다.
 
@@ -629,6 +730,8 @@ raw_records = [
 9. 결과를 `customer_inquiries_clean.csv`에 UTF-8 계열 인코딩으로 저장합니다.
 10. 처리 전후 행 수와 제거 건수를 딕셔너리로 출력합니다.
 
+처음에는 1~7번을 **기본 목표**로 수행합니다. 8~10번은 기본 목표를 실행한 뒤 추가합니다.
+
 ## 추가 도전
 
 - 허용 레이블 집합을 만들고 잘못된 레이블을 탐지합니다.
@@ -650,7 +753,9 @@ raw_records = [
 
 ## 배포용 완성 답안
 
-강의 시간이 부족할 때 바로 배포할 수 있는 실행 코드와 입력 데이터셋은 이 문서와 같은 Chapter 디렉터리 아래에 있습니다.
+> **강사용 공개 시점:** 수강생이 기본 목표 1~7번을 시도하고, 처리 전후 데이터가 달라진 이유를 설명한 뒤 공개합니다.
+
+완성 답안은 함수, 검증과 경로 관리를 포함한 실무형 확장 코드입니다. 처음부터 같은 구조로 작성할 필요는 없습니다.
 
 - [완성 답안 안내](examples/11_assignment_solution/README.md)
 - [완성 답안 코드](examples/11_assignment_solution/assignment_solution.py)
@@ -674,21 +779,28 @@ raw_records = [
 
 ## 프로젝트 목표
 
-CSV 파일을 읽어 품질을 진단하고 텍스트를 정제한 뒤, 정제 데이터와 처리 보고서를 저장하는 작은 프로그램을 설계합니다. 이 문서는 구현 명세와 완성 예제를 함께 제공합니다.
+CSV 파일을 읽어 텍스트를 정제하고, 정제 결과와 간단한 요약을 저장합니다. 처음에는 함수, CLI, JSON 보고서 없이 기본 흐름을 완성합니다.
 
-## 입력 명세
+```text
+입력 → 확인 → 정제 → 요약 → 저장
+```
 
-`reviews.csv`는 다음 열을 가집니다.
+## 시작 전 확인
 
-| 열 | 필수 | 설명 |
-|---|---|---|
-| `id` | 예 | 레코드 식별자 |
-| `text` | 예 | 리뷰 문장 |
-| `label` | 예 | `positive`,
-egative`,
-eutral`, `unknown` |
+다음 항목 중 네 가지 이상을 설명할 수 있으면 시작합니다.
 
-예시:
+- `pd.read_csv()`로 CSV를 읽는 방법
+- `dropna()`로 결측 문장을 제거하는 방법
+- `.str.strip()`으로 앞뒤 공백을 제거하는 방법
+- 빈 문자열을 조건으로 제외하는 방법
+- `drop_duplicates()`로 중복을 제거하는 방법
+- `to_csv()`로 결과를 저장하는 방법
+
+설명이 어렵다면 [Basic Practice](examples/02_basic_practice/README.md)를 한 번 더 실행합니다.
+
+## 입력 데이터
+
+`reviews.csv`는 `id`, `text`, `label` 열을 가집니다.
 
 ```csv
 id,text,label
@@ -698,187 +810,116 @@ id,text,label
 4,배송이 빨라요,positive
 ```
 
-## 권장 폴더 구조
+## 시작 코드
 
-예제 코드와 입력 데이터셋은 동일한 폴더에 둡니다. 실행 결과만 `output/`으로 분리합니다.
+다음 폴더에는 단계별 주석과 입력 데이터가 있습니다.
 
-```text
-Chapter02_Python과데이터처리/examples/12_mini_project_solution/
-├── text_data_explorer.py
-├── reviews.csv
-└── output/                 # 실행 시 생성
-    ├── reviews_clean.csv
-    └── reviews_clean.report.json
-```
-
-저장소에 포함된 배포용 파일:
-
-- [완성 예제 안내](examples/12_mini_project_solution/README.md)
-- [완성 예제 코드](examples/12_mini_project_solution/text_data_explorer.py)
-- [입력 데이터셋](examples/12_mini_project_solution/reviews.csv)
-
-## 기능 요구사항
-
-1. 명령행에서 입력·출력 경로를 받습니다.
-2. 파일 존재 여부와 필수 열을 검사합니다.
-3. UTF-8/BOM CSV를 읽습니다.
-4. 결측·빈 문장을 제거합니다.
-5. 문장 공백과 레이블 표기를 정규화합니다.
-6. 허용하지 않은 레이블이면 명확한 오류를 냅니다.
-7. 정규화된 문장 기준 중복을 제거합니다.
-8. 문장 길이와 레이블 분포를 계산합니다.
-9. 정제 CSV와 JSON 보고서를 별도 저장합니다.
-10. 원본 파일은 변경하지 않습니다.
-
-## 처리 설계
-
-```text
-CLI 인수
-  → 경로 검사
-  → CSV 읽기
-  → 스키마 검사
-  → 정제
-  → 결과 검증
-  → CSV 저장
-  → JSON 보고서 저장
-```
-
-## 완성 예제
-
-아래 코드를 `text_data_explorer.py`로 저장하면 실행할 수 있습니다. 이번 작업에서는 문서만 작성하므로 코드는 별도 파일로 생성하지 않습니다.
-
-```python
-from __future__ import annotations
-
-import argparse
-import json
-from pathlib import Path
-
-import pandas as pd
-
-REQUIRED_COLUMNS = {"id", "text", "label"}
-ALLOWED_LABELS = {"positive", "negative", "neutral", "unknown"}
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="텍스트 CSV를 정제하고 요약합니다.")
-    parser.add_argument("input", type=Path, help="입력 CSV 경로")
-    parser.add_argument("output", type=Path, help="정제 CSV 경로")
-    return parser.parse_args()
-
-def validate_columns(df: pd.DataFrame) -> None:
-    missing = REQUIRED_COLUMNS - set(df.columns)
-    if missing:
-        raise ValueError(f"필수 열이 없습니다: {', '.join(sorted(missing))}")
-
-def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
-    validate_columns(df)
-    result = df.copy()
-    result = result.dropna(subset=["text"])
-    result["text"] = (
-        result["text"]
-        .astype("string")
-        .str.strip()
-        .str.replace(r"\s+", " ", regex=True)
-    )
-    result = result.loc[result["text"].str.len() > 0].copy()
-    result["label"] = (
-        result["label"].fillna("unknown").astype("string").str.lower().str.strip()
-    )
-
-    invalid_labels = sorted(set(result["label"]) - ALLOWED_LABELS)
-    if invalid_labels:
-        raise ValueError(f"허용되지 않은 레이블: {invalid_labels}")
-
-    result = result.drop_duplicates(subset=["text"], keep="first").copy()
-    result["text_length"] = result["text"].str.len()
-    return result.reset_index(drop=True)
-
-def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
-    return {
-        "rows_before": len(before),
-        "rows_after": len(after),
-        "rows_removed": len(before) - len(after),
-        "missing_text_before": int(before["text"].isna().sum()),
-        "average_text_length": (
-            round(float(after["text_length"].mean()), 2) if not after.empty else 0.0
-        ),
-        "label_counts": {
-            str(key): int(value)
-            for key, value in after["label"].value_counts().items()
-        },
-    }
-
-def run(input_path: Path, output_path: Path) -> tuple[pd.DataFrame, dict]:
-    if not input_path.is_file():
-        raise FileNotFoundError(f"입력 파일을 찾을 수 없습니다: {input_path}")
-
-    original = pd.read_csv(input_path, encoding="utf-8-sig")
-    cleaned = clean_dataframe(original)
-
-    assert cleaned["text"].notna().all()
-    assert cleaned["text"].str.len().gt(0).all()
-    assert cleaned["text"].is_unique
-    assert set(cleaned["label"]) <= ALLOWED_LABELS
-
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    cleaned.to_csv(output_path, index=False, encoding="utf-8-sig")
-
-    report = build_report(original, cleaned)
-    report_path = output_path.with_suffix(".report.json")
-    report_path.write_text(
-        json.dumps(report, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
-    return cleaned, report
-
-def main() -> None:
-    args = parse_args()
-    _, report = run(args.input, args.output)
-    print(json.dumps(report, ensure_ascii=False, indent=2))
-
-if __name__ == "__main__":
-    main()
-```
-
-## 실행 예시
+- [시작 안내](examples/12_mini_project_starter/README.md)
+- [시작 코드](examples/12_mini_project_starter/text_data_explorer_starter.py)
+- [입력 데이터](examples/12_mini_project_starter/reviews.csv)
 
 ```powershell
-cd lecture\Part01_자연어처리기초와Python\Chapter02_Python과데이터처리\examples\12_mini_project_solution
-python text_data_explorer.py reviews.csv output\reviews_clean.csv
+cd examples\12_mini_project_starter
+python text_data_explorer_starter.py
 ```
 
-예상 보고서:
+## 1단계: 기본 요구사항
 
-```json
-{
-  "rows_before": 4,
-  "rows_after": 2,
-  "rows_removed": 2,
-  "missing_text_before": 1,
-  "average_text_length": 8.5,
-  "label_counts": {
-    "positive": 1,
-    "negative": 1
-  }
-}
+1. `reviews.csv`를 읽습니다.
+2. 처리 전 행 수를 저장합니다.
+3. `text`가 결측인 행을 제거합니다.
+4. `text`의 앞뒤 공백과 연속 공백을 정리합니다.
+5. 정제 후 빈 문자열인 행을 제거합니다.
+6. `label`을 소문자로 통일합니다.
+7. 정제된 `text` 기준으로 중복을 제거합니다.
+8. `text_length` 열을 추가합니다.
+9. 처리 전후 행 수와 레이블 분포를 출력합니다.
+10. `reviews_clean.csv`로 저장합니다.
+
+처음부터 열 항목을 모두 작성하지 말고 2~3개씩 구현한 뒤 실행합니다.
+
+## 중간 점검
+
+solution을 보기 전에 다음을 확인합니다.
+
+- 프로그램이 오류 없이 끝까지 실행되는가?
+- 결측 행과 공백뿐인 행이 제거됐는가?
+- 공백만 다른 중복 문장이 하나로 줄었는가?
+- `Positive`가 `positive`로 바뀌었는가?
+- 처리 전후 행 수 차이를 설명할 수 있는가?
+- 생성된 CSV를 다시 읽을 수 있는가?
+
+## 막혔을 때 사용하는 힌트
+
+### 힌트 1: 결측 제거
+
+```python
+df = df.dropna(subset=["text"])
 ```
+
+### 힌트 2: 공백 정리
+
+```python
+df["text"] = df["text"].str.strip()
+df["text"] = df["text"].str.replace(r"\s+", " ", regex=True)
+```
+
+### 힌트 3: 중복 제거
+
+```python
+df = df.drop_duplicates(subset=["text"])
+```
+
+힌트는 위에서부터 필요한 만큼만 확인합니다.
+
+## 2단계: 선택 도전
+
+기본 요구사항을 완성한 학습자만 진행합니다.
+
+- 필수 열 `id`, `text`, `label`이 있는지 검사
+- 허용되지 않은 레이블 탐지
+- 정제 로직을 함수로 분리
+- `assert`로 결과 검증
+- 입력·출력 경로를 명령행에서 받기
+- 처리 결과를 JSON 보고서로 저장
+- 입력 파일이 없을 때 이해하기 쉬운 오류 출력
+
+선택 도전을 모두 구현할 필요는 없습니다. 한 가지를 골라 기존 코드에 추가합니다.
 
 ## 테스트 시나리오
 
-| 번호 | 입력 | 기대 결과 |
+| 번호 | 입력 | 기본 기대 결과 |
 |---|---|---|
-| 1 | 정상 CSV | 정제 CSV와 보고서 생성 |
-| 2 | 파일 없음 | 경로를 포함한 오류 |
-| 3 | `text` 열 없음 | 누락 열을 포함한 오류 |
-| 4 | 결측·공백 문장 | 해당 행 제거 |
-| 5 | 공백만 다른 중복 | 하나만 유지 |
-| 6 | 잘못된 레이블 | 잘못된 값을 포함한 오류 |
-| 7 | 유효 행 0개 | 빈 CSV와 평균 0 보고서 |
+| 1 | 정상 CSV | 정제 CSV 생성 |
+| 2 | 결측 문장 | 해당 행 제거 |
+| 3 | 공백 문장 | 해당 행 제거 |
+| 4 | 공백만 다른 중복 | 하나만 유지 |
+| 5 | 대문자 레이블 | 소문자로 통일 |
 
-## 확장 아이디어
+파일 없음, 필수 열 누락, 잘못된 레이블 검사는 선택 도전에서 확인합니다.
 
-- 입력 형식에 JSON 추가
-- 최소·최대 문장 길이를 명령행 옵션으로 제공
-- 제외된 행과 제외 사유를 별도 파일로 저장
-- 정제 규칙별 제거 건수를 단계별로 기록
-- 단위 테스트와 자동화된 품질 검사 추가
+## Solution 공개 및 해설
+
+> **강사용 공개 시점:** 수강생이 기본 요구사항을 충분히 시도하고, 공통 오류에 대한 피드백을 받은 뒤 공개합니다.
+
+완성형 solution에는 함수, 타입 힌트, CLI, 오류 검사와 JSON 보고서가 포함되어 있습니다. 수강생의 기본 코드보다 복잡한 것이 정상이며, 처음부터 동일하게 작성하는 것이 목표가 아닙니다.
+
+- [완성형 solution 안내](examples/12_mini_project_solution/README.md)
+- [완성형 solution 코드](examples/12_mini_project_solution/text_data_explorer.py)
+- [solution 입력 데이터](examples/12_mini_project_solution/reviews.csv)
+
+해설에서는 전체 코드를 다시 입력하기보다 다음 순서로 수강생 코드와 비교합니다.
+
+1. 반복되는 처리를 함수로 분리한 부분
+2. 잘못된 입력을 미리 검사한 부분
+3. 처리 결과를 보고서로 만든 부분
+4. 실행할 때 파일 경로를 바꿀 수 있게 만든 부분
+
+## 완료 기준
+
+- 기본 요구사항 10개 중 8개 이상 구현
+- 처리 전후 결과가 달라진 이유 설명
+- 자신의 코드에서 정제 단계 하나를 찾아 수정
+- solution과 자신의 코드 차이 한 가지 설명
+
+선택 도전 구현 여부는 기본 완료 기준에 포함하지 않습니다.

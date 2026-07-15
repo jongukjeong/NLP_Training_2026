@@ -1,5 +1,30 @@
 # 08. 텍스트 데이터 정제와 검증
 
+## 기본 실습: 위에서 아래로 정제하기
+
+처음에는 함수나 타입 힌트 없이 각 줄의 결과를 확인합니다.
+
+```python
+import pandas as pd
+
+df = pd.read_csv("reviews.csv", encoding="utf-8-sig")
+rows_before = len(df)
+
+df = df.dropna(subset=["text"])
+df["text"] = df["text"].str.strip()
+df["text"] = df["text"].str.replace(r"\s+", " ", regex=True)
+df = df[df["text"] != ""]
+df["label"] = df["label"].fillna("unknown")
+df["label"] = df["label"].str.lower()
+df = df.drop_duplicates(subset=["text"])
+
+print("처리 전:", rows_before)
+print("처리 후:", len(df))
+df.to_csv("reviews_clean.csv", index=False, encoding="utf-8-sig")
+```
+
+이 흐름을 이해한 학습자는 아래의 함수화와 검증으로 확장합니다.
+
 ## 정제는 규칙의 집합이다
 
 “깨끗하게 만든다”는 표현만으로는 재현할 수 없습니다. 입력, 규칙, 출력, 제외 건수와 예외를 명시해야 합니다.
@@ -15,7 +40,7 @@
 7. 파생 변수 생성
 8. 처리 전후 통계 기록
 
-## 스키마 검사
+## 선택 확장: 스키마 검사
 
 ```python
 import pandas as pd
@@ -29,7 +54,7 @@ def validate_columns(df: pd.DataFrame) -> None:
         raise ValueError(f"필수 열이 없습니다: {names}")
 ```
 
-## 정제 함수
+## 선택 확장: 정제 함수
 
 ```python
 ALLOWED_LABELS = {"positive", "negative", "neutral", "unknown"}
@@ -57,7 +82,7 @@ def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     return result.reset_index(drop=True)
 ```
 
-## 처리 보고서
+## 선택 확장: 처리 보고서
 
 ```python
 def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
@@ -71,7 +96,7 @@ def build_report(before: pd.DataFrame, after: pd.DataFrame) -> dict:
     }
 ```
 
-## 검증 항목
+## 선택 확장: 검증 항목
 
 ```python
 cleaned = clean_dataframe(df)

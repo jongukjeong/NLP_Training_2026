@@ -1,0 +1,7 @@
+id,text,label
+1,  배송이 빨라요  ,Positive
+2,,unknown
+3,환불하고   싶어요,NEGATIVE
+4,배송이 빨라요,positive
+5,   ,neutral
+6,포장이 꼼꼼해요,Positive

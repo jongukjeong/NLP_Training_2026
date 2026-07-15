@@ -1,6 +1,23 @@
 # 06. 파일·CSV·JSON 처리
 
-## pathlib로 경로 다루기
+> **기본 목표:** 파일 이름을 지정해 읽고 저장할 수 있으면 충분합니다. `pathlib`, 예외 처리, 대용량 파일 처리는 선택 확장입니다.
+
+## 가장 간단한 CSV 입출력
+
+처음에는 코드와 CSV를 같은 폴더에 두고 파일 이름만 사용합니다.
+
+```python
+import pandas as pd
+
+df = pd.read_csv("reviews.csv", encoding="utf-8-sig")
+print(df)
+
+df.to_csv("reviews_clean.csv", index=False, encoding="utf-8-sig")
+```
+
+이 코드가 실행된 뒤 아래의 경로 관리와 파일 형식으로 확장합니다.
+
+## 선택 확장: pathlib로 경로 다루기
 
 문자열 이어 붙이기보다 `pathlib.Path`를 사용하면 Windows와 다른 운영체제에서 같은 코드를 사용할 수 있습니다.
 
@@ -22,7 +39,7 @@ output_path = BASE_DIR / "output" / "reviews_clean.txt"
 output_path.parent.mkdir(parents=True, exist_ok=True)
 ```
 
-## 텍스트 파일
+## 선택 확장: 텍스트 파일
 
 ```python
 from pathlib import Path
@@ -47,7 +64,7 @@ with path.open("r", encoding="utf-8") as file:
             print(cleaned)
 ```
 
-## CSV
+## 선택 확장: 표준 라이브러리로 CSV 처리
 
 CSV에는 쉼표가 포함된 필드와 따옴표 규칙이 있으므로 `csv` 모듈을 사용합니다.
 
@@ -74,7 +91,7 @@ with Path("reviews_clean.csv").open(
     writer.writerows(records)
 ```
 
-## JSON
+## 선택 확장: JSON
 
 ```python
 import json
@@ -90,7 +107,7 @@ Path("reviews_clean.json").write_text(
 
 `ensure_ascii=False`는 한글을 `\uXXXX` 형태가 아닌 읽을 수 있는 문자로 저장합니다.
 
-## 안전한 오류 메시지
+## 선택 확장: 안전한 오류 메시지
 
 ```python
 def read_utf8(path: Path) -> str:

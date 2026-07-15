@@ -10,7 +10,7 @@
 - **스키마(Schema): 열 이름·자료형·필수 여부처럼 데이터가 지켜야 할 구조**
 - **결측값(Missing Value): 값이 없거나 관측되지 않은 상태**
 
-자연어 처리에서는 모델 학습 전에 **데이터를 읽고, 구조를 진단하고, 정제하고, 검증하여 다시 저장하는 과정**이 필요합니다. 이 장은 Python 기본 문법을 이미 알고 있다는 전제에서 실제 텍스트 데이터 처리에 집중합니다.
+자연어 처리에서는 모델 학습 전에 **데이터를 읽고, 구조를 진단하고, 정제하고, 검증하여 다시 저장하는 과정**이 필요합니다. 이 장은 비전공자도 따라올 수 있도록 짧은 코드부터 시작하고, 같은 작업을 점차 실무적인 구조로 확장합니다.
 
 ## 학습 목표
 
@@ -23,7 +23,20 @@
 
 ## 선수 지식
 
-변수, 기본 자료형, 조건문, 반복문, 함수 등 Python 기본 문법은 이 장에서 별도로 설명하지 않습니다. 필요한 코드는 데이터 처리 맥락의 완성 예제로 제공합니다.
+변수, 리스트, `print()`와 간단한 함수 호출을 본 경험이 있으면 시작할 수 있습니다. 함수 작성, 타입 힌트, 예외 처리, CLI는 필수 선수 지식이 아니며 완성형 solution에서 선택적으로 설명합니다.
+
+## 권장 학습 순서
+
+```text
+Step by Step(함께 따라 하기)
+  → Basic Practice(짧은 전체 코드)
+  → Assignment(개별 과제)
+  → Assignment Solution(시도 후 해설)
+  → Mini Project(종합 적용)
+  → Mini Project Solution(피드백 후 공개)
+```
+
+solution은 정답 복사용 자료가 아니라 수강생 코드와 비교하는 해설 자료입니다. 강사는 다수의 수강생이 기본 요구사항을 시도한 뒤 공개합니다.
 
 ## 문서 구성
 
@@ -31,10 +44,12 @@
 2. [파일·CSV·JSON 처리](06_File_IO.md)
 3. [pandas로 표 데이터 다루기](07_Pandas.md)
 4. [텍스트 데이터 정제와 검증](08_Data_Cleaning.md)
-5. [핵심 정리](09_Summary.md)
-6. [퀴즈](10_Quiz.md)
-7. [실습 과제](11_Assignment.md)
-8. [미니 프로젝트: 텍스트 데이터 탐색기](12_Mini_Project.md)
+5. [Step by Step](examples/01_step_by_step/README.md)
+6. [Basic Practice](examples/02_basic_practice/README.md)
+7. [핵심 정리](09_Summary.md)
+8. [퀴즈](10_Quiz.md)
+9. [실습 과제](11_Assignment.md)
+10. [미니 프로젝트: 텍스트 데이터 탐색기](12_Mini_Project.md)
 
 ## 실습 환경
 
@@ -52,10 +67,13 @@ Chapter02_Python과데이터처리/
 ├── 11_Assignment.md
 ├── 12_Mini_Project.md
 └── examples/
+    ├── 01_step_by_step/             # 강사와 함께 실행
+    ├── 02_basic_practice/            # 입문용 통합 실습
     ├── 11_assignment_solution/
     │   ├── assignment_solution.py
     │   └── customer_inquiries.csv
-    └── 12_mini_project_solution/
+    ├── 12_mini_project_starter/      # 수강생 시작 코드
+    └── 12_mini_project_solution/     # 피드백 후 공개
         ├── text_data_explorer.py
         └── reviews.csv
 ```
@@ -66,9 +84,12 @@ Chapter02_Python과데이터처리/
 
 ## 완료 기준
 
+- Step by Step에서 각 단계 후 행 수가 달라진 이유를 설명
+- Basic Practice의 입력 파일과 저장 파일을 바꿔 실행
 - 퀴즈 8문항 중 6문항 이상 정답
-- 실습 과제의 필수 항목 완료
-- 미니 프로젝트가 정상 데이터와 잘못된 입력 모두를 처리
-- 출력 결과에 원본 행 수, 정제 행 수, 결측·중복 제거 수가 기록됨
+- 실습 과제의 기본 요구사항 완료
+- 미니 프로젝트에서 읽기·정제·저장 흐름 완료
+
+파일 검사, 사용자 정의 오류, CLI, JSON 보고서는 빠른 학습자를 위한 선택 목표입니다.
 
 다음 장에서는 이 장에서 준비한 텍스트 데이터를 바탕으로 정규표현식과 형태소 분석 등 본격적인 텍스트 전처리를 학습합니다.

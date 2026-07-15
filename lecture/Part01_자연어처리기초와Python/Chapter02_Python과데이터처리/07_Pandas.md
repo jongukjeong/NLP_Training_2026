@@ -1,5 +1,7 @@
 # 07. pandas로 표 데이터 다루기
 
+> **기본 목표:** 코드를 위에서 아래로 한 줄씩 실행하며 데이터가 어떻게 바뀌는지 확인합니다. 메서드 체이닝과 그룹 집계는 기본 흐름을 익힌 뒤 다룹니다.
+
 ## DataFrame 만들기
 
 ```python
@@ -52,15 +54,14 @@ valid["label"] = valid["label"].fillna("unknown")
 ## 문자열 정제
 
 ```python
-valid["text"] = (
-    valid["text"]
-    .astype("string")
-    .str.strip()
-    .str.replace(r"\s+", " ", regex=True)
-)
-valid = valid.loc[valid["text"].str.len() > 0].copy()
+valid["text"] = valid["text"].astype("string")
+valid["text"] = valid["text"].str.strip()
+valid["text"] = valid["text"].str.replace(r"\s+", " ", regex=True)
+valid = valid[valid["text"] != ""]
 valid["text_length"] = valid["text"].str.len()
 ```
+
+한 줄을 실행할 때마다 `print(valid)`로 결과를 확인합니다.
 
 ## 중복 제거
 
@@ -71,7 +72,7 @@ deduplicated = valid.drop_duplicates(subset=["text"], keep="first").copy()
 
 무엇을 중복으로 볼지 먼저 정의해야 합니다. `id`가 달라도 정제된 `text`가 같으면 중복으로 볼 것인지 업무 규칙이 필요합니다.
 
-## 그룹 집계
+## 선택 확장: 그룹 집계
 
 ```python
 summary = (
@@ -100,7 +101,7 @@ json_df.to_json(
 )
 ```
 
-## 체인보다 단계 이름 붙이기
+## 선택 확장: 단계 이름 붙이기
 
 긴 메서드 체인은 편리하지만 교육과 디버깅에서는 중간 결과를 나누는 편이 좋습니다.
 
