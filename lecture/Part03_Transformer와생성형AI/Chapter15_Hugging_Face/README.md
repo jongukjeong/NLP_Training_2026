@@ -1,5 +1,14 @@
 # Chapter 15. Hugging Face
 
+<!-- BEGIN: BEGINNER_LEARNING_PATH -->
+## 권장 학습 순서
+
+```text
+Step by Step → Basic Practice → Practice·Assignment → 피드백 → Solution
+```
+
+비전공자와 입문자는 [단계별 학습 경로](LEARNING_PATH.md)를 먼저 확인합니다. 완성형 solution의 고급 구조는 선택 학습입니다.
+<!-- END: BEGINNER_LEARNING_PATH -->
 
 ## 핵심 용어 미리보기
 

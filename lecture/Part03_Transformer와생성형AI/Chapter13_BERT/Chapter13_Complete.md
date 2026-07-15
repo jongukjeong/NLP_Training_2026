@@ -6,6 +6,15 @@
 
 # Chapter 13. BERT
 
+<!-- BEGIN: BEGINNER_LEARNING_PATH -->
+## 권장 학습 순서
+
+```text
+Step by Step → Basic Practice → Practice·Assignment → 피드백 → Solution
+```
+
+비전공자와 입문자는 [단계별 학습 경로](LEARNING_PATH.md)를 먼저 확인합니다. 완성형 solution의 고급 구조는 선택 학습입니다.
+<!-- END: BEGINNER_LEARNING_PATH -->
 
 ## 핵심 용어 미리보기
 
@@ -26,6 +35,59 @@
 - [비전공자용 BERT 분류 워크북](00_비전공자_BERT_분류워크북.md): MLM부터 Logit, Fine-tuning과 분류 평가까지 단계별로 확인합니다.
 
 - [원리·수학·실습 연결 가이드](00_원리_수학_실습_가이드.md): 직관, 핵심 공식, 수치 예, 구현 점검을 한 흐름으로 학습합니다.
+
+---
+
+<!-- SOURCE: LEARNING_PATH.md -->
+
+# Chapter 13 비전공자 학습 경로
+
+## 기본 도달 목표
+
+한국어 문장을 토큰화하고 BERT 표현 shape 확인
+
+완성형 코드를 처음부터 모두 이해하거나 다시 작성하는 것은 기본 목표가 아닙니다.
+
+## 1. Step by Step — 강사와 함께
+
+1. 문장 두 개를 준비한다
+2. Tokenizer 출력을 읽는다
+3. 모델 출력 shape를 확인한다
+4. 두 문장의 표현을 비교한다
+
+각 단계가 끝날 때 입력, 출력 또는 중간 결과를 화면에서 확인합니다. 설명할 수 없는 줄은 다음 단계로 넘어가기 전에 질문합니다.
+
+## 2. Basic Practice — 짧은 흐름 연결
+
+Step by Step의 네 단계를 한 흐름으로 연결합니다. 처음에는 함수 분리, 타입 힌트, 복잡한 예외 처리와 자동 보고서를 요구하지 않습니다.
+
+완료 확인:
+
+- 입력이 무엇인지 설명한다.
+- 핵심 처리 한 단계를 찾아 수정한다.
+- 출력이 예상과 다른 이유를 한 가지 찾는다.
+- 실행 결과를 짧게 기록한다.
+
+## 3. Practice·Assignment — 먼저 시도
+
+[04_Practice.md](04_Practice.md)의 기본 요구사항을 먼저 수행합니다. 막히면 전체 solution 대신 필요한 단계의 힌트만 확인합니다.
+
+## 4. Solution — 피드백 후 공개
+
+[examples/04_korean_bert_solution/README.md](examples/04_korean_bert_solution/README.md)은 다수의 수강생이 기본 요구사항을 시도하고 공통 오류를 함께 확인한 뒤 공개합니다. 자신의 코드와 다음 항목을 비교합니다.
+
+1. 반복되는 처리를 어떻게 묶었는가
+2. 잘못된 입력을 어디에서 검사하는가
+3. 결과를 어떻게 검증하고 기록하는가
+
+## 선택 확장
+
+- fine-tuning
+- 평가 함수
+- 오류 분석
+- 배포 점검
+
+선택 확장은 기본 완료 기준에 포함하지 않습니다.
 
 ---
 
@@ -393,6 +455,15 @@ z=h_{CLS}W+b,\qquad p=softmax(z)
 <!-- SOURCE: 04_Practice.md -->
 
 # 실습: 한국어 BERT 활용
+
+<!-- BEGIN: BEGINNER_LEARNING_PATH -->
+## 난이도와 Solution 공개 원칙
+
+- 기본 요구사항을 먼저 작은 단계로 나누어 실행합니다.
+- 함수화, 타입 힌트, 복합 평가와 운영 기능은 선택 확장입니다.
+- solution은 직접 시도하고 공통 오류 피드백을 받은 뒤 공개합니다.
+- 처음부터 solution과 같은 구조로 작성하는 것은 목표가 아닙니다.
+<!-- END: BEGINNER_LEARNING_PATH -->
 
 한국어 BERT tokenizer와 encoder를 내려받아 문장 embedding과 cosine similarity를 계산합니다.
 
