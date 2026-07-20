@@ -254,9 +254,9 @@ token_type_ids : 모델에 따라 문장 구간 표시
 
 모델 출력이 `[-0.4, 1.2, 0.1]`이라면 아직 확률이 아닙니다.
 
-\[
+$$
 p_i=\frac{e^{z_i}}{\sum_j e^{z_j}}
-\]
+$$
 
 Softmax 후 가장 큰 위치를 Label ID와 연결합니다. `id2label` 설정이 실제 데이터 Label 순서와 일치하는지 반드시 확인합니다.
 
@@ -316,9 +316,9 @@ padding은 배치 길이를 맞추고, truncation은 최대 길이를 넘는 부
 
 모델 출력 로짓은 확률이 아니다. 다중 분류 확률은 Softmax로 바꾼다.
 
-\[
+$$
 p_i=\frac{e^{z_i}}{\sum_je^{z_j}}
-\]
+$$
 
 ```python
 with torch.no_grad():

@@ -36,9 +36,9 @@ scores = cosine_similarity(query_vector.reshape(1, -1), embeddings).ravel()
 
 ## OOV 비율
 
-\[
+$$
 OOVRate=\frac{사전에없는토큰수}{전체토큰수}
-\]
+$$
 
 10,000토큰 중 700개가 없으면 7%입니다. 전체 수치와 함께 빈도 상위 OOV를 확인해 제품명·오타·신조어 문제를 구분합니다.
 

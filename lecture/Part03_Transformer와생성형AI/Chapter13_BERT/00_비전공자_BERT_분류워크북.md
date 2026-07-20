@@ -8,17 +8,17 @@
 
 가려진 위치 집합을 (M)이라고 할 때 손실은 다음과 같이 볼 수 있습니다.
 
-\[
+$$
 L_{MLM}=-\sum_{i\in M}\log P(x_i\mid x_{\setminus M})
-\]
+$$
 
 정답 토큰의 확률이 높으면 손실이 작고, 낮으면 손실이 커집니다. 모든 토큰이 아니라 선택된 Mask 위치의 예측을 평가한다는 점이 중요합니다.
 
 ## 입력 하나에는 세 종류의 정보가 더해진다
 
-\[
+$$
 E=E_{token}+E_{position}+E_{segment}
-\]
+$$
 
 - Token embedding: 어떤 토큰인가?
 - Position embedding: 몇 번째 위치인가?
@@ -37,13 +37,13 @@ Tokenizer마다 토큰과 ID가 다르므로 모델과 Tokenizer는 같은 Check
 
 클래스가 세 개라면 분류 Head는 세 개의 Logit을 만듭니다.
 
-\[
+$$
 z=h_{CLS}W+b
-\]
+$$
 
-\[
+$$
 P(y=k)=\frac{e^{z_k}}{\sum_j e^{z_j}}
-\]
+$$
 
 Logit은 아직 확률이 아닌 점수입니다. Softmax를 적용한 뒤 가장 큰 확률의 Label을 선택합니다.
 

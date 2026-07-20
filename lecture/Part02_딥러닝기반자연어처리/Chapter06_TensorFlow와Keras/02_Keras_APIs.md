@@ -50,9 +50,9 @@ model = tf.keras.Model([title, body], [priority, category])
 
 ## 잔차 연결과 shape
 
-\[
+$$
 y=x+F(x)
-\]
+$$
 
 덧셈하려면 `x`와 `F(x)`의 shape가 같아야 합니다. 차원이 다르면 projection 층으로 맞춥니다. 연결은 `Add`와 `Concatenate`가 다릅니다. Add는 차원을 유지하고, Concatenate는 지정 축의 크기를 더합니다.
 

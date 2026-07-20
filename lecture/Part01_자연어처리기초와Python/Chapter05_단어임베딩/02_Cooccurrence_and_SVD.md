@@ -41,23 +41,23 @@ embeddings = svd.fit_transform(cooccurrence_matrix)
 
 ## PMI와 PPMI
 
-\[
+$$
 PMI(x,y)=\log\frac{P(x,y)}{P(x)P(y)}
-\]
+$$
 
 독립적으로 기대한 것보다 자주 함께 나오면 양수입니다. PPMI는 음수 값을 0으로 바꿉니다.
 
-\[
+$$
 PPMI(x,y)=\max(PMI(x,y),0)
-\]
+$$
 
 희귀 단어 쌍은 우연히 한 번만 만나도 큰 PMI가 될 수 있어 최소 빈도와 smoothing을 검토합니다.
 
 ## SVD 기호
 
-\[
+$$
 X=U\Sigma V^T
-\]
+$$
 
 `Σ`의 큰 특이값 방향부터 남기면 주요 패턴을 보존하면서 차원을 줄입니다. `n_components`가 너무 작으면 정보가 손실되고 너무 크면 노이즈와 메모리가 증가합니다.
 
