@@ -51,13 +51,13 @@ test_matrix = vectorizer.transform(test_texts)
 
 ## TF와 IDF 공식
 
-\[
+$$
 TF(t,d)=\frac{count(t,d)}{문서d의전체단어수}
-\]
+$$
 
-\[
+$$
 IDF(t)=\log\frac{전체문서수}{단어t가등장한문서수}
-\]
+$$
 
 100개 문서 중 5개에만 등장한 단어의 IDF는 `log(20)≈2.996`입니다. 100개 모두에 등장하면 `log(1)=0`입니다. 라이브러리는 smoothing 때문에 손계산과 조금 다를 수 있습니다.
 
