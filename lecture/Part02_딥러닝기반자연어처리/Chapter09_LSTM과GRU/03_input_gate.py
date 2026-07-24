@@ -12,3 +12,5 @@ for input_gate in [0.0, 0.3, 1.0]:
         f"gate={input_gate:.1f}, 새 정보={new_information:.2f}, "
         f"갱신 기억={updated_cell:.2f}"
     )
+
+print("candidate는 기록할 내용, input gate는 그 내용을 기록할 비율입니다.")

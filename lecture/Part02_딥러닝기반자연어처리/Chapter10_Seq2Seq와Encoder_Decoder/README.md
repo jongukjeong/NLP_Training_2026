@@ -20,10 +20,10 @@ Step by Step → Basic Practice → Practice·Assignment → 피드백 → Solut
 - **교사 강요(Teacher Forcing): 학습 중 이전 정답 토큰을 다음 입력으로 사용하는 방법**
 - **빔 탐색(Beam Search): 점수가 높은 여러 생성 후보를 함께 유지하는 탐색 방법**
 
-1. [Seq2Seq·Encoder·Decoder](01_Seq2Seq_Architecture.md)
-2. [Teacher Forcing](02_Teacher_Forcing.md)
-3. [Beam Search](03_Beam_Search.md)
-4. [번역 모델 설계와 평가](04_Translation_Evaluation.md)
+1. [10.1~10.3 Seq2Seq·Encoder·Decoder](01_Seq2Seq_Architecture.md)
+2. [10.4 Teacher Forcing](02_Teacher_Forcing.md)
+3. [10.5 Beam Search](03_Beam_Search.md)
+4. [10.6 번역 파이프라인과 평가](04_Translation_Evaluation.md)
 5. [퀴즈](05_Summary_and_Quiz.md)
 6. [실습: 번역 모델 구현](06_Practice.md)
 

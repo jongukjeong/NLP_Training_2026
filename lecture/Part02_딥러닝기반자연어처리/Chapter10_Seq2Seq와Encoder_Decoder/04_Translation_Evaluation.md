@@ -1,4 +1,4 @@
-# 번역 모델 설계와 평가
+# 10.6 번역 파이프라인과 평가
 
 데이터 split 전에 동일·유사 번역쌍을 그룹화해 누수를 방지합니다. source와 target 언어의 vocabulary, 시작·종료·padding token ID를 저장해야 inference를 재현할 수 있습니다.
 
@@ -12,6 +12,19 @@
 자동 지표 하나만으로 번역 품질을 결론 내리지 않습니다. 이름·숫자·부정 표현과 도메인 용어를 별도 검사합니다.
 
 실무 번역은 Transformer와 사전학습 모델이 일반적이지만 Encoder-Decoder와 decoding 개념은 이후 구조의 기반입니다.
+
+[06_translation_pipeline.py](06_translation_pipeline.py)는 10.1~10.5에서
+나누어 살펴본 입력, Encoder 표현, Decoder 생성, 참고 번역 비교를 하나의
+작은 흐름으로 연결합니다.
+
+```bash
+python 06_translation_pipeline.py
+```
+
+교육용 사전 기반 예제이므로 실제 Seq2Seq 모델을 학습하지는 않습니다.
+출력 문장과 참고 번역을 비교하면서 정확히 일치하는지, 생성 길이가 다른지를
+확인하는 것이 목적입니다. 실제 모델에서는 아래의 자동·사람 평가를 함께
+사용합니다.
 
 ## 자동 평가와 사람 평가를 함께 쓰기
 

@@ -1,4 +1,4 @@
-# 감성 분석 설계
+# 9.6 감성 분석 파이프라인
 
 감성 label은 주관적일 수 있으므로 annotation 기준과 불일치 사례를 기록합니다. 부정어, 반어, 복합 감정과 도메인 표현을 오류 분석에서 별도로 확인합니다.
 
@@ -10,6 +10,19 @@ TextVectorization → Embedding(mask_zero=True)
 평가 시 accuracy와 함께 precision, recall, F1, confusion matrix를 봅니다. 같은 상품·사용자의 거의 동일한 리뷰가 train/test에 나뉘지 않도록 중복 그룹을 고려합니다.
 
 작은 데이터의 높은 점수는 일반화를 의미하지 않습니다. 실제 배포 전 시간·도메인 기준 holdout이 필요합니다.
+
+[06_sentiment_pipeline.py](06_sentiment_pipeline.py)는 9.1~9.5에서 살펴본
+순차 상태 갱신을 두 개의 짧은 감성 문장에 적용합니다.
+
+```bash
+python 06_sentiment_pipeline.py
+```
+
+“배송이 느리지만 제품은 좋아요”와 “제품은 좋지만 배송이 느려요”처럼
+비슷한 단어가 들어 있어도 순서와 마지막 정보에 따라 상태와 예측이 달라지는
+것을 확인합니다. 이 코드는 Gate의 직관을 위한 규칙 기반 축소 모형이며,
+학습된 LSTM·GRU 감성 분류기는 아닙니다. 실제 모델 구조는 아래 Keras
+예제를 사용합니다.
 
 ## 데이터 설계
 

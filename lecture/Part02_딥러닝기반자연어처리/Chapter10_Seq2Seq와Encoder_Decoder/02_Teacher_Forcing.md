@@ -13,6 +13,16 @@ decoder target: 나       는 학생 <END>
 
 padding token의 loss를 제외하려면 sample weight 또는 mask를 적용합니다. 그렇지 않으면 긴 padding을 맞히는 능력이 loss를 지배할 수 있습니다.
 
+[04_teacher_forcing.py](04_teacher_forcing.py)는 목표 문장으로부터 Decoder
+입력과 정답을 한 칸 어긋나게 만드는 과정을 단계별로 출력합니다.
+
+```bash
+python 04_teacher_forcing.py
+```
+
+출력에서 `<BOS>`는 입력에만 있고 `<EOS>`는 마지막 정답에 있는지
+확인합니다.
+
 ## 학습과 추론의 입력 차이
 
 학습에서는 정답 이전 토큰을 사용하므로 병렬로 모든 target 위치의 손실을 계산할 수 있습니다. 추론에서는 직전 예측이 다음 입력이어서 한 단계씩 생성합니다. 이 차이가 exposure bias의 원인입니다.

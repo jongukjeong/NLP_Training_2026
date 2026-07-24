@@ -19,9 +19,9 @@ Step by Step → Basic Practice → Practice·Assignment → 피드백 → Solut
 - **게이트(Gate): 정보를 얼마나 보존·추가·출력할지 조절하는 장치**
 - **게이트 순환 유닛(Gated Recurrent Unit, GRU): LSTM보다 단순한 Gate 구조를 사용하는 RNN**
 
-1. [LSTM 구조와 세 Gate](01_LSTM_Gates.md)
-2. [GRU와 모델 선택](02_GRU_and_Selection.md)
-3. [감성 분석 설계](03_Sentiment_Analysis.md)
+1. [9.1~9.4 LSTM 구조와 세 Gate](01_LSTM_Gates.md)
+2. [9.5 GRU와 모델 선택](02_GRU_and_Selection.md)
+3. [9.6 감성 분석 파이프라인](03_Sentiment_Analysis.md)
 4. [퀴즈](04_Summary_and_Quiz.md)
 5. [실습: 감성 분석](05_Practice.md)
 
